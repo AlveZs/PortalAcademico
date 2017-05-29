@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Marcus Filipe
  */
 public class DisciplinaDAO {
 
