@@ -43,7 +43,7 @@
                             <option> </option>
                             <%
                                 for(int i=0;i<depts.size();i++){ %>
-                                <option value="<%= depts.get(i).getNome() %>"><%= depts.get(i).getNome()%></option>
+                                <option value="<%= depts.get(i).getNome()%>"><%= depts.get(i).getNome()%></option>
                             <%}%>
                         </select>
                     </p>

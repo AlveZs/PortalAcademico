@@ -56,10 +56,6 @@ public class CursoController extends HttpServlet {
                 turno = Integer.parseInt(request.getParameter("turno"));
                 Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo, turno);
                 curs.pesquisarCod();
-                System.out.println(turno);
-                System.out.println(curs.getTurno());
-                System.out.println(request.getParameter("departamento"));
-                System.out.println(curs.getCodDept());
                 curs.incluir();
                 break;
             case "preencher":
