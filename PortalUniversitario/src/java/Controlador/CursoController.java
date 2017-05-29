@@ -34,6 +34,7 @@ public class CursoController extends HttpServlet {
             throws ServletException, IOException {
         String nome,departamento,opcao;
         int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno;
+        request.setCharacterEncoding("UTF-8");
         opcao= request.getParameter("opcao");
         switch (opcao){
             case "Buscar":
@@ -54,6 +55,11 @@ public class CursoController extends HttpServlet {
                 creditacao = Integer.parseInt(request.getParameter("credito"));
                 turno = Integer.parseInt(request.getParameter("turno"));
                 Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo, turno);
+                curs.pesquisarCod();
+                System.out.println(turno);
+                System.out.println(curs.getTurno());
+                System.out.println(request.getParameter("departamento"));
+                System.out.println(curs.getCodDept());
                 curs.incluir();
                 break;
             case "preencher":

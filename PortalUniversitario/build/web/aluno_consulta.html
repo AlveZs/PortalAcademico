@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<!-- Inicio do Template -->
+<head>
+    <meta charset="utf-8">
+    <title>Portal Universitário | Aluno</title>
+    <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
+    <link href="css/aluno.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="cabecalho">
+	  <img src="img/Logo_small_branca.png" width="119" height="91" />
+      <div id="boasvindas">
+      		<p style="display: inline;"> Bem-Vindo, $aluno! </p> 
+            <a href="index.html" style="margin-left: 20px;">Sair</a> 
+      </div>
+	</div>
+    <div id="barra_menu" >
+    	<ul class="menu" style="display:none;">
+        	<li> <a href="coord_aluno.html"> Aluno </a> </li>
+            <li> <a href="coord_curso.html"> Curso </a> </li>
+            <li> <a href="coord_disciplina.html"> Disciplina </a> </li>
+            <li> <a href="coord_semestre.html"> <div></div> Semestre </a> </li>
+            <li> <a href="#"> Relatório </a>
+            		<ul>
+                        <li> <a href="relatorio_integralizacao.html"> <div></div> Integralização </a> </li>
+                        <li> <a href="relatorio_formacao.html"> <div></div> Formação </a> </li>
+                        <li> <a href="relatorio_oferta_materias.html"> <div></div> Ofertar Matérias </a> </li>
+            		</ul>
+            </li>
+        </ul>
+    </div>
+    <!-- Final do Template -->
+    
+    <div id="ctx" align="center">
+        <h1> Consulta Aluno </h1>
+        <div class="separador"></div>
+    <form method="post" name="consulta">
+    	<table id="tab_dados_aluno"  width="800" border="0"  align="center">
+        	<tr>
+            	<td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" readonly><!--<input type="button" name="buscar" value="Buscar" style="margin-left:30px" readonly> </p> --></td>
+               
+            </tr>
+            <tr>
+            	<td colspan="4">
+                	<p> Nome:<br/> <input style="width:100%" type="text" name="nome" readonly> </p>
+                </td>
+            </tr>
+            <tr>
+            	<td>
+                	<div>
+                            <p> Campus:<br/> <input type="text" name="campus" style="width:100px" readonly> </p>
+                	</div>
+                	<div style="float:right">
+                            <p> Departamento:<br/> <input style="width:120px" type="text" name="departamento" readonly></p>
+                    </div>
+                    
+                </td>
+                <td colspan="3">
+                    <p style="margin-left:20px"> Curso:<br/> <input style="width:100%" type ="text" name="curso" readonly>
+                </td>
+            </tr>
+            <tr>
+            <td>
+                <p> Forma de Ingresso:<br/> <input style="width:100%" type="text" name="formaIngresso" readonly></p>
+                </td>
+            	<td>
+                    <p style="margin-left:20px"> Turno:<br/> <input style="width:100px"type="text" name="turno" readonly> </p>
+                </td>
+                <td style="width: 260px;">
+                    <div>
+                    	<p> Ano Início:<br/> <input type="text" name="ano_inicio" class="caixas" readonly> </p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                		<p> Sems Início:<br/> <input type="text" name="semestre_inicio" class="caixas" readonly> </p>
+                    </div>
+                </td>
+                <td>
+                	<p> Sems Atual:<br/> <input type="text" name="semestre_inicio" class="caixas" readonly> </p>
+                </td>
+                
+            </tr>
+        </table>
+        
+        <img src="img/fluxograma.jpg" width="747" height="540"/>
+        
+      <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
+        	<th rowspan="2"> Nome das Disciplinas: </th>
+            <th rowspan="2"> Código </th>
+            <th colspan="2"> Carga Horária: </th>
+            <th rowspan="2"> Semestre </th>
+            <th rowspan="2"> Situação </th>
+            <th rowspan="2"> Optativa </th>
+            <tr>
+                <td> <i> Exigida:</i> </td>
+                <td> <i> Cumprida: </i> </td>
+            </tr>
+            <tr>
+            	<td>Algoritmos</td>
+                <td>CPD063</td>
+                <td>60h</td>
+                <td>60h</td>
+                <td>1</td>
+                <td>Cumprida</td>
+                <td></td>
+            </tr>
+            <tr>
+            	<td>Linguagem de Programação III</td>
+                <td>CPD023</td>
+                 <td>60h</td>
+                 <td>30h</td>
+                 <td>4</td>
+                 <td>Matriculado</td>
+                 <td></td>
+            </tr>
+            <tr>
+            	<td>Teoria dos Grafos</td>
+                <td>MAT015</td>
+                 <td>60h</td>
+                 <td>0h</td>
+                 <td>5</td>
+                 <td>Apto a Cursar</td>
+                 <td>X</td>
+            </tr>
+            
+        </table>
+    </form>
+    </div>
+</body>
+</html>

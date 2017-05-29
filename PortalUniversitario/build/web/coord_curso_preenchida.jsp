@@ -4,7 +4,6 @@
     Author     : joao
 --%>
 
-<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -30,21 +29,13 @@
                  <input type="submit" name="opcao" value="Buscar" id="btn_buscar" style="margin-left: 20px;"> </p></td> 	
             </tr>
             <tr>
-                <td colspan="7"> <p>Nome:<br/> <input type="text" name="nome" style="width:100%;"></p> </td>
+                <td colspan="7"> <p>Nome:<br/> <input type="text" name="nome" value="<%=curso.getNome()%>" style="width:100%;"></p> </td>
             </tr>
             <tr>
             	<td colspan="2">
                     <p>Departamento:<br/>
-                        <%  Model.Departamento dept = (Model.Departamento)request.getAttribute("depart");
-                            ArrayList<Model.Departamento> depts = new ArrayList();
-                            depts = dept.getDept();
-                        %>
                         <select name="departamento">
-                            <option> </option>
-                            <%
-                                for(int i=0;i<depts.size();i++){ %>
-                                <option value="<%= depts.get(i).getNome() %>"><%= depts.get(i).getNome()%></option>
-                            <%}%>
+                        <option value="0"><%=curso.getDepartamento()%></option>
                         </select>
                     </p>
             	</td>
@@ -52,26 +43,28 @@
                     <p>Qtd Semestres:<br/> <input type="text" name="qtdSemestre" class="in_menores"></p>
             	</td>
             
-            	<td>
-                    <p>Carga Horária:<br/> <input type="text" name="cargaHoraria" class="in_menores"></p></td>
+            	<td colspan="2">
+                    <p>Carga Horária:<br/> <input type="text" name="cargaHoraria" value="<%=curso.getCargaHoraria()%>" class="in_menores"></p></td>
                 <td>
-                    <p>Creditação:<br/> <input type="text" name="credito" class="in_menores"></p>
+                    <p>Creditação:<br/> <input type="text" name="credito" value="<%=curso.getCreditacao()%> "class="in_menores"></p>
                 
                 </td>
             </tr>
             <tr>
-            	<td colspan="7" style="text-align:center"> <p>Turno:<br/>
-                     <input type="radio" name="turno" value="1" id="turnoM">
-                     <label for="turnoM">Matutino</label>
-                     <input type="radio" name="turno" value="2" id="turnoV">
-                     <label for="turnoV">Vespertino</label>
-                     <input type="radio" name="turno" value="3" id="turnoN">
-                     <label for="turnoN">Noturno</label> </p>
+            	<td colspan="7" style="text-align:center">
+                    <p>Turno:<br/>                        
+                        <input type="radio" name="turno" value="1" id="turnoM" <% if(curso.getTurno() == 1) out.print("checked"); %> >
+                        <label for="turnoM">Matutino</label>
+                        <input type="radio" name="turno" value="2" id="turnoV" <% if(curso.getTurno() == 2) out.print("checked"); %> >
+                        <label for="turnoV">Vespertino</label>
+                        <input type="radio" name="turno" value="3" id="turnoN" <% if(curso.getTurno() == 3) out.print("checked"); %> >
+                        <label for="turnoN">Noturno</label> </p>
+                    </p>
                 </td>
             </tr>
             
             <tr>
-                <td colspan="7" align="center">
+                <td colspan="7">
                     <table border="1">
                         <tr class="subtabela_disciplina">
                             <td><b>Nome</b></td>
@@ -80,19 +73,29 @@
                             <td><b>Semestre</b></td>
                             <td><b>Código</b></td>
                             <td><b>Tipo</b></td>
-                        </tr>   
+                        </tr>
+                    <%for(Model.Disciplina disc : disciplina.getDisciplinas()){%>
+                        <tr class="subtabela_disciplina">
+                            <td><%=disc.getNome()%></td>
+                            <td><%=disc.getCargaHoraria()%></td>
+                            <td><%=disc.getCreditacao()%></td>
+                            <td><%=disc.getSemestre()%></td>
+                            <td><%=disc.getCodigo()%></td>
+                            <td><%=disc.getTipo()%></td>
+                        </tr>    
+                    <%}%>
                  </table>
                 </td>
             </tr>
             
             <tr></tr>
             <tr align="center">
-            	<td height="56" colspan="7">
-                  <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
-                  <input type="button" value="Alterar" id="btn_alterar" class="botao">
-                  <input type="reset" value="Limpar" id="btn_limpar" class="botao">
-                </td>
-         	</tr>
+            <td height="56" colspan="7">
+              <input type="button" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
+              <input type="button" value="Alterar" id="btn_alterar" class="botao">
+                      <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+            </td>
+            </tr>
         </table>
     </form>
     </div>
