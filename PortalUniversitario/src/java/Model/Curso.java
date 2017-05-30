@@ -36,9 +36,12 @@ public class Curso {
         this.codigo = codigo;
         this.turno = turno;
     }
+
+    public Curso() {
+    }
     
     
-    
+  
     public void pesquisarCod(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         ResultSet resultado = x.pesquisarCod(this);
@@ -153,6 +156,6 @@ public class Curso {
     public void setCodDept(int codDept) {
         this.codDept = codDept;
     }
-
+    
     
 }

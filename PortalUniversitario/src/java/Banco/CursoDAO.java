@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,8 @@ public class CursoDAO {
 
     public CursoDAO() {
     }
-        public ResultSet pesquisar(Model.Curso curso){
+    
+    public ResultSet pesquisar(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
             sql = "select * from sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id where cursos.Codigo=("+curso.getCodigo()+")";
@@ -33,7 +35,28 @@ public class CursoDAO {
           finally{
               return resultado;
           }
+    }
+        
+    public void pesquisarTodos(ArrayList<Model.Curso> cursos){
+        Connection con = ConnectionFactory.getConnection();
+      try{
+        Model.Curso obj;  
+        Statement stm = con.createStatement();
+        ResultSet res = stm.executeQuery("SELECT Nome FROM sonaes.cursos");
+        while (res.next()){
+          obj = new Model.Curso();
+          obj.setNome(res.getString("Nome"));
+          cursos.add(obj);
         }
+        res.close();
+        con.close();
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+
+    }       
+        
         
     public ResultSet pesquisarCod(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();

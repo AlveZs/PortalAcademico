@@ -4,6 +4,7 @@
     Author     : joao
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,11 +39,16 @@
         </script>
     </head>
     <body>
-        <%@include file="menu.jsp"%>
+    <%@include file="menu.jsp"%>
     <div id="ctx" align="center">
         <h1> Gerenciar Aluno </h1>
         <div class="separador"></div>
         <form method="post"action="AlunoController"name="consulta">
+            <% Model.Aluno aluno = (Model.Aluno)request.getAttribute("alu");
+            ArrayList<Model.Curso> cursos = new ArrayList<>();
+            aluno.pesquisarTodos();
+            cursos = aluno.getCursos();
+            %>
             <table id="tab_dados_aluno"  width="800" border="0"  align="center">
                     <tr>
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="buscar" value="Buscar" style="margin-left:30px"> </p> </td>

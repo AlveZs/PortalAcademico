@@ -15,6 +15,10 @@ import java.sql.Statement;
  * @author Marcus Filipe
  */
 public class AlunoDAO {
+
+    public AlunoDAO() {
+    }
+    
     
     public int incluir(Model.Aluno aluno){   
         
@@ -33,4 +37,38 @@ public class AlunoDAO {
           return retorno;
       }
    }
+   
+    public ResultSet pesquisarFormaIngresso(Model.Aluno aluno){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "SELECT Id FROM sonaes.formasingresso where Nome = ('"+aluno.getFormaIngresso()+"')";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
+    
+    public ResultSet pesquisarCurso(Model.Aluno aluno){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "SELECT Id FROM sonaes.cursos where Nome = ('"+aluno.getCurso()+"')";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
 }

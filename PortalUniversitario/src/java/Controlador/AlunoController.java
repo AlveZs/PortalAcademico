@@ -29,10 +29,16 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
    
         String matricula,nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
         int creditacao;
-
+        
         opcao = request.getParameter("opcao");
         
     switch (opcao) {
+      case "preencher":
+            Model.Aluno alu = new Model.Aluno(); 
+            request.setAttribute("alu", alu);
+            RequestDispatcher dispatcher2 = request.getRequestDispatcher("coord_aluno.jsp");
+            dispatcher2.forward(request,response);
+            break;
         case "cadastro":
             matricula = request.getParameter("matricula");
             nome = request.getParameter("nome");

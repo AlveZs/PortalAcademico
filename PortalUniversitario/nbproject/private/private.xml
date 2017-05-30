@@ -4,9 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/CursoController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/DisciplinaDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/AlunoDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Aluno.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/AlunoController.java</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_aluno.jsp</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/index.jsp</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/CursoDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Disciplina.java</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_curso.jsp</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/menu.jsp</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Curso.java</file>

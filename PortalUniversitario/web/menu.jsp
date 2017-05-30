@@ -22,14 +22,14 @@
 	</div>
     <div id="barra_menu">
     	<ul class="menu">
-        	<li> <a href="coord_aluno.jsp"> Aluno </a> </li>
+        	<li> <a href="AlunoController?opcao=preencher"> Aluno </a> </li>
             <li> <a href="CursoController?opcao=preencher"> Curso </a> </li>
             <li> <a href="coord_disciplina.jsp"> Disciplina </a> </li>
 			<li> <a href="coord_semestre.jsp"> <div></div> Semestre </a> </li>
             <li> <a href="processo.jsp"> <div></div> Processos </a> </li>
             <li> <a href="#"> Relatório </a>
             		<ul>
-            			<li> <a href="relatorio_integralizacao.jsp"> <div></div> Integralização </a> </li>
+                        <li> <a href="relatorio_integralizacao.jsp"> <div></div> Integralização </a> </li>
                         <li> <a href="relatorio_formacao.jsp"> <div></div> Formação </a> </li>
                         <li> <a href="relatorio_oferta_materias.jsp"> <div></div> Ofertar Matérias </a> </li>
             		</ul>
