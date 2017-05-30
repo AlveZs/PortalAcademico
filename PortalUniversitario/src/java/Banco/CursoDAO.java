@@ -38,7 +38,7 @@ public class CursoDAO {
     public ResultSet pesquisarCod(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT Id FROM sonaes.departamentos where Nome = ("+curso.getDepartamento()+")";
+            sql = "SELECT Id FROM sonaes.departamentos where Nome = ('"+curso.getDepartamento()+"')";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();

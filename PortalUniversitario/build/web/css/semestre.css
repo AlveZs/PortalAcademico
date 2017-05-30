@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+h2 {
+	font-family: Candara, Constantia, Times, serif;
+	font-size: 35px;
+}
+
+
+#bt_enviar {
+	font-size: 18px;
+	color: #fff;
+	background: #0072bc;
+	padding: 10px 5px 10px 5px;
+}
+
+#bt_limpar {
+	margin-left: 30px;
+	font-size: 18px;
+	padding: 10px 5px 10px 5px;
+}
