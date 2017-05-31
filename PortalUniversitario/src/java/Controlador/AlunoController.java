@@ -34,8 +34,8 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         
     switch (opcao) {
       case "preencher":
-            Model.Aluno alu = new Model.Aluno(); 
-            request.setAttribute("alu", alu);
+            Model.Resultados resultados = new Model.Resultados(); 
+            request.setAttribute("results", resultados);
             RequestDispatcher dispatcher2 = request.getRequestDispatcher("coord_aluno.jsp");
             dispatcher2.forward(request,response);
             break;

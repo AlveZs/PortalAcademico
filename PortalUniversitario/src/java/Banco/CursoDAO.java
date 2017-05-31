@@ -55,7 +55,27 @@ public class CursoDAO {
           System.out.println(e.getMessage());
       }
 
-    }       
+    }
+    
+    public void pesquisarCursos(ArrayList<Model.Curso> cursos){
+        Connection con = ConnectionFactory.getConnection();
+      try{
+        Model.Curso obj;  
+        Statement stm = con.createStatement();
+        ResultSet res = stm.executeQuery("SELECT cursos.Nome, departamentos.Nome, cursos.CargaHoraria, cursos.Creditacao,cursos.Codigo, Min_Semestre,Max_Semestre, fk_turno FROM sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id;");
+        while (res.next()){
+          obj = new Model.Curso(res.getString("cursos.Nome"),res.getString("departamentos.Nome"),res.getInt("CargaHoraria"),res.getInt("Creditacao"),res.getInt("Codigo"),res.getInt("Min_Semestre"),res.getInt("Max_Semestre"),res.getInt("fk_turno"));
+          obj.setNome(res.getString("Nome"));
+          cursos.add(obj);
+        }
+        res.close();
+        con.close();
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+
+    }      
         
         
     public ResultSet pesquisarCod(Model.Curso curso){

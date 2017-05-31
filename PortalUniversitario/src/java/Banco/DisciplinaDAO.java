@@ -37,4 +37,23 @@ public class DisciplinaDAO {
       }
 
     }
+    
+    public void pesquisarDisciplinas(ArrayList<Model.Disciplina> disciplinas){
+        Connection con = ConnectionFactory.getConnection();
+      try{
+        Model.Disciplina obj;  
+        Statement stm = con.createStatement();
+        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome, cursos.Nome, tipo_disciplinas.Nome,disciplinas.CargaHoraria,disciplinas.Creditacao,disciplinas.Semestre,disciplinas.Codigo FROM sonaes.disciplinas join sonaes.cursos on disciplinas.Fk_Cursos = cursos.Id join sonaes.tipo_disciplinas on disciplinas.Fk_Tipo = tipo_disciplinas.Id;");
+        while (res.next()){
+          obj = new Model.Disciplina(res.getString("disciplinas.Nome"),res.getInt("disciplinas.Semestre"),res.getString("cursos.Nome"),res.getString("tipo_disciplinas.Nome"),res.getString("disciplinas.Codigo"),res.getInt("disciplinas.Creditacao"),res.getInt("disciplinas.CargaHoraria"));
+          disciplinas.add(obj);
+        }
+        res.close();
+        con.close();
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+
+    }
 }

@@ -13,11 +13,17 @@ import java.util.ArrayList;
  */
 public class Departamento {
     
-    private String nome;
+    private String nome, nomeCampus;
     private int codigo, campus;
     private ArrayList<Departamento> dept = new ArrayList<>();
 
     public Departamento() {
+    }
+
+    public Departamento(String nome, String nomeCampus, int codigo) {
+        this.nome = nome;
+        this.nomeCampus = nomeCampus;
+        this.codigo = codigo;
     }
 
     
@@ -55,6 +61,14 @@ public class Departamento {
 
     public void setCampus(int campus) {
         this.campus = campus;
+    }
+
+    public String getNomeCampus() {
+        return nomeCampus;
+    }
+
+    public void setNomeCampus(String nomeCampus) {
+        this.nomeCampus = nomeCampus;
     }
 
     public ArrayList<Departamento> getDept() {

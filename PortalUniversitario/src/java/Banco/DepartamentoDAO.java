@@ -39,4 +39,23 @@ public class DepartamentoDAO {
       }
 
     }
+        
+    public void pesquisarDepartamentos(ArrayList<Model.Departamento> departamentos){
+        Connection con = ConnectionFactory.getConnection();
+      try{
+        Model.Departamento obj;  
+        Statement stm = con.createStatement();
+        ResultSet res = stm.executeQuery("SELECT departamentos.Nome, departamentos.Codigo, campus.Nome FROM sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus = campus.Id;");
+        while (res.next()){
+          obj = new Model.Departamento(res.getString("departamentos.Nome"),res.getString("campus.Nome"),res.getInt("departamentos.codigo"));
+          departamentos.add(obj);
+        }
+        res.close();
+        con.close();
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+
+    }
 }
