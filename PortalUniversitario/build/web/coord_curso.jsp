@@ -20,7 +20,7 @@
     <form method="post" action="CursoController">
         <% Model.Curso curso = (Model.Curso)request.getAttribute("c");%>
         <% Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
-        <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="638">
+        <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="700">
         	<th colspan="7">
             	<h1>Gerenciar Curso</h1>
                 <div class="separador"></div>
@@ -30,16 +30,16 @@
                  <input type="submit" name="opcao" value="Buscar" id="btn_buscar" style="margin-left: 20px;"> </p></td> 	
             </tr>
             <tr>
-                <td colspan="7"> <p>Nome:<br/> <input type="text" name="nome" style="width:100%;"></p> </td>
+                <td colspan="8"> <p>Nome:<br/> <input type="text" name="nome" style="width:100%;"></p> </td>
             </tr>
             <tr>
-            	<td colspan="2">
+            	<td colspan="4">
                     <p>Departamento:<br/>
                         <%  Model.Departamento dept = (Model.Departamento)request.getAttribute("depart");
                             ArrayList<Model.Departamento> depts = new ArrayList();
                             depts = dept.getDept();
                         %>
-                        <select name="departamento">
+                        <select name="departamento" class="cb_departamento">
                             <option> </option>
                             <%
                                 for(int i=0;i<depts.size();i++){ %>
@@ -48,14 +48,18 @@
                         </select>
                     </p>
             	</td>
+            </tr>
+            <tr>
                 <td colspan="2">
-                    <p>Qtd Semestres:<br/> <input type="text" name="qtdSemestre" class="in_menores"></p>
+                    <p>Qtd Min Sems:<br/> <input type="number" name="qtdMinSemestres" class="in_menores"></p>
             	</td>
-            
+                <td colspan="2">
+                    <p>Qtd Max Sems:<br/> <input type="number" name="qtdMaxSemestres" class="in_menores"></p>
+            	</td>
             	<td>
-                    <p>Carga Horária:<br/> <input type="text" name="cargaHoraria" class="in_menores"></p></td>
+                    <p>Carga Horária:<br/> <input type="number" name="cargaHoraria" class="in_menores"></p></td>
                 <td>
-                    <p>Creditação:<br/> <input type="text" name="credito" class="in_menores"></p>
+                    <p>Creditação:<br/> <input type="number" name="credito" class="in_menores"></p>
                 
                 </td>
             </tr>

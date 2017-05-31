@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : coord_aluno
     Created on : 28/05/2017, 14:43:20
     Author     : joao
@@ -13,7 +13,9 @@
         <title>Portal Universitário | Coordenador</title>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="js/jquery-3.2.1.js"></script>
+        <link href="css/modal.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/libs/jquery/jquery.js"></script>
+        <script type="text/javascript" src="js/modal.js"></script>
         <script type="text/javascript">
             // Função responsável por inserir linhas na tabela
         function inserirLinha() {
@@ -27,10 +29,10 @@
 
             // Insere uma linha no fim da tabela.
             var novaLinha = table.insertRow(numLinhas);
- 
+
             // Faz um loop para criar as colunas
             for (var j = 0; j < numCols; j++) {
-                // Insere uma coluna na nova linha 
+                // Insere uma coluna na nova linha
                 novaCelula = novaLinha.insertCell(j);
                 // Insere um conteúdo na coluna
                 novaCelula.innerHTML = "Linha "+ numLinhas + " – Coluna "+ j;
@@ -52,9 +54,24 @@
             cursos = resultados.getCursos();
             departamentos = resultados.getDepartamentos();
             %>
+
+            <%-- TESTE DO MODAL --%>
+            <a href="#janela1" rel="modal" style="color:red">Janela modal</a>
+
+            <div class="janela" id="janela1">
+                <a href="#" class="fechar" style="color: red">X Fechar</a>
+                <h4>Primeira janela modal</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
+                <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>
+            </div>
+            <!-- mascara para cobrir o site -->
+            <div id="mascara"></div>
+            <%-- FIM DO TESTE DO MODAL --%>
+
+
             <table id="tab_dados_aluno"  width="800" border="0"  align="center">
                     <tr>
-                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="buscar" value="Buscar" style="margin-left:30px"> </p> </td>
+                        <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="buscar" value="Buscar" style="margin-left:30px"></p> </td>
 
                 </tr>
                 <tr>

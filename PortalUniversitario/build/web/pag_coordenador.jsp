@@ -3,7 +3,7 @@
 <!-- Inicio do Template -->
 <head>
     <meta charset="utf-8">
-    <title>Portal Universit√°rio | Coordenador</title>
+    <title>Portal Universit·rio | Coordenador</title>
     <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
 </head>
 <body>
