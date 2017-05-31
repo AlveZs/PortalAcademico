@@ -4,6 +4,7 @@
     Author     : joao
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -38,11 +39,19 @@
         </script>
     </head>
     <body>
-        <%@include file="menu.jsp"%>
+    <%@include file="menu.jsp"%>
     <div id="ctx" align="center">
         <h1> Gerenciar Aluno </h1>
         <div class="separador"></div>
         <form method="post"action="AlunoController"name="consulta">
+            <% Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
+            ArrayList<Model.Curso> cursos = new ArrayList();
+            ArrayList<Model.Departamento> departamentos = new ArrayList();
+            resultados.pesquisarTodosCursos();
+            resultados.pesquisarTodosDepartamentos();
+            cursos = resultados.getCursos();
+            departamentos = resultados.getDepartamentos();
+            %>
             <table id="tab_dados_aluno"  width="800" border="0"  align="center">
                     <tr>
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="buscar" value="Buscar" style="margin-left:30px"> </p> </td>
@@ -64,33 +73,34 @@
                             </div>
                             <div style="float:right">
                                 <p> Departamento:<br/> <select name="departamento" style="width:120px;">
-                                <option value="0"></option>
-                                <option value="1"> DCET </option>
-                                <option value="2"> DCV </option>
-                                <option value="3"> DCH </option>
+                               <option> </option>
+                            <%
+                                for(int i=0;i<departamentos.size();i++){ %>
+                                <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
+                            <%}%>
                             </select> </p>
                         </div>
 
                     </td>
                     <td colspan="3">
                         <p class="cols_centrais"> Curso:<br/> <select name="curso" class="campo_tabela" >
-                        <option value="0"> </option>
-                        <option value="1"> Design </option>
-                        <option value="2"> Fisioterapia </option>
-                        <option value="3"> Licenciatura em História </option>
-                        <option value="4"> Sistemas de Infomação </option>
-                        <option value="5"> Urbanismo </option>
-                        </select> </p> 
+                            <option> </option>
+                            <%
+                                for(int i=0;i<cursos.size();i++){ %>
+                                <option value="<%= cursos.get(i).getNome()%>"><%= cursos.get(i).getNome()%></option>
+                            <%}%>
+                            </select></p>
                     </td>
                 </tr>
                 <tr>
                 <td>
                             <p> Forma de Ingresso:<br/> <select name="forma_ingresso" class="campo_tabela" >
                             <option value="0"> </option>
-                            <option value="1"> ENEM </option>
-                            <option value="2"> Vestibular </option>
-                            <option value="3"> Transferência Interna </option>
-                            <option value="3"> Transferência Externa </option>
+                            <option value="1"> Vestibular</option>
+                            <option value="2"> SISU</option>
+                            <option value="3"> Mat. Esp. Portador Diploma</option>
+                            <option value="4"> Mat. Esp. Transf. Inter</option>
+                            <option value="5"> Mat. Esp. Trans. Ext.</option>
                         </select> </p>
                     </td>
                     <td>
