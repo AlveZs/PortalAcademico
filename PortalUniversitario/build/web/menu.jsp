@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : menu
     Created on : 28/05/2017, 14:41:15
     Author     : joao
@@ -11,13 +11,16 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Menu</title>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
+        <link href="css/modal.css" rel="stylesheet" type="text/css">
+        <script type="text/javascript" src="js/libs/jquery/jquery.js"></script>
+        <script type="text/javascript" src="js/modal.js"></script>
     </head>
     <body>
     <div id="cabecalho">
         <a href="pag_coordenador.jsp"><img src="img/Logo_small_branca.png" width="119" height="91" /></a>
       <div id="boasvindas">
-      		<p style="display: inline;"> Bem-Vindo, $coordenador! </p> 
-            <a href="index.html" style="margin-left: 20px;">Sair</a> 
+      		<p style="display: inline;"> Bem-Vindo, $coordenador! </p>
+            <a href="index.jsp" style="margin-left: 20px;">Sair</a>
       </div>
 	</div>
     <div id="barra_menu">
