@@ -23,14 +23,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Aluno {
     
-    private String matricula,nome,curso,telefone,email,semestreInicio,formaIngresso;
+    private String matricula,nome,telefone,email,semestreInicio,formaIngresso;
+    private Curso curso = new Curso();
     private int creditacao,formaIngressoCod,cursoCod;
     private ArrayList<Curso> cursos = new ArrayList<>();
 
-    public Aluno(String matricula, String nome, String curso, String telefone, String email, String semestreInicio, String formaIngresso, int creditacao) {
+    public Aluno(String matricula, String nome, String telefone, String email, String semestreInicio, String formaIngresso, int creditacao) {
         this.matricula = matricula;
         this.nome = nome;
-        this.curso = curso;
         this.telefone = telefone;
         this.email = email;
         this.semestreInicio = semestreInicio;
@@ -57,14 +57,6 @@ public class Aluno {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
     }
 
     public String getTelefone() {
@@ -136,6 +128,25 @@ public class Aluno {
         x.incluir(this);        
     }
     
+    public void alterar(){
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        x.alterar(this);        
+    }
+    
+    public void deletar(){
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        x.deletar(this);        
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+       
+    
     public void pesquisarCodFormaIng(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarFormaIngresso(this);
@@ -167,6 +178,10 @@ public class Aluno {
     public void pesquisarTodos(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         x.pesquisarTodos(cursos);
+    }
+    
+    public void pesquisarIdCurso(){
+       this.curso.pesquisarCodCurso();
     }
     
 }

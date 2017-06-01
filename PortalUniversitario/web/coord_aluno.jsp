@@ -195,8 +195,8 @@
                 </tr>
             </table>
                     <div align="center">
-                    <input type="button" id="btn_novo" class="botao" value="Novo">
-                    <input type="button" id="btn_alterar" class="botao" value="Alterar">
+                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
+                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
                     <input type="reset" id="btn_limpar" class="botao" value="Limpar">
                     </div>
         </form>

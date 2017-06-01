@@ -15,7 +15,7 @@ import java.sql.SQLException;
 public class Curso {
     
     private String nome,departamento;
-    private int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno, codDept;
+    private int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno, codDept,idCurso;
 
     public Curso(String nome, String departamento, int cargaHoraria, int creditacao, int codigo, int minSemestre, int maxSemestre, int turno) {
         this.nome = nome;
@@ -42,13 +42,28 @@ public class Curso {
     
     
   
-    public void pesquisarCod(){
+    public void pesquisarCodDept(){
         Banco.CursoDAO x = new Banco.CursoDAO();
-        ResultSet resultado = x.pesquisarCod(this);
+        ResultSet resultado = x.pesquisarCodDept(this);
         try{
         while (resultado.next())
         {
             this.codDept = resultado.getInt("Id");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
+    }
+    
+    public void pesquisarCodCurso(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        ResultSet resultado = x.pesquisarCodCurso(this);
+        try{
+        while (resultado.next())
+        {
+            this.codigo = resultado.getInt("Codigo");
+            this.idCurso = resultado.getInt("Id");
         }
         }
         catch (SQLException e){
@@ -156,6 +171,15 @@ public class Curso {
     public void setCodDept(int codDept) {
         this.codDept = codDept;
     }
+
+    public int getIdCurso() {
+        return idCurso;
+    }
+
+    public void setId(int id) {
+        this.idCurso = id;
+    }
+    
     
     
 }
