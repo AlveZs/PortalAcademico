@@ -3,18 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Resultados.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/DisciplinaDAO.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Aluno.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/CampusDAO.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_aluno.jsp</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/AlunoController.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Campus.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Departamento.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/DepartamentoDAO.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/CursoDAO.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Disciplina.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Curso.java</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_semestre.jsp</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/pag_coordenador.jsp</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_curso.jsp</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/css/modal.css</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/css/pag_coordenador.css</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/js/modal.js</file>
+            <file>file:/C:/Users/John_Peter/Documents/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_aluno.jsp</file>
         </group>
     </open-files>
 </project-private>

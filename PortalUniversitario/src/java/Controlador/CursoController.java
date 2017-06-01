@@ -54,8 +54,10 @@ public class CursoController extends HttpServlet {
                 cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
                 creditacao = Integer.parseInt(request.getParameter("credito"));
                 turno = Integer.parseInt(request.getParameter("turno"));
-                Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo, turno);
-                curs.pesquisarCod();
+                minSemestre = Integer.parseInt(request.getParameter("qtdMinSemestres"));
+                maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
+                Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
+                curs.pesquisarCodDept();
                 curs.incluir();
                 break;
             case "preencher":

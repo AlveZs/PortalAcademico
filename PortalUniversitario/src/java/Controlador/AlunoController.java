@@ -29,7 +29,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
    
         String matricula,nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
         int creditacao;
-        
+        request.setCharacterEncoding("UTF-8");
         opcao = request.getParameter("opcao");
         
     switch (opcao) {
@@ -45,10 +45,14 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             curso = request.getParameter("curso");
             telefone = request.getParameter("telefone");
             email = request.getParameter("email");
-            semestreInicio = request.getParameter("semestreInicio");
-            formaIngresso = request.getParameter("formaIngresso");
+            semestreInicio = request.getParameter("sems_inicio");
+            formaIngresso = request.getParameter("forma_ingresso");
             creditacao = Integer.parseInt(request.getParameter("creditacao"));
-            Model.Aluno aluno = new Model.Aluno(matricula,nome,curso,telefone,email,semestreInicio,formaIngresso,creditacao);
+            //turno = Integer.parseInt(request.getParameter("turno"));
+            Model.Aluno aluno = new Model.Aluno(matricula,nome,telefone,email,semestreInicio,formaIngresso,creditacao);
+            //aluno.setTurno(turno);
+            aluno.getCurso().setNome(curso);
+            aluno.pesquisarIdCurso();
             aluno.incluir();
             break;
         case "consulta":
@@ -60,6 +64,25 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
                 dispatcher.forward(request, response);
             }
             break;
+        case "alterar":
+            matricula = request.getParameter("matricula");
+            nome = request.getParameter("nome");
+            curso = request.getParameter("curso");
+            telefone = request.getParameter("telefone");
+            email = request.getParameter("email");
+            semestreInicio = request.getParameter("sems_inicio");
+            formaIngresso = request.getParameter("forma_ingresso");
+            creditacao = Integer.parseInt(request.getParameter("creditacao"));
+            Model.Aluno alunoAlt = new Model.Aluno(matricula,nome,telefone,email,semestreInicio,formaIngresso,creditacao);
+            alunoAlt.getCurso().setNome(curso);
+            alunoAlt.pesquisarIdCurso();
+            alunoAlt.alterar();
+            break;
+        case "deletar":
+            matricula = request.getParameter("matricula");
+            Model.Aluno alunoDel = new Model.Aluno();
+            alunoDel.setMatricula(matricula);
+            alunoDel.deletar();      
         default:
             //alteração
             break;

@@ -78,10 +78,27 @@ public class CursoDAO {
     }      
         
         
-    public ResultSet pesquisarCod(Model.Curso curso){
+    public ResultSet pesquisarCodDept(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
             sql = "SELECT Id FROM sonaes.departamentos where Nome = ('"+curso.getDepartamento()+"')";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
+    
+    public ResultSet pesquisarCodCurso(Model.Curso curso){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "SELECT Codigo,Id FROM sonaes.cursos where Nome = ('"+curso.getNome()+"')";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
