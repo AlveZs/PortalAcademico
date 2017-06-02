@@ -23,12 +23,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Aluno {
     
-    private String matricula,nome,telefone,email,semestreInicio,formaIngresso;
+    private String nome,telefone,email,semestreInicio,formaIngresso;
     private Curso curso = new Curso();
-    private int creditacao,formaIngressoCod,cursoCod;
+    private int matricula,creditacao,formaIngressoCod,cursoCod,id;
     private ArrayList<Curso> cursos = new ArrayList<>();
 
-    public Aluno(String matricula, String nome, String telefone, String email, String semestreInicio, String formaIngresso, int creditacao) {
+    public Aluno(int matricula, String nome, String telefone, String email, String semestreInicio, String formaIngresso, int creditacao) {
         this.matricula = matricula;
         this.nome = nome;
         this.telefone = telefone;
@@ -43,11 +43,11 @@ public class Aluno {
     
     
 
-    public String getMatricula() {
+    public int getMatricula() {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
+    public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
 
@@ -122,6 +122,14 @@ public class Aluno {
     public void setCursos(ArrayList<Curso> cursos) {
         this.cursos = cursos;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
     
     public void incluir(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
@@ -154,6 +162,20 @@ public class Aluno {
         while (resultado.next())
         {
             this.formaIngressoCod = resultado.getInt("Id");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
+    }
+    
+    public void pesquisarIdAluno(){
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        ResultSet resultado = x.pesquisarIdAluno(this);
+        try{
+        while (resultado.next())
+        {
+            this.id = resultado.getInt("Id");
         }
         }
         catch (SQLException e){

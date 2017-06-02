@@ -27,8 +27,8 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             throws ServletException, IOException {
     
    
-        String matricula,nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
-        int creditacao;
+        String nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
+        int matricula,creditacao;
         request.setCharacterEncoding("UTF-8");
         opcao = request.getParameter("opcao");
         
@@ -40,7 +40,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             dispatcher2.forward(request,response);
             break;
         case "cadastro":
-            matricula = request.getParameter("matricula");
+            matricula = Integer.parseInt(request.getParameter("matricula"));
             nome = request.getParameter("nome");
             curso = request.getParameter("curso");
             telefone = request.getParameter("telefone");
@@ -65,7 +65,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             }
             break;
         case "alterar":
-            matricula = request.getParameter("matricula");
+            matricula = Integer.parseInt(request.getParameter("matricula"));
             nome = request.getParameter("nome");
             curso = request.getParameter("curso");
             telefone = request.getParameter("telefone");
@@ -79,7 +79,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             alunoAlt.alterar();
             break;
         case "deletar":
-            matricula = request.getParameter("matricula");
+            matricula = Integer.parseInt(request.getParameter("matricula"));
             Model.Aluno alunoDel = new Model.Aluno();
             alunoDel.setMatricula(matricula);
             alunoDel.deletar();      

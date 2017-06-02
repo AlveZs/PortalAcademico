@@ -11,7 +11,7 @@ package Model;
  */
 public class Campus {
     String nome;
-    int codigo;
+    int codigo,id;
 
     public Campus(String nome, int codigo) {
         this.nome = nome;
@@ -33,5 +33,14 @@ public class Campus {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 
 }
