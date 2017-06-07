@@ -90,28 +90,28 @@
                         </div>  
                     </td>
                     <td>
-                            <div>
-                                <p> Curso:<br/> <select name="curso" style="width:120px;">
-                                    <option value="<%=usuario.getCurso().getIdCurso()%>"> <%=usuario.getCurso().getNome()%></option>
-                                        <%for(int i=0;i<cursos.size();i++){ 
-                                            if(!cursos.get(i).getNome().equals(usuario.getCurso().getNome())){%>
-                                                <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                                            <%}%>
+                        <div>
+                            <p> Departamento: <br/> <select name="departamento" style="width:120px;">
+                                <option value="<%=usuario.getDepartamento().getId()%>"><%=usuario.getDepartamento().getNome()%> </option>
+                                    <%for(int i=0;i<depts.size();i++){ 
+                                        if(!depts.get(i).getNome().equals(usuario.getDepartamento().getNome())){%>
+                                            <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
                                         <%}%>
-                                </select> </p>
+                                    <%}%>
+                            </select> </p>
                         </div>  
                     </td> 
                     <td>
-                            <div>
-                                <p> Departamento: <br/> <select name="departamento" style="width:120px;">
-                                    <option value="<%=usuario.getDepartamento().getId()%>"><%=usuario.getDepartamento().getNome()%> </option>
-                                        <%for(int i=0;i<depts.size();i++){ 
-                                            if(!depts.get(i).getNome().equals(usuario.getDepartamento().getNome())){%>
-                                                <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
-                                            <%}%>
+                        <div>
+                            <p> Curso:<br/> <select name="curso" style="width:120px;">
+                                <option value="<%=usuario.getCurso().getIdCurso()%>"> <%=usuario.getCurso().getNome()%></option>
+                                    <%for(int i=0;i<cursos.size();i++){ 
+                                        if(!cursos.get(i).getNome().equals(usuario.getCurso().getNome())){%>
+                                            <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
                                         <%}%>
-                                </select> </p>
-                        </div>  
+                                    <%}%>
+                            </select> </p>
+                        </div>
                     </td>
                     <tr>
                         <td>

@@ -15,6 +15,16 @@
         <%@include file="menu.jsp" %>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
+        <script>
+            $(document).ready(function() {
+                $("#tipo").on('change', function(){
+                    if ($("#tipo").val() !== "2" && $("#tipo").val() !== "3")
+                        $("#sel_curso").attr("disabled", false);
+                    else
+                        $("#sel_curso").attr("disabled", true);
+                });
+            });
+        </script>
     </head>
     <body>
         <form method="post" action="UsuarioController" name="usuarioForm">
@@ -33,7 +43,7 @@
                 <tr>
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                     <td>                                   
-                        <p>Tipo: <select name="tipo" style="width:120px;">
+                        <p>Tipo: <select name="tipo" id="tipo" style="width:120px;">
                             <option> </option>
                             <option value = "2">Coordenador(a) Acadêmico</option>
                             <option value = "3">Secretário(a) Acadêmico</option>
@@ -55,24 +65,25 @@
                         </div>  
                     </td>
                     <td>
-                            <div>
-                                <p> Curso:<br/> <select name="curso" style="width:120px;">
-                                <option> </option>
-                                <%for(int i=0;i<cursos.size();i++){ %>
-                                <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                                <%}%>
-                                </select> </p>
+                            
+                        <div>
+                            <p> Departamento: <br/> <select name="departamento" style="width:120px;">
+                            <option> </option>
+                            <%for(int i=0;i<depts.size();i++){ %>
+                            <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
+                            <%}%>
+                            </select> </p>
                         </div>  
                     </td> 
                     <td>
-                            <div>
-                                <p> Departamento: <br/> <select name="departamento" style="width:120px;">
-                                <option> </option>
-                                <%for(int i=0;i<depts.size();i++){ %>
-                                <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
-                                <%}%>
-                                </select> </p>
-                        </div>  
+                         <div>
+                             <p> Curso:<br/> <select name="curso" id="sel_curso" style="width:120px;" disabled="disabled">
+                            <option> </option>
+                            <%for(int i=0;i<cursos.size();i++){ %>
+                            <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
+                            <%}%>
+                            </select> </p>
+                        </div>   
                     </td>
                     <tr>
                         <td>
