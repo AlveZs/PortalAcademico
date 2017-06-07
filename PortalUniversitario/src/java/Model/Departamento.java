@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class Departamento {
     
     private String nome, nomeCampus, codigo;
-    private int campus;
+    private int campus,id;
     private ArrayList<Departamento> dept = new ArrayList<>();
 
     public Departamento() {
@@ -111,6 +111,15 @@ public class Departamento {
     public void setDept(ArrayList<Departamento> dept) {
         this.dept = dept;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     
        

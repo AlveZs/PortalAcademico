@@ -110,9 +110,10 @@ public class DepartamentoDAO {
       try{
         Model.Departamento obj;  
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT departamentos.Nome, departamentos.Codigo, campus.Nome FROM sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus = campus.Id;");
+        ResultSet res = stm.executeQuery("SELECT departamentos.Id,departamentos.Nome, departamentos.Codigo, campus.Nome FROM sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus = campus.Id;");
         while (res.next()){
           obj = new Model.Departamento(res.getString("departamentos.Nome"),res.getString("campus.Nome"),res.getString("departamentos.codigo"));
+          obj.setId(res.getInt("departamentos.Id"));
           departamentos.add(obj);
         }
         res.close();

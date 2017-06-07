@@ -13,6 +13,9 @@ public class Campus {
     String nome;
     int codigo,id;
 
+    public Campus() {
+    }
+    
     public Campus(String nome, int codigo) {
         this.nome = nome;
         this.codigo = codigo;

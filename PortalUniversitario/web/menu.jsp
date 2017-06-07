@@ -6,17 +6,23 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-
+<% 
+    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+    response.setDateHeader("Expires", 0); // Proxies.
+    
+if((session.getAttribute("tipoUser")== null))
+    response.sendRedirect("index.jsp");
+%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Menu</title>
-        <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">      
+        <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">    
         <link href="css/modal.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="js/libs/jquery/jquery.js"></script>
         <script type="text/javascript" src="js/modal.js"></script>
-
     </head>
     <body>
     <div id="cabecalho">
@@ -40,12 +46,12 @@
             </li>
              <li> <a href="coord_disciplina.jsp" id="disciplina"> Disciplina </a> </li>
             <li> <a href="coord_semestre.jsp" id="semestre"> <div></div> Semestre </a> </li>
-            <li> <a href="" id="usuario"> <div></div> Usuário </a> </li>
+            <li> <a href="UsuarioController?opcao=preencher" id="usuario"> <div></div> Usuário </a> </li>
             <li> <a href="DepartamentoController?opcao=preencher" id="departamento"> <div></div> Departamento  </a> </li>
         </ul>
     </div>
             
-               <script>
+                 <script>
             var sessao = <%= session.getAttribute("tipoUser") %>;
             //document.write(sessao);
             
