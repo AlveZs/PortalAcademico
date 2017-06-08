@@ -62,10 +62,11 @@ public class CursoDAO {
       try{
         Model.Curso obj;  
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT cursos.Nome, departamentos.Nome, cursos.CargaHoraria, cursos.Creditacao,cursos.Codigo, Min_Semestre,Max_Semestre, fk_turno FROM sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id;");
+        ResultSet res = stm.executeQuery("SELECT cursos.Id,cursos.Nome, departamentos.Nome, cursos.CargaHoraria, cursos.Creditacao,cursos.Codigo, Min_Semestre,Max_Semestre, fk_turno FROM sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id;");
         while (res.next()){
           obj = new Model.Curso(res.getString("cursos.Nome"),res.getString("departamentos.Nome"),res.getInt("CargaHoraria"),res.getInt("Creditacao"),res.getInt("Codigo"),res.getInt("Min_Semestre"),res.getInt("Max_Semestre"),res.getInt("fk_turno"));
-          obj.setNome(res.getString("Nome"));
+//          obj.setNome(res.getString("Nome"));
+          obj.setId(res.getInt("cursos.Id"));
           cursos.add(obj);
         }
         res.close();

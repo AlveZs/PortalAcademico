@@ -11,11 +11,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Portal Universitário | Coordenador</title>
-        <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
-        <link href="css/modal.css" rel="stylesheet" type="text/css">
-        <script type="text/javascript" src="js/libs/jquery/jquery.js"></script>
-        <script type="text/javascript" src="js/modal.js"></script>
         <script type="text/javascript">
             // Função responsável por inserir linhas na tabela
         function inserirLinha() {
@@ -56,10 +52,10 @@
             %>
 
             <%-- TESTE DO MODAL --%>
-            <a href="#janela1" rel="modal" style="color:red">Janela modal</a>
+            <a href="#janela1" class="modal" style="color:red">Janela modal</a>
 
             <div class="janela" id="janela1">
-                <a href="#" class="fechar" style="color: red">X Fechar</a>
+                <a href="#" class="fechar">X Fechar</a>
                 <h4>Primeira janela modal</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
                 <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>

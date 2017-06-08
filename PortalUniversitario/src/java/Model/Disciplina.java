@@ -15,28 +15,71 @@ import java.util.ArrayList;
  */
 public class Disciplina {
     
-    private String  nome,curso,tipo,codigo;
-    private int creditacao,cargaHoraria,semestre;
+    private String  nome,tipo,codigo;
+    private Curso curso = new Curso();
+    private int creditacao,cargaHoraria,semestre,idTipo,id;
     private ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
     public Disciplina() {
     }
 
-
-
-    public Disciplina(String nome, int semestre, String curso, String tipo, String codigo, int creditacao, int cargaHoraria) {
+    public Disciplina(String nome, int semestre,int idTipo, String codigo, int creditacao, int cargaHoraria) {
         this.nome = nome;
         this.semestre = semestre;
-        this.curso = curso;
-        this.tipo = tipo;
+        this.idTipo = idTipo;
         this.codigo = codigo;
         this.creditacao = creditacao;
         this.cargaHoraria = cargaHoraria;
     }
 
+    public Disciplina(String nome,int semestre, String tipo, String codigo, int creditacao, int cargaHoraria) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.codigo = codigo;
+        this.creditacao = creditacao;
+        this.cargaHoraria = cargaHoraria;
+        this.semestre = semestre;
+    }
+    
+    public void incluir(){
+        Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
+        x.incluir(this);
+    }
+    
+    public void alterar(){
+        Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
+        x.alterar(this);
+    }
+    
+    public void deletar(){
+        Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
+        x.deletar(this);
+    } 
+
     public void pesquisarTodos(int cod){
         Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
         x.pesquisarTodas(disciplinas,cod);
+    }
+    
+    public void pesquisarDisciplina(){
+        Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
+        ResultSet resultado = x.pesquisarDisciplina(this);
+        try{
+        while (resultado.next())
+        {
+            this.nome = resultado.getString("disciplinas.Nome");
+            this.cargaHoraria = resultado.getInt("disciplinas.CargaHoraria");
+            this.creditacao = resultado.getInt("disciplinas.Creditacao");
+            this.curso.setId(resultado.getInt("disciplinas.Fk_Cursos"));
+            this.curso.setNome(resultado.getString("cursos.Nome"));
+            this.idTipo = resultado.getInt("disciplinas.Fk_Tipo");
+            this.semestre = resultado.getInt("disciplinas.Semestre");
+            
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
     }
     
     public String getNome() {
@@ -55,13 +98,6 @@ public class Disciplina {
         this.semestre = semestre;
     }
 
-    public String getCurso() {
-        return curso;
-    }
-
-    public void setCurso(String curso) {
-        this.curso = curso;
-    }
 
     public String getTipo() {
         return tipo;
@@ -102,5 +138,31 @@ public class Disciplina {
     public void setDisciplinas(ArrayList<Disciplina> disciplinas) {
         this.disciplinas = disciplinas;
     }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
+    }
+
+    public int getIdTipo() {
+        return idTipo;
+    }
+
+    public void setIdTipo(int idTipo) {
+        this.idTipo = idTipo;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
 }

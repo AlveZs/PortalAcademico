@@ -30,4 +30,13 @@ and open the template in the editor.
     background-color:#000;
 }
 
-.fechar{display:block; text-align:right;}
+.fechar{
+    display: block;
+    text-align: right;
+    color: red;
+}
+
+.modal:hover {
+    background-color: gray;
+    cursor: pointer;
+}

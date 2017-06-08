@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -13,14 +15,14 @@ import java.util.ArrayList;
  */
 public class Departamento {
     
-    private String nome, nomeCampus;
-    private int codigo, campus;
+    private String nome, nomeCampus, codigo;
+    private int campus,id;
     private ArrayList<Departamento> dept = new ArrayList<>();
 
     public Departamento() {
     }
 
-    public Departamento(String nome, String nomeCampus, int codigo) {
+    public Departamento(String nome, String nomeCampus, String codigo) {
         this.nome = nome;
         this.nomeCampus = nomeCampus;
         this.codigo = codigo;
@@ -28,7 +30,7 @@ public class Departamento {
 
     
     
-    public Departamento(String nome, int codigo, int campus) {
+    public Departamento(String nome, String codigo, int campus) {
         this.nome = nome;
         this.codigo = codigo;
         this.campus = campus;
@@ -37,6 +39,37 @@ public class Departamento {
     public void pesquisar(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
         x.pesquisar(dept);
+    }
+    
+    public void incluir(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        x.incluir(this);
+    }
+    
+    public void alterar(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        x.alterar(this);
+    }
+    
+    public void deletar(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        x.deletar(this);
+    }
+    
+    public void pesquisarDepartamento(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        ResultSet resultado = x.pesquisarDepartamento(this);
+        try{
+        while (resultado.next())
+        {
+            this.campus = resultado.getInt("Fk_Campus");
+            this.nome = resultado.getString("departamentos.Nome");
+            this.nomeCampus = resultado.getString("campus.nome");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
     }
 
     public String getNome() {
@@ -47,11 +80,11 @@ public class Departamento {
         this.nome = nome;
     }
 
-    public int getCodigo() {
+    public String getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
@@ -78,6 +111,15 @@ public class Departamento {
     public void setDept(ArrayList<Departamento> dept) {
         this.dept = dept;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     
     
        

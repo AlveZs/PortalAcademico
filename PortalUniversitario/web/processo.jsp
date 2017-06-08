@@ -21,24 +21,19 @@
        <div id="ctx" align="center">
         <h1> Gerenciar Processos </h1>
         <div class="separador"></div>
-    <form method="post" name="consulta">        
+    <form method="post" action="ProcessoController" name="consulta">        
     	<table id="tab_dados_aluno"  width="750" border="0"  align="center">
         	<tr>
-                <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" > <input type="button" name="buscar" value="Buscar" style="margin-left:30px"> </p> </td>
-                <td> <p> Data<br/> <input type="date" name="data"> </td>
-            </tr>
-            <tr>
-            	<td colspan="4">
-                	<p> Nome:<br/> <input style="width:100%" type="text" name="nome"> </p>
-                </td>
+                <td colspan="2"> <p> Código do processo:<br/> <input type="text" name="codProcesso" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
+                <td> <p> Matrícula<br/> <input type="text" name="matrícula"> </td>
             </tr>
             <tr>
             	<td>
                 	<div>
                             <p> Situação:<br/> <select name="situacao" style="width:120px;">
-                            <option value="0"></option>
+                            <option value="Vazio"></option>
                             <option value="1"> Aprovado </option>
-                            <option value="2"> Reprovado </option>
+                            <option value="0"> Reprovado </option>
                         </select> </p>
                     </div>  
                 </td>   
@@ -47,17 +42,13 @@
                     	<p> Qtd. Total de Semestres:<br/> <input style="width: 150px;" type="text" name="qtdTotalSem" class="caixas" > </p>
                     </div>
                 </td>
-                <td>
-                    <div>
-                        <p> Qtd. Adicional de Semestres:<br/> <input style="width: 150px; margin-right: 150px; " type="text" name="qtdAdicionalSem" class="caixas" > </p>
-                    </div>
-                </td>
             </tr>
             <tr></tr>
             <tr> 
             	<td align="center" colspan="3"> 
-                    <input type="button" value="Novo" id="btn_novo" class="botao">
-                    <input type="button" value="Alterar" id="btn_alterar" class="botao"> 
+                    <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
+                    <input type="button" value="Alterar" id="btn_alterar" class="botao">
+                    <input type="submit" name="opcao" value="Deletar" class="botao"> 
                     <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
                 </td>
             </tr>

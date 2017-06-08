@@ -28,7 +28,7 @@ public class CampusDAO {
         ResultSet res = stm.executeQuery("SELECT * FROM sonaes.campus;");
         while (res.next()){
           obj = new Model.Campus(res.getString("Nome"), res.getInt("Codigo"));
-          obj.setNome(res.getString("Nome"));
+          obj.setId(res.getInt("Id"));
           campus.add(obj);
         }
         res.close();

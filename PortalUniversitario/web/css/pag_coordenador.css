@@ -86,14 +86,14 @@ a {
     text-decoration: none;
 	width: 100px;
 	text-align:center;
- 
+
     border-left: 1px solid #797979;
     border-right: 1px solid #797979;
- 
+
     font-family: Helvetica, Arial, sans-serif;
     font-weight: bold;
     font-size: 16px;
- 
+
     color: #f3f3f3;
     text-shadow: 1px 1px 1px rgba(0,0,0,.6);
 }
@@ -109,7 +109,7 @@ a {
     height: 0;;
     overflow: hidden;
     padding: 0px;
-	
+
 	-webkit-transition: height .25s ease .1s;
     -moz-transition: height .25s ease .1s;
     -o-transition: height .25s ease .1s;
@@ -204,7 +204,7 @@ th {
 	height: 1px;
 	width: 100%;
 	background-color: #000;
-	margin: -20px 20px 40px 20px; 
+	margin: -20px 20px 40px 20px;
 }
 
 h1 {
@@ -255,4 +255,15 @@ select {
 
 .cb_departamento {
     width: 280px;
+}
+
+.tab_menu_resultado {
+    margin-top: 30px;
+}
+.tab_resultado {
+    margin-top: 10px;
+    text-align: center;
+}
+.td_buscar {
+    text-align: left;
 }

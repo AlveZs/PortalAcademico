@@ -24,7 +24,7 @@ public class AlunoDAO {
         
       Connection minhaConexao = ConnectionFactory.getConnection();
       String sql;
-      sql = "insert into sonaes.aluno (matricula, nome, Fk_Curso, SemInicio, telefone, email, Fk_Forma_Ingresso, creditacao) values ('"+aluno.getMatricula()+"','"+aluno.getNome()+"',"+aluno.getCurso().getIdCurso()+",'"+aluno.getSemestreInicio()+"','"+aluno.getTelefone()+"','"+aluno.getEmail()+"',"+aluno.getFormaIngresso()+" ,"+aluno.getCreditacao()+")";
+      sql = "insert into sonaes.aluno (matricula, nome, Fk_Curso, SemInicio, telefone, email, Fk_Forma_Ingresso, creditacao) values ("+aluno.getMatricula()+",'"+aluno.getNome()+"',"+aluno.getCurso().getIdCurso()+",'"+aluno.getSemestreInicio()+"','"+aluno.getTelefone()+"','"+aluno.getEmail()+"',"+aluno.getFormaIngresso()+" ,"+aluno.getCreditacao()+")";
       int retorno=0;
       try{
             Statement stm = minhaConexao.createStatement();
@@ -41,7 +41,7 @@ public class AlunoDAO {
         
       Connection minhaConexao = ConnectionFactory.getConnection();
       String sql;
-      sql = "update sonaes.aluno set Fk_Curso ="+aluno.getCurso().getIdCurso()+",SemInicio ='"+aluno.getSemestreInicio()+"',telefone ='"+aluno.getTelefone()+"',email = '"+aluno.getEmail()+"',Fk_Forma_Ingresso='"+aluno.getFormaIngresso()+"' , creditacao = '"+aluno.getCreditacao()+"', nome ='"+aluno.getNome()+"' where matricula = '"+aluno.getMatricula()+"'";
+      sql = "update sonaes.aluno set Fk_Curso ="+aluno.getCurso().getIdCurso()+",SemInicio ='"+aluno.getSemestreInicio()+"',telefone ='"+aluno.getTelefone()+"',email = '"+aluno.getEmail()+"',Fk_Forma_Ingresso='"+aluno.getFormaIngresso()+"' , creditacao = '"+aluno.getCreditacao()+"', nome ='"+aluno.getNome()+"' where matricula = "+aluno.getMatricula()+"";
       int retorno=0;
       try{
             Statement stm = minhaConexao.createStatement();
@@ -59,7 +59,7 @@ public class AlunoDAO {
         
       Connection minhaConexao = ConnectionFactory.getConnection();
       String sql;
-      sql = "delete from sonaes.aluno where matricula = '"+aluno.getMatricula()+"'";
+      sql = "delete from sonaes.aluno where matricula = "+aluno.getMatricula()+"";
       int retorno=0;
       try{
             Statement stm = minhaConexao.createStatement();
@@ -90,6 +90,24 @@ public class AlunoDAO {
               return resultado;
           }             
     }
+    
+    public ResultSet pesquisarIdAluno(Model.Aluno aluno){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "SELECT Id FROM sonaes.aluno where matricula = ("+aluno.getMatricula()+")";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
+    
     
     public ResultSet pesquisarCurso(Model.Aluno aluno){
         Connection minhaConexao = ConnectionFactory.getConnection();
