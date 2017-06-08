@@ -4,6 +4,7 @@
     Author     : joao
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,8 +18,13 @@
         <%@include file ="menu.jsp"%>
     <div>
     <form method="post" action="CursoController">
-        <% Model.Curso curso = (Model.Curso)request.getAttribute("c");%>
-        <% Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
+        <% Model.Curso curso = (Model.Curso)request.getAttribute("c");
+        Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");
+        Model.Resultados resultado = (Model.Resultados)request.getAttribute("results");
+        ArrayList<Model.Departamento> departamento = new ArrayList();
+        resultado.pesquisarTodosDepartamentos();
+        departamento = resultado.getDepartamentos();
+        %>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="700">
         	<th colspan="7">
             	<h1>Gerenciar Curso</h1>
@@ -35,7 +41,12 @@
             	<td colspan="4">
                     <p>Departamento:<br/>
                         <select name="departamento" class="cb_departamento">
-                        <option value="0"><%=curso.getDepartamento()%></option>
+                            <option value="<%=curso.getCodDept()%>"><%=curso.getDepartamento()%></option>
+                                <%for(int i=0;i<departamento.size();i++){ 
+                                    if(!departamento.get(i).getNome().equals(curso.getDepartamento())){%>
+                                        <option value="<%=departamento.get(i).getId()%>"><%= departamento.get(i).getNome()%></option>
+                                    <%}%>
+                                <%}%>
                         </select>
                     </p>
             	</td>
@@ -49,7 +60,7 @@
             	<td>
                     <p>Carga Horária:<br/> <input type="text" name="cargaHoraria" value="<%=curso.getCargaHoraria()%>" class="in_menores"></p></td>
                 <td>
-                    <p>Creditação:<br/> <input type="text" name="credito" value="<%=curso.getCreditacao()%> "class="in_menores"></p>
+                    <p>Creditação:<br/> <input type="text" name="credito" value="<%=curso.getCreditacao()%>"class="in_menores"></p>
                 
                 </td>
             </tr>
@@ -94,9 +105,10 @@
             <tr></tr>
             <tr align="center">
             <td height="56" colspan="7">
-              <input type="button" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
-              <input type="button" value="Alterar" id="btn_alterar" class="botao">
-                      <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+                <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
+                <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
+                <input type="submit" name="opcao" value="Deletar" class="botao"> 
+                <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
             </td>
             </tr>
         </table>

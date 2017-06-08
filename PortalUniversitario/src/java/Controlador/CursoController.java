@@ -36,8 +36,11 @@ public class CursoController extends HttpServlet {
         int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno;
         request.setCharacterEncoding("UTF-8");
         opcao= request.getParameter("opcao");
+        RequestDispatcher dispatcherDefault = request.getRequestDispatcher("CursoController?opcao=preencher");
         switch (opcao){
             case "Buscar":
+                Model.Resultados resultadosBusca = new Model.Resultados();
+                request.setAttribute("results", resultadosBusca);
                 Model.Curso curso = new Model.Curso(Integer.parseInt(request.getParameter("codigo")));
                 Model.Disciplina disciplina = new Model.Disciplina();
                 disciplina.pesquisarTodos(Integer.parseInt(request.getParameter("codigo")));
@@ -59,6 +62,27 @@ public class CursoController extends HttpServlet {
                 Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
                 curs.pesquisarCodDept();
                 curs.incluir();
+                dispatcherDefault.forward(request, response);
+                break;
+            case "Alterar":
+                codigo = Integer.parseInt(request.getParameter("codigo"));
+                nome = request.getParameter("nome");
+                departamento = request.getParameter("departamento");
+                cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
+                creditacao = Integer.parseInt(request.getParameter("credito"));
+                turno = Integer.parseInt(request.getParameter("turno"));
+                minSemestre = Integer.parseInt(request.getParameter("qtdMinSemestres"));
+                maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
+                Model.Curso cursoAlt = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
+                cursoAlt.setCodDept(Integer.parseInt(request.getParameter("departamento")));
+                cursoAlt.alterar();
+                dispatcherDefault.forward(request, response);
+                break;
+            case "Deletar":
+                Model.Curso cursoDel = new Model.Curso();
+                cursoDel.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+                cursoDel.deletar();
+                dispatcherDefault.forward(request, response);
                 break;
             case "preencher":
                 Model.Departamento dept = new Model.Departamento(); 

@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/DisciplinaDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/semestre_preenchida.jsp</file>
             <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/UsuarioDAO.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/ProcessoController.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/DisciplinaController.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Usuario.java</file>
-            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Disciplina.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_curso_preenchida.jsp</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/SemestreController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_semestre.jsp</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Semestre.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/SemestreDAO.java</file>
         </group>
     </open-files>
 </project-private>

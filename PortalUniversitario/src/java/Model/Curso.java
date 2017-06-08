@@ -75,6 +75,16 @@ public class Curso {
         Banco.CursoDAO x = new Banco.CursoDAO();
         x.incluir(this);
     }
+    
+    public void alterar(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        x.alterar(this);
+    }
+    
+    public void deletar(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        x.deletar(this);
+    }    
 
     public void pesquisar(){
         Banco.CursoDAO x = new Banco.CursoDAO();
@@ -89,6 +99,7 @@ public class Curso {
             this.minSemestre = resultado.getInt("Min_Semestre");
             this.maxSemestre = resultado.getInt("Max_Semestre");
             this.turno = resultado.getInt("fk_turno");
+            this.codDept = resultado.getInt("Fk_Departamento");
         }
         }
         catch (SQLException e){
