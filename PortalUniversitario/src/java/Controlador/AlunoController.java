@@ -33,6 +33,16 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
         opcao = request.getParameter("opcao");
         
     switch (opcao) {
+        case "Buscar":
+            Model.Resultados resultadosBusca = new Model.Resultados();
+            request.setAttribute("results", resultadosBusca);
+            Model.Aluno alunoBusca = new Model.Aluno();
+            alunoBusca.setMatricula(Integer.parseInt(request.getParameter("matricula")));
+            alunoBusca.pesquisarIdAluno();
+            request.setAttribute("depart", alunoBusca);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
+            dispatcher.forward(request, response);
+            break;
       case "preencher":
             Model.Resultados resultados = new Model.Resultados(); 
             request.setAttribute("results", resultados);
@@ -60,7 +70,7 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             request.setAttribute("resultado_banco",x);          
             if(opcao.equals("consulta"))
             {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("Balanco.jsp");
+                dispatcher = request.getRequestDispatcher("Balanco.jsp");
                 dispatcher.forward(request, response);
             }
             break;

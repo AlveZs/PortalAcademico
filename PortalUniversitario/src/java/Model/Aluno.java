@@ -183,6 +183,28 @@ public class Aluno {
         }    
     }
     
+    public void pesquisarAluno(){
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        ResultSet resultado = x.pesquisarAluno(this);
+        try{
+        while (resultado.next())
+        {
+            this.nome = resultado.getString("aluno.Nome");
+            this.curso.setNome(resultado.getString("cursos.Nome"));
+            this.curso.setId(resultado.getInt("aluno.Fk_Cursos"));
+            this.email = resultado.getString("aluno.email");
+            this.telefone = resultado.getString("aluno.telefone");
+            this.formaIngresso = resultado.getString("formasingresso.nome");
+            this.formaIngressoCod = resultado.getInt("aluno.Fk_Forma_Ingresso");
+            this.semestreInicio = resultado.getString("aluno.SemInicio");
+            this.matricula = resultado.getInt("aluno.Matricula");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
+    }
+    
     public void pesquisarCurso(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarCurso(this);

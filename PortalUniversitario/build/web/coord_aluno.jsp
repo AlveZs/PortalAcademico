@@ -13,7 +13,7 @@
         <title>Portal Universitário | Coordenador</title>
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
         <script type="text/javascript">
-            // Função responsável por inserir linhas na tabela
+        // Função responsável por inserir linhas na tabela
         function inserirLinha() {
 
             // Captura a referência da tabela com id “minhaTabela”
@@ -38,27 +38,76 @@
     </head>
     <body>
     <%@include file="menu.jsp"%>
+    
+    <% 
+    Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
+    ArrayList<Model.Curso> cursos = new ArrayList();
+    ArrayList<Model.Departamento> departamentos = new ArrayList();
+    ArrayList<Model.Campus> campi = new ArrayList();
+    resultados.pesquisarTodosCursos();
+    resultados.pesquisarTodosDepartamentos();
+    resultados.pesquisarTodosCampus();
+    cursos = resultados.getCursos();
+    departamentos = resultados.getDepartamentos();
+    campi = resultados.getCampus();
+    %>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Desabilita o combobox departamento, caso o CB de Campus não tenha um item selecionado
+            $("#cb_campus").on('change', function(){
+                if ($("#cb_campus").val())
+                    $("#cb_departamento").attr('disabled', false);
+                else
+                    $("#cb_departamento").attr('disabled', true);
+            })
+            
+            //Mesmo princípio do código acima, dessa vez pra Curso em relação à Departamento
+            $("#cb_departamento").on('change', function(){
+                if ($("#cb_departamento").val())
+                    $("#cb_curso").attr('disabled', false);
+                else
+                    $("#cb_curso").attr('disabled', true);
+            })
+        });
+    </script>
+    
     <div id="ctx" align="center">
         <h1> Gerenciar Aluno </h1>
         <div class="separador"></div>
         <form method="post"action="AlunoController"name="consulta">
-            <% Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
-            ArrayList<Model.Curso> cursos = new ArrayList();
-            ArrayList<Model.Departamento> departamentos = new ArrayList();
-            resultados.pesquisarTodosCursos();
-            resultados.pesquisarTodosDepartamentos();
-            cursos = resultados.getCursos();
-            departamentos = resultados.getDepartamentos();
-            %>
-
+            
             <%-- TESTE DO MODAL --%>
             <a href="#janela1" class="modal" style="color:red">Janela modal</a>
 
             <div class="janela" id="janela1">
+                <%//Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
                 <a href="#" class="fechar">X Fechar</a>
                 <h4>Primeira janela modal</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
                 <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>
+                <table>
+                    <tbody>
+                        <tr class="subtabela_disciplina">
+                            <td><b>Nome</b></td>
+                            <td><b>Carga Horária</b></td>
+                            <td><b>Creditação</b></td>
+                            <td><b>Semestre</b></td>
+                            <td><b>Código</b></td>
+                            <td><b>Tipo</b></td>
+                        </tr>
+                        <%//for(Model.Disciplina disc : disciplina.getDisciplinas()){%>
+                        <tr class="subtabela_disciplina">
+                            <td><%//disc.getNome()%></td>
+                            <td><%//disc.getCargaHoraria()%></td>
+                            <td><%//disc.getCreditacao()%></td>
+                            <td><%//disc.getSemestre()%></td>
+                            <td><%//disc.getCodigo()%></td>
+                            <td><%//disc.getTipo()%></td>
+                        </tr>    
+                        <%//}%>
+                    </tbody>
+                </table>
             </div>
             <!-- mascara para cobrir o site -->
             <div id="mascara"></div>
@@ -66,9 +115,8 @@
 
 
             <table id="tab_dados_aluno"  width="800" border="0"  align="center">
-                    <tr>
-                        <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="buscar" value="Buscar" style="margin-left:30px"></p> </td>
-
+                <tr>
+                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="opcao" value="Buscar" style="margin-left:30px"></p> </td>
                 </tr>
                 <tr>
                     <td colspan="4">
@@ -82,10 +130,15 @@
                 <tr>
                     <td>
                             <div>
-                                <p> Campus:<br/> <input type="text" name="campus" style="width:100px" > </p>
+                                <p> Campus:<br/> <select name="campus" id="cb_campus">
+                                        <option></option>
+                                        <%for(int i=0;i<campi.size();i++){ %>
+                                        <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
+                                        <%}%>
+                                    </select> </p>
                             </div>
                             <div style="float:right">
-                                <p> Departamento:<br/> <select name="departamento" style="width:120px;">
+                                <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;" disabled="true">
                                <option> </option>
                             <%
                                 for(int i=0;i<departamentos.size();i++){ %>
@@ -96,7 +149,7 @@
 
                     </td>
                     <td colspan="3">
-                        <p class="cols_centrais"> Curso:<br/> <select name="curso" class="campo_tabela" >
+                        <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela" disabled="true">
                             <option> </option>
                             <%
                                 for(int i=0;i<cursos.size();i++){ %>
@@ -140,10 +193,8 @@
                 </tr>
             </table>
 
-            <img src="img/fluxograma.jpg" width="747" height="540"/>
-
           <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
-                    <th rowspan="2"> Nome das Disciplinas: </th>
+                <th rowspan="2"> Nome das Disciplinas: </th>
                 <th rowspan="2"> Código </th>
                 <th colspan="2"> Carga Horária: </th>
                 <th rowspan="2"> Semestre </th>
@@ -153,6 +204,7 @@
                     <td> <i> Exigida:</i> </td>
                     <td> <i> Cumprida: </i> </td>
                 </tr>
+                <!--código-->
                 <tr>
                     <td>Algoritmos</td>
                     <td>CPD063</td>
@@ -197,5 +249,5 @@
                     </div>
         </form>
     </div>
-    </body>
+</body>
 </html>

@@ -19,9 +19,9 @@
             $(document).ready(function() {
                 $("#tipo").on('change', function(){
                     if ($("#tipo").val() !== "2" && $("#tipo").val() !== "3")
-                        $("#sel_curso").attr("disabled", false);
+                        $("#cb_curso").attr("disabled", false);
                     else
-                        $("#sel_curso").attr("disabled", true);
+                        $("#cb_curso").attr("disabled", true);
                 });
             });
         </script>
@@ -77,7 +77,7 @@
                     </td> 
                     <td>
                          <div>
-                             <p> Curso:<br/> <select name="curso" id="sel_curso" style="width:120px;" disabled="disabled">
+                             <p> Curso:<br/> <select name="curso" id="cb_curso" style="width:120px;" disabled="disabled">
                             <option> </option>
                             <%for(int i=0;i<cursos.size();i++){ %>
                             <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>

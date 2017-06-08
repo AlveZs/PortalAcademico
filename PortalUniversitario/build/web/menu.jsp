@@ -51,7 +51,7 @@ if((session.getAttribute("tipoUser")== null))
         </ul>
     </div>
             
-                 <script>
+        <script>
             var sessao = <%= session.getAttribute("tipoUser") %>;
             //document.write(sessao);
             

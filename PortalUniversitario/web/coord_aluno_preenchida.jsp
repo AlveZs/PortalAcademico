@@ -1,7 +1,7 @@
-<%--
-    Document   : coord_aluno
-    Created on : 28/05/2017, 14:43:20
-    Author     : joao
+<%-- 
+    Document   : coord_aluno_preenchida
+    Created on : 07/06/2017, 23:49:57
+    Author     : John_Peter
 --%>
 
 <%@page import="java.util.ArrayList"%>
@@ -113,10 +113,10 @@
             <div id="mascara"></div>
             <%-- FIM DO TESTE DO MODAL --%>
 
-
+            <%Model.Aluno aluno = (Model.Aluno)request.getAttribute("x");%>
             <table id="tab_dados_aluno"  width="800" border="0"  align="center">
                 <tr>
-                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="opcao" value="Buscar" style="margin-left:30px"></p> </td>
+                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" value=""><input type="button" name="opcao" value="Buscar" style="margin-left:30px"></p> </td>
                 </tr>
                 <tr>
                     <td colspan="4">
