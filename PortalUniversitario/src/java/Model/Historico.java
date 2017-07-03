@@ -21,6 +21,11 @@ public class Historico {
         this.situacao = situacao;
         this.matricula = matricula;
     }
+    
+    public Historico(String disciplina, String situacao) {
+        this.disciplina = disciplina;
+        this.situacao = situacao;
+    }
 
     public String getDisciplina() {
         return disciplina;

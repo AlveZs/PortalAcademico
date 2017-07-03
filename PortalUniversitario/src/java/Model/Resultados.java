@@ -93,4 +93,9 @@ public class Resultados {
         x.pesquisarHistorico(historico);
     }
     
+    public void pesquisarResultadosHistorico(String curso){
+        Banco.HistoricoDAO x = new Banco.HistoricoDAO();
+        x.pesquisarResultadosHistorico(disciplinas, curso);
+    }
+    
 }
