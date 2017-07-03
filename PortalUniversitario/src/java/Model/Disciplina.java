@@ -17,7 +17,8 @@ public class Disciplina {
     
     private String  nome,tipo,codigo;
     private Curso curso = new Curso();
-    private int creditacao,cargaHoraria,semestre,idTipo,id;
+    private int creditacao,cargaHoraria,semestre,idTipo,id, qtdPendentes;
+
     private ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
     public Disciplina() {
@@ -163,6 +164,12 @@ public class Disciplina {
         this.id = id;
     }
     
-    
+    public int getQtdPendentes() {
+        return qtdPendentes;
+    }
+
+    public void setQtdPendentes(int qtdPendentes) {
+        this.qtdPendentes = qtdPendentes;
+    }
     
 }

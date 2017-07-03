@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author Marcus Filipe
  */
 public class Curso {
-    
+
     private String nome,departamento;
     private int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno, codDept,idCurso;
 
@@ -37,11 +37,15 @@ public class Curso {
         this.turno = turno;
     }
 
+    public Curso(int codigo) {
+        this.codigo = codigo;
+    }
+
     public Curso() {
     }
+
     
-    
-  
+
     public void pesquisarCodDept(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         ResultSet resultado = x.pesquisarCodDept(this);
@@ -53,9 +57,9 @@ public class Curso {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarCodCurso(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         ResultSet resultado = x.pesquisarCodCurso(this);
@@ -68,9 +72,9 @@ public class Curso {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void incluir(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         x.incluir(this);
@@ -94,10 +98,6 @@ public class Curso {
         catch (SQLException e){
           System.out.println(e.getMessage());
         }
-    }
-    
-    public Curso(int codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -139,14 +139,14 @@ public class Curso {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    
+
     public int getTurno() {
         return turno;
     }
-    
+
     public void setTurno(int turno) {
         this.turno = turno;
-    }    
+    }
 
     public int getMinSemestre() {
         return minSemestre;
@@ -179,7 +179,7 @@ public class Curso {
     public void setId(int id) {
         this.idCurso = id;
     }
-    
-    
-    
+
+
+
 }
