@@ -9,7 +9,7 @@ and open the template in the editor.
    <!-- Inicio do Template -->
 <head>
     <meta charset="utf-8">
-    <title>Portal Universitï¿½rio | Disciplina</title>
+    <title>Portal Universitário | Disciplina</title>
     <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
     <link href="css/relatorio_oferta_materias.css" rel="stylesheet" type="text/css">
 </head>
@@ -30,7 +30,7 @@ and open the template in the editor.
     <form method="post" action="Relatorio_OfertaDisciplinaController">
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="800" id="tab_disciplinas">
             <th colspan="3">
-                <h1>Relatï¿½rio de Oferta de Matï¿½rias</h1>
+                <h1>Relatório de Oferta de Matérias</h1>
                 <div class="separador"></div>
             </th>
             <tr>
@@ -81,12 +81,12 @@ and open the template in the editor.
                                 <table border="1" align="center" width="500" style="margin-bottom:40px;">
                                     <tr>
                                     <th colspan="4">
-                                        <h3> <%=i+1%>ï¿½ Semestre </h3>
+                                        <h3> <%=i+1%>º Semestre </h3>
                                     </th>
                                     </tr>
                                     <tr>
                                     <th>Disciplina:</th>
-                                    <th>Cï¿½digo:</th>
+                                    <th>Código:</th>
                                     <th>Demanda:</th>
                                     <th>Optativa:</th>
                                     </tr>

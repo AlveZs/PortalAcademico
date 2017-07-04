@@ -67,7 +67,7 @@
             </tr>
             
             <tr>
-                <td colspan="7">
+                <td colspan="7" align="center">
                     <table border="1">
                         <tr class="subtabela_disciplina">
                             <td><b>Nome</b></td>
