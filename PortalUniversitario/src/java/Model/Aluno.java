@@ -191,7 +191,7 @@ public class Aluno {
         {
             this.nome = resultado.getString("aluno.Nome");
             this.curso.setNome(resultado.getString("cursos.Nome"));
-            this.curso.setId(resultado.getInt("aluno.Fk_Cursos"));
+            this.curso.setId(resultado.getInt("aluno.Fk_Curso"));
             this.email = resultado.getString("aluno.email");
             this.telefone = resultado.getString("aluno.telefone");
             this.formaIngresso = resultado.getString("formasingresso.nome");

@@ -67,7 +67,6 @@ public class Relatorio_OfertaDisciplinaController extends HttpServlet {
                 break;
             default:
                 //alteração
-                break;
         }
         
         }

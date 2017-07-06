@@ -31,7 +31,11 @@
             depts = resultado.getDepartamentos();
             int tipoUsr = usuario.getTipoUser();
             %>
-            <table id="tab_dados_aluno"  width="750" border="1"  align="center">
+            <table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
+                <th colspan="4">
+                    <h1>Gerenciar Usuário</h1>
+                    <div class="separador"></div>
+                </th>
                 <tr>
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" value="<%=usuario.getMatricula()%>" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                     <td>                                   
@@ -78,15 +82,15 @@
                 </tr>
                 <tr>
                     <td>
-                            <div>
-                                <p> Campus:<br/> <select name="campus" style="width:120px;">
+                        <div>
+                            <p> Campus:<br/> <select name="campus" style="width:120px;">
                                 <option value="<%=usuario.getCampus().getId()%>"> <%=usuario.getCampus().getNome()%></option>
                                 <%for(int i=0;i<campi.size();i++){ 
                                     if(!campi.get(i).getNome().equals(usuario.getCampus().getNome())){%>
                                         <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
                                     <%}%>
                                 <%}%>
-                                </select> </p>
+                            </select> </p>
                         </div>  
                     </td>
                     <td>
@@ -123,7 +127,6 @@
                             </div>
                         </td>                                         
                     </tr>
-                </tr>
                 <tr></tr>
                 <tr> 
                     <td align="center" colspan="3"> 

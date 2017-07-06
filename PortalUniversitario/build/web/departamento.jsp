@@ -22,8 +22,12 @@
             resultado.pesquisarTodosCampus();
             campi = resultado.getCampus();
             %>
-            <table id="tab_dados_aluno"  width="750" border="1"  align="center">
-                    <tr>
+            <table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
+                <th colspan="4">
+                    <h1>Gerenciar Departamento</h1>
+                    <div class="separador"></div>
+                </th>
+                <tr>
                     <td colspan="2"> <p> Código:<br/> <input type="text" name="codDept" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                     <td> <p> Nome:<br/> <input type="text" name="nome"> </td>
                 </tr>

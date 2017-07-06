@@ -17,21 +17,22 @@
             <link href="css/aluno.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        
-       <div id="ctx" align="center">
-        <h1> Gerenciar Processos </h1>
-        <div class="separador"></div>
+    
     <form method="post" action="ProcessoController" name="consulta">        
         <% Model.Processo processo = (Model.Processo)request.getAttribute("proc");%>
-        <table id="tab_dados_aluno"  width="750" border="0"  align="center">
+        <table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
+            <th colspan="5">
+                <h1> Gerenciar Processos </h1>
+                <div class="separador"></div>
+            </th>
             <tr>
                 <td colspan="2"> <p> Código do processo:<br/> <input type="text" name="codProcesso" value="<%=processo.getCodProcesso()%>" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                 <td> <p> Matrícula<br/> <input type="text" name="matrícula" value="<%=processo.getAluno().getMatricula()%>"> </td>
             </tr>
             <tr>
             	<td>
-                	<div>
-                            <p> Situação:<br/> <select name="situacao" style="width:120px;">
+                    <div>
+                        <p> Situação:<br/> <select name="situacao" style="width:120px;">
                             <%if(processo.getSituacao()==1){%>
                                 <option value="<%=processo.getSituacao()%>"> Aprovado</option>
                                 <option value="0"> Reprovado </option>
@@ -58,5 +59,6 @@
                 </td>
             </tr>
         </table>
+    </form>
     </body>
 </html>

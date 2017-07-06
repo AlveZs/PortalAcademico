@@ -32,6 +32,7 @@ public class CursoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         
         String nome,departamento,opcao;
         int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno;
         request.setCharacterEncoding("UTF-8");

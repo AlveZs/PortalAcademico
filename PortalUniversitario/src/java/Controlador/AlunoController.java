@@ -24,30 +24,31 @@ import javax.servlet.http.HttpServletResponse;
 public class AlunoController extends HttpServlet {
   
 protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
+try (PrintWriter out = response.getWriter()) {
+
+    String nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
+    int matricula,creditacao;
     
-   
-        String nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
-        int matricula,creditacao;
-        request.setCharacterEncoding("UTF-8");
-        opcao = request.getParameter("opcao");
+    Model.Resultados resultadosBusca = new Model.Resultados();
+    request.setAttribute("results", resultadosBusca);
+    RequestDispatcher dispatcher;
+    
+    request.setCharacterEncoding("UTF-8");
+    opcao = request.getParameter("opcao");
         
     switch (opcao) {
         case "Buscar":
-            Model.Resultados resultadosBusca = new Model.Resultados();
-            request.setAttribute("results", resultadosBusca);
             Model.Aluno alunoBusca = new Model.Aluno();
             alunoBusca.setMatricula(Integer.parseInt(request.getParameter("matricula")));
-            alunoBusca.pesquisarIdAluno();
-            request.setAttribute("depart", alunoBusca);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
+            alunoBusca.pesquisarAluno();
+            request.setAttribute("x", alunoBusca);
+            dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
             dispatcher.forward(request, response);
             break;
       case "preencher":
-            Model.Resultados resultados = new Model.Resultados(); 
-            request.setAttribute("results", resultados);
-            RequestDispatcher dispatcher2 = request.getRequestDispatcher("coord_aluno.jsp");
-            dispatcher2.forward(request,response);
+            dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
+            dispatcher.forward(request,response);
             break;
         case "cadastro":
             matricula = Integer.parseInt(request.getParameter("matricula"));
@@ -92,11 +93,11 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
             matricula = Integer.parseInt(request.getParameter("matricula"));
             Model.Aluno alunoDel = new Model.Aluno();
             alunoDel.setMatricula(matricula);
-            alunoDel.deletar();      
+            alunoDel.deletar();
+            break;
         default:
             //alteração
-            break;
-    }
+    }}
  } 
 
 

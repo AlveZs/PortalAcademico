@@ -71,129 +71,130 @@
             })
         });
     </script>
-    
-    <div id="ctx" align="center">
-        <h1> Gerenciar Aluno </h1>
-        <div class="separador"></div>
-        <form method="post"action="AlunoController"name="consulta">
-            
-            <%-- TESTE DO MODAL --%>
-            <a href="#janela1" class="modal" style="color:red">Janela modal</a>
+           
+    <form method="post"action="AlunoController"name="consulta">
 
-            <div class="janela" id="janela1">
-                <%//Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
-                <a href="#" class="fechar">X Fechar</a>
-                <h4>Primeira janela modal</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
-                <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>
-                <table>
-                    <tbody>
-                        <tr class="subtabela_disciplina">
-                            <td><b>Nome</b></td>
-                            <td><b>Carga Horária</b></td>
-                            <td><b>Creditação</b></td>
-                            <td><b>Semestre</b></td>
-                            <td><b>Código</b></td>
-                            <td><b>Tipo</b></td>
-                        </tr>
-                        <%//for(Model.Disciplina disc : disciplina.getDisciplinas()){%>
-                        <tr class="subtabela_disciplina">
-                            <td><%//disc.getNome()%></td>
-                            <td><%//disc.getCargaHoraria()%></td>
-                            <td><%//disc.getCreditacao()%></td>
-                            <td><%//disc.getSemestre()%></td>
-                            <td><%//disc.getCodigo()%></td>
-                            <td><%//disc.getTipo()%></td>
-                        </tr>    
-                        <%//}%>
-                    </tbody>
-                </table>
-            </div>
-            <!-- mascara para cobrir o site -->
-            <div id="mascara"></div>
-            <%-- FIM DO TESTE DO MODAL --%>
+        <%-- TESTE DO MODAL --%>
+        <a href="#janela1" class="modal" style="color:red">Janela modal</a>
+
+        <!--<div class="janela" id="janela1">
+            <%//Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
+            <a href="#" class="fechar">X Fechar</a>
+            <h4>Primeira janela modal</h4>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam venenatis auctor tempus. Lorem ipsum dolor sit amet,</p>
+            <p>Morbi dui lacus, placerat eget pretium vehicula, mollis id ligula. Nulla facilisi. </p>
+            <table>
+                <tbody>
+                    <tr class="subtabela_disciplina">
+                        <td><b>Nome</b></td>
+                        <td><b>Carga Horária</b></td>
+                        <td><b>Creditação</b></td>
+                        <td><b>Semestre</b></td>
+                        <td><b>Código</b></td>
+                        <td><b>Tipo</b></td>
+                    </tr>
+                    <%//for(Model.Disciplina disc : disciplina.getDisciplinas()){%>
+                    <tr class="subtabela_disciplina">
+                        <td><%//disc.getNome()%></td>
+                        <td><%//disc.getCargaHoraria()%></td>
+                        <td><%//disc.getCreditacao()%></td>
+                        <td><%//disc.getSemestre()%></td>
+                        <td><%//disc.getCodigo()%></td>
+                        <td><%//disc.getTipo()%></td>
+                    </tr>    
+                    <%//}%>
+                </tbody>
+            </table>
+        </div>
+        <!-- mascara para cobrir o site -->
+        <!--<div id="mascara"></div>-->
+        <%-- FIM DO TESTE DO MODAL --%>
 
 
-            <table id="tab_dados_aluno"  width="800" border="0"  align="center">
-                <tr>
-                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="button" name="opcao" value="Buscar" style="margin-left:30px"></p> </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <p> Nome:<br/> <input class="campo_tabela" type="text" name="nome"> </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td> <p> Email: <br> <input type="text" name="email" class="campo_tabela"> </p> </td>
-                    <td colspan="2"> <p class="cols_centrais"> Telefone: <br> <input type="text" name="telefone"> </p> </td>
-                </tr>
-                <tr>
-                    <td>
-                            <div>
-                                <p> Campus:<br/> <select name="campus" id="cb_campus">
-                                        <option></option>
-                                        <%for(int i=0;i<campi.size();i++){ %>
-                                        <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
-                                        <%}%>
-                                    </select> </p>
-                            </div>
-                            <div style="float:right">
-                                <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;" disabled="true">
-                               <option> </option>
-                            <%
-                                for(int i=0;i<departamentos.size();i++){ %>
-                                <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
-                            <%}%>
-                            </select> </p>
-                        </div>
-
-                    </td>
-                    <td colspan="3">
-                        <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela" disabled="true">
-                            <option> </option>
-                            <%
-                                for(int i=0;i<cursos.size();i++){ %>
-                                <option value="<%= cursos.get(i).getNome()%>"><%= cursos.get(i).getNome()%></option>
-                            <%}%>
-                            </select></p>
-                    </td>
-                </tr>
-                <tr>
+        <table id="tab_dados_aluno" class="tabelao" width="800" border="0"  align="center">
+            <th colspan="7">
+                <h1> Gerenciar Aluno </h1>
+                <div class="separador"></div>
+            </th>
+            <tr>
+                <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" ><input type="submit" name="opcao" value="Buscar" style="margin-left:30px"></p> </td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <p> Nome:<br/> <input class="campo_tabela" type="text" name="nome"> </p>
+                </td>
+            </tr>
+            <tr>
+                <td> <p> Email: <br> <input type="text" name="email" class="campo_tabela"> </p> </td>
+                <td colspan="2"> <p class="cols_centrais"> Telefone: <br> <input type="text" name="telefone"> </p> </td>
+            </tr>
+            <tr>
                 <td>
-                            <p> Forma de Ingresso:<br/> <select name="forma_ingresso" class="campo_tabela" >
-                            <option value="0"> </option>
-                            <option value="1"> Vestibular</option>
-                            <option value="2"> SISU</option>
-                            <option value="3"> Mat. Esp. Portador Diploma</option>
-                            <option value="4"> Mat. Esp. Transf. Inter</option>
-                            <option value="5"> Mat. Esp. Trans. Ext.</option>
+                    <div>
+                        <p> Campus:<br/> <select name="campus" id="cb_campus">
+                            <option></option>
+                            <%for(int i=0;i<campi.size();i++){ %>
+                            <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
+                            <%}%>
                         </select> </p>
-                    </td>
-                    <td>
-                        <p class="cols_centrais"> Turno:<br/>
-                            <select name="turno" style="width:100px">
+                    </div>
+                    <div style="float:right">
+                       <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;" disabled="true">
+                       <option> </option>
+                        <%
+                            for(int i=0;i<departamentos.size();i++){ %>
+                            <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
+                        <%}%>
+                        </select> </p>
+                    </div>
+
+                </td>
+                <td colspan="3">
+                    <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela" disabled="true">
+                        <option> </option>
+                        <%
+                            for(int i=0;i<cursos.size();i++){ %>
+                            <option value="<%= cursos.get(i).getNome()%>"><%= cursos.get(i).getNome()%></option>
+                        <%}%>
+                        </select></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p> Forma de Ingresso:<br/> <select name="forma_ingresso" class="campo_tabela" >
+                        <option value="0"> </option>
+                        <option value="1"> Vestibular</option>
+                        <option value="2"> SISU</option>
+                        <option value="3"> Mat. Esp. Portador Diploma</option>
+                        <option value="4"> Mat. Esp. Transf. Inter</option>
+                        <option value="5"> Mat. Esp. Trans. Ext.</option>
+                    </select> </p>
+                </td>
+                <td>
+                    <p class="cols_centrais"> Turno:<br/>
+                        <select name="turno" style="width:100px">
                             <option value="0"> </option>
                             <option value="1"> Matutino </option>
                             <option value="2"> Vespertino </option>
                             <option value="3"> Noturno </option>
-                            </select>
-                        </p>
-                    </td>
-                    <td style="width: 260px;">
-                        <div>
-                            <p> Sems Início:<br/> <input type="text" name="sems_inicio" class="caixas" > </p>
-                        </div>
-                        <div style="margin-left: 5px;">
-                            <p> Sems Cursados:<br/> <input type="text" name="sems_cursados" class="caixas" > </p>
-                        </div>
-                    </td>
-                    <td>
-                        <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" > </p>
-                    </td>
-                </tr>
-            </table>
-
-          <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
+                        </select>
+                    </p>
+                </td>
+                <td style="width: 260px;">
+                    <div>
+                        <p> Sems Início:<br/> <input type="text" name="sems_inicio" class="caixas" > </p>
+                    </div>
+                    <div style="margin-left: 5px;">
+                        <p> Sems Cursados:<br/> <input type="text" name="sems_cursados" class="caixas" > </p>
+                    </div>
+                </td>
+                <td>
+                    <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" > </p>
+                </td>
+            </tr>
+            
+            <tr><td colspan="7">
+            <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
                 <th rowspan="2"> Nome das Disciplinas: </th>
                 <th rowspan="2"> Código </th>
                 <th colspan="2"> Carga Horária: </th>
@@ -242,12 +243,16 @@
                     <td>---</td>
                 </tr>
             </table>
-                    <div align="center">
+            </td></tr>
+            
+            <tr><td colspan="4" align="center">
+                <div>
                     <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
                     <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
                     <input type="reset" id="btn_limpar" class="botao" value="Limpar">
-                    </div>
-        </form>
-    </div>
+                </div>
+            </td></tr>
+        </table>
+    </form>
 </body>
 </html>

@@ -39,7 +39,11 @@
             cursos = resultado.getCursos();
             depts = resultado.getDepartamentos();
             %>
-            <table id="tab_dados_aluno"  width="750" border="1"  align="center">
+            <table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
+                <th colspan="4">
+                    <h1>Gerenciar Usuário</h1>
+                    <div class="separador"></div>
+                </th>
                 <tr>
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                     <td>                                   

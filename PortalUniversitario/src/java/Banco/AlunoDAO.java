@@ -111,7 +111,7 @@ public class AlunoDAO {
     public ResultSet pesquisarAluno(Model.Aluno aluno){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, aluno.email, aluno.telefone, aluno.AnoInicio, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo FROM sonaes.aluno JOIN cursos ON aluno.Fk_Curso = cursos.Id JOIN formasingresso ON aluno.Fk_Forma_Ingresso = formasingresso.Id WHERE aluno.Matricula= "+aluno.getMatricula()+";";
+            sql = "SELECT aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, aluno.email, aluno.telefone, aluno.AnoInicio, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo, formasingresso.nome FROM sonaes.aluno JOIN sonaes.cursos ON sonaes.aluno.Fk_Curso = sonaes.cursos.Id JOIN sonaes.formasingresso ON sonaes.aluno.Fk_Forma_Ingresso = sonaes.formasingresso.Id WHERE sonaes.aluno.Matricula= "+aluno.getMatricula()+";";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();

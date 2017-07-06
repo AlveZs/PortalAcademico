@@ -20,7 +20,7 @@
         <% Model.Curso curso = (Model.Curso)request.getAttribute("c");%>
         <% Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="700">
-        	<th colspan="7">
+            <th colspan="7">
             	<h1>Gerenciar Curso</h1>
                 <div class="separador"></div>
             </th>
