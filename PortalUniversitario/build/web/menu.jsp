@@ -41,7 +41,7 @@ if((session.getAttribute("tipoUser")== null))
             <li> <a href="#" id="relatorio"> Relatório </a>
             		<ul>
                             <li> <a href="relatorio_integralizacao.jsp" id="integralizacao"> <div></div> Integralização </a> </li>
-                            <li> <a href="relatorio_formacao.jsp" id="formacao"> <div></div> Formação </a> </li>
+                            <li> <a href="Relatorio_FormacaoController?opcao=preencher" id="formacao"> <div></div> Formação </a> </li>
                             <li> <a href="Relatorio_OfertaDisciplinaController?opcao=preencher" id="oferta"> <div></div> Ofertar Matérias </a> </li>
             		</ul>
             </li>

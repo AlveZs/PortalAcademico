@@ -16,7 +16,7 @@ public class ConnectionFactory {
       Connection con = null;
       try      {
           Class.forName("com.mysql.jdbc.Driver").newInstance();
-          con = DriverManager.getConnection("jdbc:mysql://localhost", "root", "123456");
+          con = DriverManager.getConnection("jdbc:mysql://localhost/sonaes?user=root&password=123456");
       }
       catch(SQLException e){
           System.out.println(e.getMessage());
@@ -25,4 +25,6 @@ public class ConnectionFactory {
           return con;
       }
     }
+    
+    //jdbc:mysql://localhost", "root", "123456
 }

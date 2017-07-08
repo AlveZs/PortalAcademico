@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+    <%@page import="java.util.ArrayList"%>
+
 <!--
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -14,27 +16,44 @@ and open the template in the editor.
 <body>
     <%@include file="menu.jsp" %>
     <!-- Final do Template -->  
+      <% 
+
+    Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
+
+    ArrayList<Model.Departamento> departamentos = new ArrayList();
+
+    
+
+    resultados.pesquisarTodosDepartamentos();
+
+    departamentos = resultados.getDepartamentos();
+
+    %>
     <div id="ctx" align="center">
         <h1>Relatório de Formação</h1>
         <div class="separador">
     </div>
-    <form method="post" action="FormacaoController">
+    <form method="post" action="Relatorio_FormacaoController">
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabela_menu">	
                 <tr>
                 <td>
                     <div> <p>Departamento:<br/> <select name="departamento">
-                        <option value="0"></option>
-                        <option value="1">DCET</option>
-                        <option value="2">DCV</option>
+                       <option value="0"></option>
+
+                        <%
+
+                            for(int i=0;i<departamentos.size();i++){ %>
+
+                            <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
+
+                        <%}%>
                     </select>
                     </p> </div>
                     <div style="margin-left:10px;"> <p>Curso:<br/> <select name="curso" style="width: auto;">
-                        <option value="0"></option>
-                        <option value="1">Sistemas de InformaÃ§Ã£o</option>
-                        <option value="2">Engenharia Civil</option>
+                         <option value="0"></option>
                     </select>
                     </p></div>
-                    <div style="margin-left:10px"> <p>Situação:<br/> <select name="curso" style="width: auto;">
+                    <div style="margin-left:10px"> <p>Situação:<br/> <select name="situacao" style="width: auto;">
                         <option value="0"></option>
                         <option value="1">Possivel Concluinte</option>
                         <option value="2">Jubilado</option>
@@ -42,41 +61,13 @@ and open the template in the editor.
                     </p>
                     </div>
                     <div> 
-                        <input type="button" value="Buscar" id="btn_buscar" onClick="checkFields()">
+                        <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">
                         </div>
                         </td>
                         </tr>
             <tr>
             <td>
-        <table id="tab_disciplinas" border="1" align="center">
-            <th>Matricula:</th>
-            <th>Aluno:</th>
-            <th>Semestres concluidos:</th>
-            <th>Materias restantes:</th>
-            <th>Situacao:</th>
-            <tr>
-                <td>070112453</td>
-                <td>Sergio B.</td>
-                <td>9</td>
-                <td>6</td>
-                <td>Possivel Concluinte</td>
-            </tr>
-            <tr>
-                <td>070912453</td>
-                <td>Irineu</td>
-                <td>10</td>
-                <td>20</td>
-                <td>Jubilado</td>
-            </tr>
-            
-            
-        </table>
-        </td>
-        </tr>
-        <tr>
-                <td> Total de Alunos: 2</td>
-            </tr>
-        </table>
+ 
     </form>
     </div>
     </body>

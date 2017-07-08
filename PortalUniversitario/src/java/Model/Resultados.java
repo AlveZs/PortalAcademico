@@ -88,6 +88,11 @@ public class Resultados {
         x.pesquisarCampus(campus);
     }
     
+    public void pesquisarTodosAlunos(String curso){
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        x.pesquisarTodosAlunos(alunos, curso);
+    }    
+    
     public void pesquisarHistorico(){
         Banco.HistoricoDAO x = new Banco.HistoricoDAO();
         x.pesquisarHistorico(historico);

@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -111,7 +112,7 @@ public class AlunoDAO {
     public ResultSet pesquisarAluno(Model.Aluno aluno){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, aluno.email, aluno.telefone, aluno.AnoInicio, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo, formasingresso.nome FROM sonaes.aluno JOIN sonaes.cursos ON sonaes.aluno.Fk_Curso = sonaes.cursos.Id JOIN sonaes.formasingresso ON sonaes.aluno.Fk_Forma_Ingresso = sonaes.formasingresso.Id WHERE sonaes.aluno.Matricula= "+aluno.getMatricula()+";";
+            sql = "SELECT aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, aluno.email, aluno.telefone, aluno.AnoInicio, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo, formasingresso.nome FROM aluno JOIN cursos ON aluno.Fk_Curso = cursos.Id JOIN formasingresso ON aluno.Fk_Forma_Ingresso = formasingresso.Id WHERE aluno.Matricula= "+aluno.getMatricula()+";";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -142,4 +143,27 @@ public class AlunoDAO {
               return resultado;
           }             
     }
+    
+    
+    public void pesquisarTodosAlunos(ArrayList<Model.Aluno> alunos, String curso){
+        Connection con = ConnectionFactory.getConnection();
+        try{
+          Model.Aluno obj;  
+          Statement stm = con.createStatement();
+          ResultSet res = stm.executeQuery("SELECT Matricula,aluno.Nome FROM aluno join cursos on aluno.Fk_Curso = cursos.Id where cursos.Nome = '"+curso+"';");
+          while (res.next()){
+            obj = new Model.Aluno();
+            obj.getCurso().setNome(curso);
+            obj.setNome(res.getString("Nome"));
+            obj.setMatricula(res.getInt("Matricula"));
+            alunos.add(obj);
+          }
+          res.close();
+          con.close();
+        }
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
 }
