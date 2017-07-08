@@ -36,25 +36,26 @@ and open the template in the editor.
             <tr>
             <td>
             	<div>
-                <p>Departamento:<br/> <select name="departamento">
+                    <p>Departamento:<br/> <select name="departamento">
                         <option value="0"></option>
                         <%
                             for(int i=0;i<departamentos.size();i++){ %>
                             <option value="<%= departamentos.get(i).getNome()%>" <% if(request.getParameter("departamento").equals(departamentos.get(i).getNome())) { %> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
                         <%}%>
-                    </select>
-                    </p> </div>
-                    <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" style="width: 260px;">
-                        <% for(int i=0;i<cursos.size();i++) {
-                            if (request.getParameter("departamento").equals(cursos.get(i).getDepartamento())) {
-                        %>
-                                <option value="<%=cursos.get(i).getNome()%>" <% if(request.getParameter("curso").equals(cursos.get(i).getNome())) { %> selected="selected" <%}%>> <%=cursos.get(i).getNome()%> </option>
-                        <%} }%>
-                    </p></div>
+                    </select></p>
+                </div>
+                    
+                <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" class="cb_curso">
+                    <% for(int i=0;i<cursos.size();i++) {
+                        if (request.getParameter("departamento").equals(cursos.get(i).getDepartamento())) {
+                    %>
+                            <option value="<%=cursos.get(i).getNome()%>" <% if(request.getParameter("curso").equals(cursos.get(i).getNome())) { %> selected="selected" <%}%>> <%=cursos.get(i).getNome()%> </option>
+                    <%} }%>
+                </select></p></div>
                 
-                    <div> 
-                        <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">
-            	</div>
+                <div> 
+                    <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">
+                </div>
             </td>
             </tr>
                 <%

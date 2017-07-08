@@ -2,8 +2,8 @@
 /* CSS Document */
 
 body {
-	margin: 0;
-	background-color: #ebebeb;
+        margin: 0;
+        background-color: #ebebeb;
 }
 
 #cabecalho {
@@ -255,6 +255,10 @@ select {
 
 .cb_departamento {
     width: 280px;
+}
+
+.cb_curso {
+    width: 260px;
 }
 
 .tab_menu_resultado {

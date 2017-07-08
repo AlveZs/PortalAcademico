@@ -7,6 +7,8 @@ package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,16 +35,42 @@ public class Relatorio_IntegralizacaoController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Relatorio_IntegralizacaoController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Relatorio_IntegralizacaoController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        
+            String opcao;
+        
+        Model.Resultados resultados = new Model.Resultados();
+        request.setAttribute("results", resultados);
+        RequestDispatcher dispatcher;
+        
+        ArrayList<Model.Curso> cursos = new ArrayList<Model.Curso>();
+        resultados.pesquisarTodosCursos();
+        cursos = resultados.getCursos();
+        StringBuilder sb = new StringBuilder(""); //cria uma lista de String
+        
+        for(int i=0; i<cursos.size(); i++) {
+            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento() + ":");
+        }
+        
+        out.println(sb); //Saída que será lida pelo AJAX
+        
+        request.setCharacterEncoding("UTF-8");
+        opcao = request.getParameter("opcao");
+        
+        switch (opcao) {
+            case "Buscar":
+                dispatcher = request.getRequestDispatcher("relatorio_integralizacao_preenchida.jsp");
+                dispatcher.forward(request, response);
+                break;
+            case "preencher":
+                dispatcher = request.getRequestDispatcher("relatorio_integralizacao.jsp");
+                dispatcher.forward(request,response);
+                break;
+            default:
+                //alteração
+                break;
+        }
+        
+        
         }
     }
 

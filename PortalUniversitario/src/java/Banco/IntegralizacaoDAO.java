@@ -36,10 +36,10 @@ public class IntegralizacaoDAO {
           }             
     }
     
-    public ResultSet pesquisaSemCancelados(){
+    public ResultSet pesquisaSemCancelados(Model.Aluno aluno){
     Connection minhaConexao = ConnectionFactory.getConnection();
         String sql;
-        sql = "select count(ano) as SemCancelados from semestrecancelado where ano between (select substring(aluno.SemInicio,1,4) from aluno) AND year(curdate())";
+        sql = "select count(ano) as SemCancelados from semestrecancelado where ano between (select substring(aluno.SemInicio,1,4) from aluno where aluno.Matricula = '"+ aluno.getMatricula() +"') AND year(curdate())";
         ResultSet resultado=null;
         try{
             Statement stm = minhaConexao.createStatement();

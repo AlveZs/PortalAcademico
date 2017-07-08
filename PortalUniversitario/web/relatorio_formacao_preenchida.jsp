@@ -28,13 +28,14 @@ and open the template in the editor.
     departamentos = resultados.getDepartamentos();
    
     %>
-     <div>
+    
     <form method="post" action="Relatorio_FormacaoController">
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="800" id="tab_disciplinas">
             <th colspan="3">
                 <h1>Relatório de Formação</h1>
                 <div class="separador"></div>
             </th>
+            
             <tr>
             <td>
             	<div>
@@ -46,8 +47,7 @@ and open the template in the editor.
                         <%}%>
                     </select>
                     </p> </div>
-                    <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" style="width: 260px;">
-                                
+                    <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" class="cb_curso">
                         <% for(int i=0;i<cursos.size();i++) {
                             if (request.getParameter("departamento").equals(cursos.get(i).getDepartamento())) {
                         %>
@@ -62,14 +62,15 @@ and open the template in the editor.
                     </select>
                     </p>
                 </div>
-                   <div> 
-                        <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">
-            	</div>
+                <div> 
+                    <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">
+                </div>
             </td>
             </tr>
-
-
-  <%
+            
+            <tr>
+            <td>
+            <%
                 ArrayList<Model.Integralizacao> relFor = new ArrayList();
                 resultados.pesquisarTodosAlunos(request.getParameter("curso"));
                 alunos = resultados.getAlunos();
@@ -85,8 +86,8 @@ and open the template in the editor.
                     obj.calculaMateriasRestantes();
                     obj.calculaQtdSemestres();
                     relFor.add(obj);
-                } 
-                %>
+                }
+            %>
                 <table border="1" align="center" width="500" style="margin-bottom:40px;">
                     <tr>
                     <th>Matricula:</th>
@@ -104,7 +105,9 @@ and open the template in the editor.
                     </tr>
                 <%}%>
                 </table>
+            </td>
+            </tr>
+        </table>
     </form>
-    </div>
 </body>
 </html>

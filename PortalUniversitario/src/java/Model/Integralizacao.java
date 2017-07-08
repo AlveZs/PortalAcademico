@@ -121,7 +121,7 @@ public class Integralizacao {
     
     public void pesquisarSemCancelados(){
         Banco.IntegralizacaoDAO x = new Banco.IntegralizacaoDAO();
-        ResultSet resultado = x.pesquisaSemCancelados();
+        ResultSet resultado = x.pesquisaSemCancelados(aluno);
         try{
         while (resultado.next())
         {
