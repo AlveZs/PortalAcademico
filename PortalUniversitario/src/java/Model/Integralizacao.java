@@ -139,7 +139,7 @@ public class Integralizacao {
         else
             semAtual = 2;
         if (semInicio != semAtual){
-            qtdSemestres -= 1;
+            qtdSemestres += 1;
             qtdSemestres -= qtdSemestresCancelados;
         }
         else{
@@ -154,7 +154,7 @@ public class Integralizacao {
         try{
         while (resultado.next())
         {
-            this.materiasCurso = resultado.getInt("qtdDisc");
+            this.materiasCurso = resultado.getInt("discT");
         }
         }
         catch (SQLException e){
@@ -180,4 +180,31 @@ public class Integralizacao {
         materiasRestantes = materiasCurso - materiasAprovadas;
     }
     
+    public String verificaSituacao(String nomeCurso){
+        int materiasSemestre,materiasRestantes,semRestantes;
+        float mediaAluno,valorAlarme;
+        curso.setNome(nomeCurso);
+        curso.pesquisarCodCurso();
+        curso.pesquisar();
+        semRestantes = curso.getMaxSemestre() - qtdSemestres;
+        materiasSemestre = materiasCurso/curso.getMinSemestre();
+        materiasRestantes = materiasCurso - materiasAprovadas;
+        valorAlarme = materiasCurso/curso.getMaxSemestre();
+        this.calculaQtdSemestres();
+        if(qtdSemestres!=0){
+            mediaAluno = materiasAprovadas/qtdSemestres;
+            if((materiasSemestre * semRestantes >= materiasCurso - materiasAprovadas) && mediaAluno>valorAlarme) {
+                return "Integralizado";
+            }
+            else if ((materiasSemestre * semRestantes >= materiasCurso - materiasAprovadas) && mediaAluno<=valorAlarme)
+                return "Atenção";
+            else if (((materiasSemestre * semRestantes >= materiasCurso - materiasAprovadas)) && (qtdSemestres > curso.getMaxSemestre()-3 && qtdSemestres<curso.getMaxSemestre())){
+                return "Crítica";
+            }
+            else
+                return "Jubilado";
+        }
+        else
+            return "Calouro";
+    }
 }

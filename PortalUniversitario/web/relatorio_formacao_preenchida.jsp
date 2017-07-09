@@ -72,7 +72,8 @@ and open the template in the editor.
             <td>
             <%
                 ArrayList<Model.Integralizacao> relFor = new ArrayList();
-                resultados.pesquisarTodosAlunos(request.getParameter("curso"));
+                String nomeCurso = request.getParameter("curso");
+                resultados.pesquisarTodosAlunos(nomeCurso);
                 alunos = resultados.getAlunos();
                 for(Model.Aluno a : alunos) {
                     Model.Integralizacao obj = new Model.Integralizacao();
@@ -94,6 +95,7 @@ and open the template in the editor.
                     <th>Nome:</th>
                     <th>Semestres:</th>
                     <th>Materias restantes:</th>
+                    <th>Situação:</th>
                     </tr>
                     
                 <%for(Model.Integralizacao i: relFor){%>
@@ -102,6 +104,7 @@ and open the template in the editor.
                         <td><%=i.getAluno().getNome()%></td>
                         <td><%=i.getQtdtSemestres()%></td>
                         <td><%=i.getMateriasRestantes()%></td>
+                        <td><%=i.verificaSituacao(nomeCurso)%></td>
                     </tr>
                 <%}%>
                 </table>
