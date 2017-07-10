@@ -15,12 +15,12 @@ import java.sql.SQLException;
 public class Curso {
 
     private String nome;
-    private Departamento departamento;
+    private Departamento departamento = new Departamento();
     private int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno, codDept,idCurso;
 
     public Curso(String nome, Departamento departamento, int cargaHoraria, int creditacao, int codigo, int minSemestre, int maxSemestre, int turno) {
         this.nome = nome;
-        this.departamento = new Departamento(departamento.getNome(), departamento.getCodigo(), departamento.getCampus());
+        this.departamento = departamento;
         this.cargaHoraria = cargaHoraria;
         this.creditacao = creditacao;
         this.codigo = codigo;
@@ -31,7 +31,7 @@ public class Curso {
 
     public Curso(String nome, Departamento departamento, int cargaHoraria, int creditacao, int codigo, int turno) {
         this.nome = nome;
-        this.departamento = new Departamento(departamento.getNome(), departamento.getCodigo(), departamento.getCampus());
+        this.departamento = departamento;
         this.cargaHoraria = cargaHoraria;
         this.creditacao = creditacao;
         this.codigo = codigo;
@@ -162,6 +162,21 @@ public class Curso {
         }
     }
 
+    public void pesquisarIdCurso(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        ResultSet resultado = x.pesquisarIdCurso(this);
+        try{
+        while (resultado.next())
+        {
+            this.idCurso = resultado.getInt("Id");
+            this.nome = resultado.getString("Nome");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }
+    }
+    
     public void pesquisarCodCurso(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         ResultSet resultado = x.pesquisarCodCurso(this);

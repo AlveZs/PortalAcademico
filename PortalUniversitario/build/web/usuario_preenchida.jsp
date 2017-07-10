@@ -56,7 +56,7 @@
                     <td colspan="4">
                         <div>
                             <p> Campus:<br/> <select name="campus" id="cb_campus">
-                                <option></option>
+                                <option value="0"></option>
                                 <%for(int i=0;i<campi.size();i++){ %>
                                     <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(usuario.getCurso().getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
                                 <%}%>
@@ -64,7 +64,7 @@
                         </div>
                         <div style="margin-left: 10px">
                             <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;">
-                                <option> </option>
+                                <option value="0"> </option>
                                 <%
                                     for(int i=0;i<departamentos.size();i++) {
                                         if (usuario.getCampus().getNome().equals(departamentos.get(i).getNomeCampus())) {
@@ -77,7 +77,7 @@
                         <div style="margin-left: 10px">
                             <p> Curso:<br/> <select name="curso"  id="cb_curso" class="cb_curso">
                                 <% if(tipoUsr != 6 && tipoUsr != 5 && tipoUsr != 4) { %>
-                                    <option> </option>
+                                    <option value="0"> </option>
                                 <%}
                                 else {
                                     for(int i=0;i<cursos.size();i++) {

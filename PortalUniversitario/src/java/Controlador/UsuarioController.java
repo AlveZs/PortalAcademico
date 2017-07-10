@@ -46,6 +46,7 @@ public class UsuarioController extends HttpServlet {
                     Model.Usuario usuarioBusca = new Model.Usuario();
                     usuarioBusca.setMatricula(Integer.parseInt(request.getParameter("matricula")));
                     usuarioBusca.pesquisarUsuario();
+                    usuarioBusca.getCurso().pesquisar();
                     request.setAttribute("usr", usuarioBusca);
                     RequestDispatcher dispatcherBusca = request.getRequestDispatcher("usuario_preenchida.jsp");
                     dispatcherBusca.forward(request, response);                    

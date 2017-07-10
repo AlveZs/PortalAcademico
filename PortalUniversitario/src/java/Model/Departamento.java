@@ -74,6 +74,23 @@ public class Departamento {
           System.out.println(e.getMessage());
         }    
     }
+    
+    public void pesquisarDepartamentoPorId(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        ResultSet resultado = x.pesquisarDepartamento(this);
+        try{
+        while (resultado.next())
+        {
+            this.campus = resultado.getInt("Fk_Campus");
+            this.nome = resultado.getString("departamentos.Nome");
+            this.nomeCampus = resultado.getString("campus.nome");
+            this.codigo = resultado.getString("departamentos.Codigo");
+        }
+        }
+        catch (SQLException e){
+          System.out.println(e.getMessage());
+        }    
+    }
 
     public String getNome() {
         return nome;

@@ -27,8 +27,8 @@ protected void processRequest(HttpServletRequest request, HttpServletResponse re
     throws ServletException, IOException {
 try (PrintWriter out = response.getWriter()) {
 
-    String nome,curso,telefone,email,semestreInicio,formaIngresso,opcao;
-    int matricula,creditacao;
+    String nome,telefone,email,semestreInicio,formaIngresso,opcao;
+    int matricula,creditacao, curso;
     
     Model.Resultados resultadosBusca = new Model.Resultados();
     request.setAttribute("results", resultadosBusca);
@@ -54,7 +54,7 @@ try (PrintWriter out = response.getWriter()) {
         case "cadastro":
             matricula = Integer.parseInt(request.getParameter("matricula"));
             nome = request.getParameter("nome");
-            curso = request.getParameter("curso");
+            curso = Integer.parseInt(request.getParameter("curso"));
             telefone = request.getParameter("telefone");
             email = request.getParameter("email");
             semestreInicio = request.getParameter("sems_inicio");
@@ -63,8 +63,8 @@ try (PrintWriter out = response.getWriter()) {
             //turno = Integer.parseInt(request.getParameter("turno"));
             Model.Aluno aluno = new Model.Aluno(matricula,nome,telefone,email,semestreInicio,formaIngresso,creditacao);
             //aluno.setTurno(turno);
-            aluno.getCurso().setNome(curso);
-            aluno.pesquisarIdCurso();
+            aluno.getCurso().setId(curso);
+            aluno.getCurso().pesquisar();
             aluno.incluir();
             dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
             dispatcher.forward(request,response);
@@ -81,18 +81,16 @@ try (PrintWriter out = response.getWriter()) {
         case "alterar":
             matricula = Integer.parseInt(request.getParameter("matricula"));
             nome = request.getParameter("nome");
-            curso = request.getParameter("curso");
+            curso = Integer.parseInt(request.getParameter("curso"));
             telefone = request.getParameter("telefone");
             email = request.getParameter("email");
             semestreInicio = request.getParameter("sems_inicio");
             formaIngresso = request.getParameter("forma_ingresso");
             creditacao = Integer.parseInt(request.getParameter("creditacao"));
             Model.Aluno alunoAlt = new Model.Aluno(matricula,nome,telefone,email,semestreInicio,formaIngresso,creditacao);
-            alunoAlt.getCurso().setNome(curso);
-            alunoAlt.pesquisarIdCurso();
+            alunoAlt.getCurso().setId(curso);
             alunoAlt.getCurso().pesquisar();
             alunoAlt.alterar();
-            alunoAlt.setNome(alunoAlt.getTelefone());
             request.setAttribute("x", alunoAlt);
             dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
             dispatcher.forward(request,response);

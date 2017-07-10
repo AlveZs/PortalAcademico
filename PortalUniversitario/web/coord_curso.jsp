@@ -101,7 +101,7 @@
             <tr align="center">
             	<td height="56" colspan="7">
                   <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
-                  <input type="submit" value="Alterar" id="btn_alterar" class="botao">
+                  <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
                   <input type="reset" value="Limpar" id="btn_limpar" class="botao">
                 </td>
          	</tr>
