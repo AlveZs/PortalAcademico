@@ -33,18 +33,26 @@
                 <td colspan="8"> <p>Nome:<br/> <input type="text" name="nome" style="width:100%;"></p> </td>
             </tr>
             <tr>
-            	<td colspan="4">
-                    <p>Departamento:<br/>
-                        <%  Model.Departamento dept = (Model.Departamento)request.getAttribute("depart");
-                            ArrayList<Model.Departamento> depts = new ArrayList();
-                            depts = dept.getDept();
+                <td>
+                    <p>Campus:<br/>
+                        <%  Model.Resultados resultados = new Model.Resultados();
+                            ArrayList<Model.Campus> campi = new ArrayList();
+                            resultados.pesquisarTodosCampus();
+                            campi = resultados.getCampus();
                         %>
-                        <select name="departamento" class="cb_departamento">
+                        <select name="campus" class="cb_campus">
                             <option> </option>
                             <%
-                                for(int i=0;i<depts.size();i++){ %>
-                                <option value="<%= depts.get(i).getNome()%>"><%= depts.get(i).getNome()%></option>
+                                for(int i=0;i<campi.size();i++){ %>
+                                <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
                             <%}%>
+                        </select>
+                    </p>
+                </td>
+            	<td colspan="4">
+                    <p>Departamento:<br/>
+                        <select name="departamento" class="cb_departamento" disabled="">
+                            <option> </option>
                         </select>
                     </p>
             	</td>
@@ -93,7 +101,7 @@
             <tr align="center">
             	<td height="56" colspan="7">
                   <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
-                  <input type="button" value="Alterar" id="btn_alterar" class="botao">
+                  <input type="submit" value="Alterar" id="btn_alterar" class="botao">
                   <input type="reset" value="Limpar" id="btn_limpar" class="botao">
                 </td>
          	</tr>

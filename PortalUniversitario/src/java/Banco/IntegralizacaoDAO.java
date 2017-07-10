@@ -56,7 +56,7 @@ public class IntegralizacaoDAO {
     public ResultSet pesquisaMateriasCurso(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "select sum(qtdDisc) as discT from( select count(disciplinas.Codigo) as qtdDisc from disciplinas join cursos on disciplinas.Fk_Cursos = cursos.Id where cursos.Nome ='"+curso.getNome()+"' AND disciplinas.Fk_Tipo = 1 union select count(distinct disciplinas.Semestre) as qtdDisc from disciplinas join cursos on disciplinas.Fk_Cursos = cursos.Id where cursos.Nome = '"+curso.getNome()+"' AND disciplinas.Fk_Tipo = 2) as disc;";
+            sql = "select sum(qtdDisc) as discT from( select count(disciplinas.Codigo) as qtdDisc from disciplinas join cursos on disciplinas.Fk_Cursos = cursos.Id where cursos.Id ="+curso.getIdCurso()+" AND disciplinas.Fk_Tipo = 1 union select count(distinct disciplinas.Semestre) as qtdDisc from disciplinas join cursos on disciplinas.Fk_Cursos = cursos.Id where cursos.Id = "+curso.getIdCurso()+" AND disciplinas.Fk_Tipo = 2) as disc;";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();

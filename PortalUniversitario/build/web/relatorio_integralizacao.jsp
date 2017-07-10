@@ -35,7 +35,7 @@ and open the template in the editor.
             
             <tr>
             <td>
-                <div> <p>Departamento:<br/> <select name="departamento">
+                <div> <p>Departamento:<br/> <select name="departamento" disabled="">
                     <option value="0"></option>
                     <%
                     for(int i=0;i<departamentos.size();i++){ %>
@@ -43,7 +43,7 @@ and open the template in the editor.
                     <%}%>
                 </select>
                 </p> </div>
-                <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" class="cb_curso">
+                <div style="margin-left:10px"> <p>Curso:<br/> <select name="curso" class="cb_curso" disabled="">
                     <option value="0"></option>
                 </select>
                 </p></div>

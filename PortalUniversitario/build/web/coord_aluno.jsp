@@ -44,40 +44,23 @@
     ArrayList<Model.Curso> cursos = new ArrayList();
     ArrayList<Model.Departamento> departamentos = new ArrayList();
     ArrayList<Model.Campus> campi = new ArrayList();
+    ArrayList<String> formasIngresso = new ArrayList();
     resultados.pesquisarTodosCursos();
     resultados.pesquisarTodosDepartamentos();
     resultados.pesquisarTodosCampus();
+    resultados.pesquisarFormasIngresso();
     cursos = resultados.getCursos();
     departamentos = resultados.getDepartamentos();
     campi = resultados.getCampus();
+    formasIngresso = resultados.getFormasIngresso();
     %>
-    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            //Desabilita o combobox departamento, caso o CB de Campus não tenha um item selecionado
-            $("#cb_campus").on('change', function(){
-                if ($("#cb_campus").val())
-                    $("#cb_departamento").attr('disabled', false);
-                else
-                    $("#cb_departamento").attr('disabled', true);
-            })
-            
-            //Mesmo princípio do código acima, dessa vez pra Curso em relação à Departamento
-            $("#cb_departamento").on('change', function(){
-                if ($("#cb_departamento").val())
-                    $("#cb_curso").attr('disabled', false);
-                else
-                    $("#cb_curso").attr('disabled', true);
-            })
-        });
-    </script>
            
     <form method="post"action="AlunoController"name="consulta">
 
         <%-- TESTE DO MODAL --%>
-        <a href="#janela1" class="modal" style="color:red">Janela modal</a>
+        <!--<a href="#janela1" class="modal" style="color:red">Janela modal</a>
 
-        <!--<div class="janela" id="janela1">
+        <div class="janela" id="janela1">
             <%//Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
             <a href="#" class="fechar">X Fechar</a>
             <h4>Primeira janela modal</h4>
@@ -133,41 +116,33 @@
                     <div>
                         <p> Campus:<br/> <select name="campus" id="cb_campus">
                             <option></option>
-                            <%for(int i=0;i<campi.size();i++){ %>
+                            <%
+                                for(int i=0;i<campi.size();i++){
+                            %>
                             <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
                             <%}%>
                         </select> </p>
                     </div>
                     <div style="float:right">
                        <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;" disabled="true">
-                       <option> </option>
-                        <%
-                            for(int i=0;i<departamentos.size();i++){ %>
-                            <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
-                        <%}%>
+                       <option></option>
                         </select> </p>
                     </div>
-
                 </td>
                 <td colspan="3">
                     <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela" disabled="true">
-                        <option> </option>
-                        <%
-                            for(int i=0;i<cursos.size();i++){ %>
-                            <option value="<%= cursos.get(i).getNome()%>"><%= cursos.get(i).getNome()%></option>
-                        <%}%>
-                        </select></p>
+                        <option></option>
+                    </select></p>
                 </td>
             </tr>
             <tr>
                 <td>
                     <p> Forma de Ingresso:<br/> <select name="forma_ingresso" class="campo_tabela" >
-                        <option value="0"> </option>
-                        <option value="1"> Vestibular</option>
-                        <option value="2"> SISU</option>
-                        <option value="3"> Mat. Esp. Portador Diploma</option>
-                        <option value="4"> Mat. Esp. Transf. Inter</option>
-                        <option value="5"> Mat. Esp. Trans. Ext.</option>
+                        <option value=""> </option>
+                        <%
+                            for(int i=0;i<formasIngresso.size();i++){%>
+                            <option value="<%= formasIngresso.get(i)%>"><%= formasIngresso.get(i)%></option>
+                        <%}%>
                     </select> </p>
                 </td>
                 <td>
@@ -192,58 +167,6 @@
                     <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" > </p>
                 </td>
             </tr>
-            
-            <tr><td colspan="7">
-            <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
-                <th rowspan="2"> Nome das Disciplinas: </th>
-                <th rowspan="2"> Código </th>
-                <th colspan="2"> Carga Horária: </th>
-                <th rowspan="2"> Semestre </th>
-                <th rowspan="2"> Situação </th>
-                <th rowspan="2"> Optativa </th>
-                <tr>
-                    <td> <i> Exigida:</i> </td>
-                    <td> <i> Cumprida: </i> </td>
-                </tr>
-                <!--código-->
-                <tr>
-                    <td>Algoritmos</td>
-                    <td>CPD063</td>
-                    <td>60h</td>
-                    <td>60h</td>
-                    <td>1</td>
-                    <td>Cumprida</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Linguagem de Programação III</td>
-                    <td>CPD023</td>
-                     <td>60h</td>
-                     <td>30h</td>
-                     <td>4</td>
-                     <td>Matriculado</td>
-                     <td></td>
-                </tr>
-                <tr>
-                    <td>Teoria dos Grafos</td>
-                    <td>MAT015</td>
-                     <td>60h</td>
-                     <td>0h</td>
-                     <td>5</td>
-                     <td>Apto a Cursar</td>
-                     <td>X</td>
-                </tr>
-                <tr>
-                    <td> <input type="button" onClick="inserirLinha()" id="btn_add_linha" value="+ Adicionar Disciplina" style="font-size:17px"> </td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                </tr>
-            </table>
-            </td></tr>
             
             <tr><td colspan="4" align="center">
                 <div>

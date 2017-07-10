@@ -45,7 +45,7 @@ public class DisciplinaDAO {
       try{
         Model.Disciplina obj;  
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome,disciplinas.Fk_Cursos, cursos.Nome, tipo_disciplinas.Nome,disciplinas.CargaHoraria,disciplinas.Creditacao,disciplinas.Semestre,disciplinas.Codigo FROM sonaes.disciplinas join sonaes.cursos on disciplinas.Fk_Cursos = cursos.Id join sonaes.tipo_disciplinas on disciplinas.Fk_Tipo = tipo_disciplinas.Id;");
+        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome,disciplinas.Fk_Cursos, cursos.Nome, departamentos.Nome AS Departamento, campus.Nome AS Campus, tipo_disciplinas.Nome,disciplinas.CargaHoraria,disciplinas.Creditacao,disciplinas.Semestre,disciplinas.Codigo FROM sonaes.disciplinas join sonaes.cursos on disciplinas.Fk_Cursos = cursos.Id join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id join sonaes.campus on departamentos.Fk_Campus = campus.Id join sonaes.tipo_disciplinas on disciplinas.Fk_Tipo = tipo_disciplinas.Id;");
         while (res.next()){
           obj = new Model.Disciplina(res.getString("disciplinas.Nome"),res.getInt("disciplinas.Semestre"),res.getString("tipo_disciplinas.Nome"),res.getString("disciplinas.Codigo"),res.getInt("disciplinas.Creditacao"),res.getInt("disciplinas.CargaHoraria"));
           obj.getCurso().setNome(res.getString("cursos.Nome"));
@@ -64,7 +64,7 @@ public class DisciplinaDAO {
     public ResultSet pesquisarDisciplina(Model.Disciplina disciplina){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT disciplinas.Nome,disciplinas.Creditacao, disciplinas.Fk_Cursos,disciplinas.Fk_Tipo,disciplinas.CargaHoraria,disciplinas.Semestre,disciplinas.Codigo,cursos.Nome,tipo_disciplinas.Nome FROM sonaes.disciplinas join sonaes.cursos on disciplinas.Fk_Cursos = cursos.Id join sonaes.tipo_disciplinas on disciplinas.Fk_Tipo = tipo_disciplinas.Id where disciplinas.Codigo = '"+disciplina.getCodigo()+"'";
+            sql = "SELECT disciplinas.Nome,disciplinas.Creditacao, disciplinas.Fk_Cursos, departamentos.Nome AS Departamento, campus.Nome AS Campus,disciplinas.Fk_Tipo,disciplinas.CargaHoraria,disciplinas.Semestre,disciplinas.Codigo,cursos.Nome,tipo_disciplinas.Nome FROM sonaes.disciplinas join sonaes.cursos on disciplinas.Fk_Cursos = cursos.Id join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id join sonaes.campus on departamentos.Fk_Campus = campus.Id join sonaes.tipo_disciplinas on disciplinas.Fk_Tipo = tipo_disciplinas.Id where disciplinas.Codigo = '"+disciplina.getCodigo()+"'";
             ResultSet resultado=null;            
             try{
                 Statement stm = minhaConexao.createStatement();

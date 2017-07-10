@@ -30,7 +30,7 @@ and open the template in the editor.
             </tr>
             <tr align="center">
             	<td height="56" colspan="4">
-                  <input type="button" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
+                  <input type="submit" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
                   <input type="reset" value="Limpar" id="btn_limpar" class="botao">
                 </td>
             </tr>

@@ -125,13 +125,17 @@ public class Usuario {
         while (resultado.next())
         {
             this.nome = resultado.getString("usuarios.nome");
-            this.campus.setNome(resultado.getString("campus.Nome"));
-            this.campus.setId(resultado.getInt("usuarios.Fk_Campus"));
+            this.tipoUser = resultado.getInt("usuarios.tipUser");
             this.curso.setNome(resultado.getString("cursos.Nome"));
             this.curso.setId(resultado.getInt("usuarios.Fk_Cursos"));
+            this.curso.getDepartamento().setNome(resultado.getString("departamentos.Nome"));
+            this.curso.getDepartamento().setNomeCampus(resultado.getString("campus.Nome"));
+            this.curso.getDepartamento().setId(resultado.getInt("usuarios.Fk_Departamentos"));
+            this.curso.getDepartamento().setCampus(resultado.getInt("usuarios.Fk_Campus"));
+            this.campus.setNome(resultado.getString("campus.Nome"));
+            this.campus.setId(resultado.getInt("usuarios.Fk_Campus"));
             this.departamento.setNome(resultado.getString("departamentos.Nome"));
             this.departamento.setId(resultado.getInt("usuarios.Fk_Departamentos"));
-            this.tipoUser = resultado.getInt("usuarios.tipUser");
             this.senha = resultado.getString("usuarios.senha");
             
         }

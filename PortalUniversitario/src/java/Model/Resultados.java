@@ -18,6 +18,7 @@ public class Resultados {
     ArrayList<Departamento> departamentos = new ArrayList();
     ArrayList<Campus> campus = new ArrayList();
     ArrayList<Historico> historico = new ArrayList();
+    ArrayList<String> formasIngresso = new ArrayList();
 
     public ArrayList<Aluno> getAlunos() {
         return alunos;
@@ -67,6 +68,13 @@ public class Resultados {
         this.historico = historico;
     }
     
+    public ArrayList<String> getFormasIngresso() {
+        return formasIngresso;
+    }
+
+    public void setFormasIngresso(ArrayList<String> formasIngresso) {
+        this.formasIngresso = formasIngresso;
+    }
    
     public void pesquisarTodosDepartamentos(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
@@ -98,9 +106,14 @@ public class Resultados {
         x.pesquisarHistorico(historico);
     }
     
-    public void pesquisarResultadosHistorico(String curso){
+    public void pesquisarResultadosHistorico(int IDcurso){
         Banco.HistoricoDAO x = new Banco.HistoricoDAO();
-        x.pesquisarResultadosHistorico(disciplinas, curso);
+        x.pesquisarResultadosHistorico(disciplinas, IDcurso);
+    }
+    
+    public void pesquisarFormasIngresso() {
+        Banco.AlunoDAO x = new Banco.AlunoDAO();
+        x.pesquisarTodasFormaIngresso(formasIngresso);
     }
     
 }

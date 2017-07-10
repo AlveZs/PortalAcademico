@@ -44,33 +44,16 @@
     ArrayList<Model.Curso> cursos = new ArrayList();
     ArrayList<Model.Departamento> departamentos = new ArrayList();
     ArrayList<Model.Campus> campi = new ArrayList();
+    ArrayList<String> formasIngresso = new ArrayList();
     resultados.pesquisarTodosCursos();
     resultados.pesquisarTodosDepartamentos();
     resultados.pesquisarTodosCampus();
+    resultados.pesquisarFormasIngresso();
     cursos = resultados.getCursos();
     departamentos = resultados.getDepartamentos();
     campi = resultados.getCampus();
+    formasIngresso = resultados.getFormasIngresso();
     %>
-    
-    <script type="text/javascript">
-        $(document).ready(function(){
-            //Desabilita o combobox departamento, caso o CB de Campus não tenha um item selecionado
-            $("#cb_campus").on('change', function(){
-                if ($("#cb_campus").val())
-                    $("#cb_departamento").attr('disabled', false);
-                else
-                    $("#cb_departamento").attr('disabled', true);
-            })
-            
-            //Mesmo princípio do código acima, dessa vez pra Curso em relação à Departamento
-            $("#cb_departamento").on('change', function(){
-                if ($("#cb_departamento").val())
-                    $("#cb_curso").attr('disabled', false);
-                else
-                    $("#cb_curso").attr('disabled', true);
-            })
-        });
-    </script>
     
     
     <form method="post"action="AlunoController"name="consulta">
@@ -116,7 +99,7 @@
         %>
         <table id="tab_dados_aluno" class="tabelao" width="800" border="0"  align="center">
             <th colspan="7">
-                <h1> Gerenciar Aluno---- </h1>
+                <h1> Gerenciar Aluno </h1>
                 <div class="separador"></div>
             </th>
             <tr>
@@ -136,63 +119,73 @@
                     <div>
                         <p> Campus:<br/> <select name="campus" id="cb_campus">
                             <option></option>
-                            <%for(int i=0;i<campi.size();i++){ %>
-                            <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
+                            <%
+                                for(int i=0;i<campi.size();i++){ %>
+                                <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(aluno.getCurso().getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
                             <%}%>
                         </select> </p>
                     </div>
                     <div style="float:right">
-                        <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;" disabled="true">
+                        <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;">
                             <option> </option>
                             <%
-                                for(int i=0;i<departamentos.size();i++){ %>
-                                <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
-                            <%}%>
+                                for(int i=0;i<departamentos.size();i++) {
+                                    if (aluno.getCurso().getDepartamento().getNomeCampus().equals(departamentos.get(i).getNomeCampus())) {
+
+                            %>
+                                        <option value="<%= departamentos.get(i).getId()%>" <% if(departamentos.get(i).getNome().equals(aluno.getCurso().getDepartamento().getNome())) {%> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
+                            <%} }%>
                         </select> </p>
                     </div>
 
                 </td>
                 <td colspan="3">
-                    <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela" disabled="true">
+                    <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela">
                         <option> </option>
                         <%
-                            for(int i=0;i<cursos.size();i++){ %>
-                            <option value="<%= aluno.getCurso().getNome()%>" selected="selected"><%= aluno.getCurso().getNome()%></option>
-                        <%}%>
-                    </select></p>
+                            for(int i=0;i<cursos.size();i++) {
+                                if (aluno.getCurso().getDepartamento().getNome().equals(cursos.get(i).getDepartamento().getNome())) {
+                        %>
+                                <option value="<%=cursos.get(i).getIdCurso()%>" <% if(aluno.getCurso().getNome().equals(cursos.get(i).getNome())) { %> selected="selected" <%}%> > <%=cursos.get(i).getNome()%> </option>
+                        <%} }%>
+                    </select> </p>
                 </td>
             </tr>
             <tr>
                 <td>
                     <p> Forma de Ingresso:<br/> <select name="forma_ingresso" class="campo_tabela" >
                         <option value="0"> </option>
-                        <option value="1"> Vestibular</option>
-                        <option value="2"> SISU</option>
-                        <option value="3"> Mat. Esp. Portador Diploma</option>
-                        <option value="4"> Mat. Esp. Transf. Inter</option>
-                        <option value="5"> Mat. Esp. Trans. Ext.</option>
+                        <%
+                            for(int i=0;i<formasIngresso.size();i++){ %>
+                            <option value="<%= formasIngresso.get(i)%>" <% if(formasIngresso.get(i).equals(aluno.getFormaIngresso())) {%> selected="selected" <%}%> ><%= formasIngresso.get(i)%></option>
+                        <%}%>
                     </select> </p>
                 </td>
                 <td>
                     <p class="cols_centrais"> Turno:<br/>
                         <select name="turno" style="width:100px">
-                        <option value="0"> </option>
-                        <option value="1"> Matutino </option>
-                        <option value="2"> Vespertino </option>
-                        <option value="3"> Noturno </option>
+                            <option value="0"> </option>
+                            <option value="1" <% if(aluno.getCurso().getTurno() == 1) { %> selected="selected" <%}%> > Matutino </option>
+                            <option value="2" <% if(aluno.getCurso().getTurno() == 2) { %> selected="selected" <%}%> > Vespertino </option>
+                            <option value="3" <% if(aluno.getCurso().getTurno() == 3) { %> selected="selected" <%}%> > Noturno </option>
                         </select>
                     </p>
                 </td>
                 <td style="width: 260px;">
                     <div>
-                        <p> Sems Início:<br/> <input type="text" name="sems_inicio" class="caixas" > </p>
+                        <p> Sems Início:<br/> <input type="text" name="sems_inicio" class="caixas" value="<%=aluno.getSemestreInicio()%>"> </p>
                     </div>
                     <div style="margin-left: 5px;">
-                        <p> Sems Cursados:<br/> <input type="text" name="sems_cursados" class="caixas" > </p>
+                        <% 
+                            Model.Integralizacao integ = new Model.Integralizacao();
+                            integ.setAluno(aluno);
+                            integ.pesquisarInfos();
+                        %>
+                        <p> Sems Cursados:<br/> <input type="text" name="sems_cursados" class="caixas" value="<%=integ.getQtdtSemestres()%>" > </p>
                     </div>
                 </td>
                 <td>
-                    <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" > </p>
+                    <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" value="<%=aluno.getCreditacao()%>"> </p>
                 </td>
             </tr>
         

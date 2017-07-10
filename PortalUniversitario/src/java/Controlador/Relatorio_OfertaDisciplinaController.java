@@ -45,10 +45,23 @@ public class Relatorio_OfertaDisciplinaController extends HttpServlet {
         ArrayList<Model.Curso> cursos = new ArrayList();
         resultados.pesquisarTodosCursos();
         cursos = resultados.getCursos();
+        
+        ArrayList<Model.Departamento> departamentos = new ArrayList();
+        resultados.pesquisarTodosDepartamentos();
+        departamentos = resultados.getDepartamentos();
+        
         StringBuilder sb = new StringBuilder(""); //cria uma lista de String
         
         for(int i=0; i<cursos.size(); i++) {
-            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento() + ":");
+            for (int j=0; j<departamentos.size(); j++) {
+                if (cursos.get(i).getDepartamento().getNome().equals(departamentos.get(j).getNome())) {
+                    cursos.get(i).getDepartamento().setNomeCampus(departamentos.get(j).getNomeCampus());
+                    cursos.get(i).getDepartamento().setId(departamentos.get(j).getId());
+                    departamentos.get(j).pesquisarDepartamento();
+                    cursos.get(i).getDepartamento().setCampus(departamentos.get(j).getCampus());
+                }
+            }
+            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento().getNome() + ":" + cursos.get(i).getDepartamento().getNomeCampus()+ "?" + cursos.get(i).getIdCurso() + "/" + cursos.get(i).getDepartamento().getId() + "*" + cursos.get(i).getDepartamento().getCampus() + "=");
         }
         
         out.println(sb); //Saída que será lida pelo AJAX

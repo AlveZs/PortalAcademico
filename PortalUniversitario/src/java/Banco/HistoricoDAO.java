@@ -39,12 +39,12 @@ public class HistoricoDAO {
 
     }
     
-    public void pesquisarResultadosHistorico(ArrayList<Model.Disciplina> disciplina, String curso){
+    public void pesquisarResultadosHistorico(ArrayList<Model.Disciplina> disciplina, int IDcurso){
         Connection con = ConnectionFactory.getConnection();
       try{
         Model.Disciplina obj;
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome, disciplinas.Codigo, disciplinas.Semestre, tipo_disciplinas.Nome, COUNT(disciplinas.Nome) FROM sonaes.historico JOIN sonaes.disciplinas ON historico.Fk_Disciplina=disciplinas.Id JOIN sonaes.situacao_disciplina_aluno ON historico.Fk_Situacao = situacao_disciplina_aluno.Id JOIN sonaes.cursos ON cursos.Id = disciplinas.Fk_Cursos JOIN sonaes.tipo_disciplinas ON disciplinas.Fk_Tipo = tipo_disciplinas.Id AND (situacao_disciplina_aluno.Nome LIKE 'Reprovado%' OR situacao_disciplina_aluno.Nome LIKE 'Pendente') AND cursos.Nome = '"+curso+"' GROUP BY disciplinas.Nome ORDER BY disciplinas.Nome;");
+        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome, disciplinas.Codigo, disciplinas.Semestre, tipo_disciplinas.Nome, COUNT(disciplinas.Nome) FROM sonaes.historico JOIN sonaes.disciplinas ON historico.Fk_Disciplina=disciplinas.Id JOIN sonaes.situacao_disciplina_aluno ON historico.Fk_Situacao = situacao_disciplina_aluno.Id JOIN sonaes.cursos ON cursos.Id = disciplinas.Fk_Cursos JOIN sonaes.tipo_disciplinas ON disciplinas.Fk_Tipo = tipo_disciplinas.Id AND (situacao_disciplina_aluno.Nome LIKE 'Reprovado%' OR situacao_disciplina_aluno.Nome LIKE 'Pendente') AND cursos.Id = "+IDcurso+" GROUP BY disciplinas.Nome ORDER BY disciplinas.Nome;");
         while (res.next()){
           obj =  new Model.Disciplina();
           obj.setNome(res.getString("disciplinas.Nome"));

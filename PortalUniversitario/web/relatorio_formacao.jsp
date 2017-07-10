@@ -18,9 +18,12 @@ and open the template in the editor.
     <!-- Final do Template -->  
     <% 
       Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
+      ArrayList<Model.Campus> campi = new ArrayList();
       ArrayList<Model.Departamento> departamentos = new ArrayList();
-
+      
+      resultados.pesquisarTodosCampus();
       resultados.pesquisarTodosDepartamentos();
+      campi = resultados.getCampus();
       departamentos = resultados.getDepartamentos();
     %>
  
@@ -33,24 +36,31 @@ and open the template in the editor.
 
             <tr>
             <td>
-                <div> <p>Departamento:<br/> <select name="departamento">
-                   <option value="0"></option>
-                    <%
-                        for(int i=0;i<departamentos.size();i++){ %>
-                            <option value="<%= departamentos.get(i).getNome()%>"><%= departamentos.get(i).getNome()%></option>
-                    <%}%>
-                </select>
-                </p> </div>
-                <div style="margin-left:10px;"> <p>Curso:<br/> <select name="curso" class="cb_curso">
-                     <option value="0"></option>
-                </select>
-                </p></div>
-                <div style="margin-left:10px"> <p>Situação:<br/> <select name="situacao" style="width: auto;">
-                    <option value="0"></option>
-                    <option value="1">Possivel Concluinte</option>
-                    <option value="2">Jubilado</option>
-                </select>
-                </p>
+                <div>
+                    <p>Campus:<br/> <select name="campus">
+                        <option value="0"></option>
+                        <%
+                            for(int i=0;i<campi.size();i++){ %>
+                            <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
+                        <%}%>
+                    </select></p>
+                </div>
+                <div style="margin-left:10px;">
+                    <p>Departamento:<br/> <select name="departamento" disabled="">
+                        <option value="0"></option>
+                    </select></p>
+                </div>
+                <div style="margin-left:10px;">
+                    <p>Curso:<br/> <select name="curso" class="cb_curso" disabled="">
+                        <option value="0"></option>
+                    </select></p>
+                </div>
+                <div style="margin-left:10px">
+                    <p>Situação:<br/> <select name="situacao" style="width: 180px;">
+                        <option value="0"></option>
+                        <option value="1">Possivel Concluinte</option>
+                        <option value="2">Jubilado</option>
+                    </select></p>
                 </div>
                 <div> 
                     <input type="submit" name="opcao" value="Buscar" id="btn_buscar" onClick="checkFields()">

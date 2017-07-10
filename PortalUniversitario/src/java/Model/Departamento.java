@@ -21,14 +21,16 @@ public class Departamento {
 
     public Departamento() {
     }
-
+    
+    public Departamento(String nome) {
+        this.nome = nome;
+    }
+    
     public Departamento(String nome, String nomeCampus, String codigo) {
         this.nome = nome;
         this.nomeCampus = nomeCampus;
         this.codigo = codigo;
     }
-
-    
     
     public Departamento(String nome, String codigo, int campus) {
         this.nome = nome;
@@ -65,6 +67,7 @@ public class Departamento {
             this.campus = resultado.getInt("Fk_Campus");
             this.nome = resultado.getString("departamentos.Nome");
             this.nomeCampus = resultado.getString("campus.nome");
+            this.id = Integer.parseInt(resultado.getString("departamentos.Id"));
         }
         }
         catch (SQLException e){

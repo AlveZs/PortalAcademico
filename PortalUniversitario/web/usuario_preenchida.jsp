@@ -25,10 +25,10 @@
             resultado.pesquisarTodosDepartamentos();
             ArrayList<Model.Campus> campi = new ArrayList();
             ArrayList<Model.Curso> cursos = new ArrayList();
-            ArrayList<Model.Departamento> depts = new ArrayList();
+            ArrayList<Model.Departamento> departamentos = new ArrayList();
             campi = resultado.getCampus();
             cursos = resultado.getCursos();
-            depts = resultado.getDepartamentos();
+            departamentos = resultado.getDepartamentos();
             int tipoUsr = usuario.getTipoUser();
             %>
             <table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
@@ -40,91 +40,61 @@
                     <td colspan="2"> <p> Matrícula:<br/> <input type="text" value="<%=usuario.getMatricula()%>" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
                     <td>                                   
                         <p>Tipo: <select name="tipo" style="width:120px;">
-                            <%switch(tipoUsr){
-                                case 2:%>
-                                    <option value = "2">Coordenador(a) Acadêmico</option>
-                                    <option value = "3">Secretário(a) Acadêmico</option>
-                                    <option value = "4">Coordenador(a) Curso</option>
-                                    <option value = "5">Secretário(a) Curso</option>
-                                    <option value = "7">Aluno(a)</option>
-                                    <%break;
-                                case 3:%>
-                                    <option value = "3">Secretário(a) Acadêmico</option>
-                                    <option value = "2">Coordenador(a) Acadêmico</option>
-                                    <option value = "4">Coordenador(a) Curso</option>
-                                    <option value = "5">Secretário(a) Curso</option>
-                                    <option value = "7">Aluno(a)</option>
-                                    <%break;
-                                case 4:%>
-                                    <option value = "4">Coordenador(a) Curso</option>
-                                    <option value = "3">Secretário(a) Acadêmico</option>
-                                    <option value = "2">Coordenador(a) Acadêmico</option>
-                                    <option value = "5">Secretário(a) Curso</option>
-                                    <option value = "7">Aluno(a)</option>
-                                    <%break;
-                                case 5:%>
-                                    <option value = "5">Secretário(a) Curso</option>
-                                    <option value = "4">Coordenador(a) Curso</option>
-                                    <option value = "3">Secretário(a) Acadêmico</option>
-                                    <option value = "2">Coordenador(a) Acadêmico</option>
-                                    <option value = "7">Aluno(a)</option>
-                                    <%break;
-                                case 7:%>
-                                    <option value = "7">Aluno(a)</option>
-                                    <option value = "5">Secretário(a) Curso</option>
-                                    <option value = "4">Coordenador(a) Curso</option>
-                                    <option value = "3">Secretário(a) Acadêmico</option>
-                                    <option value = "2">Coordenador(a) Acadêmico</option>
-                                    <%break;         
+                                <% if(tipoUsr == 1) {%>
+                                    <option value="1" selected="selected"> Root </option>
+                                <%}%>
+                                <option value = "2" <% if(tipoUsr == 2) {%> selected="selected" <%}%> >Coordenador(a) Acadêmico</option>
+                                <option value = "3" <% if(tipoUsr == 3) {%> selected="selected" <%}%> >Secretário(a) Acadêmico</option>
+                                <option value = "4" <% if(tipoUsr == 4) {%> selected="selected" <%}%> >Coordenador(a) Curso</option>
+                                <option value = "5" <% if(tipoUsr == 5) {%> selected="selected" <%}%> >Secretário(a) Curso</option>
+                                <option value = "6" <% if(tipoUsr == 6) {%> selected="selected" <%}%> >Aluno(a)</option>        
                             }%>
                         </select></p> 
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td colspan="4">
                         <div>
-                            <p> Campus:<br/> <select name="campus" style="width:120px;">
-                                <option value="<%=usuario.getCampus().getId()%>"> <%=usuario.getCampus().getNome()%></option>
-                                <%for(int i=0;i<campi.size();i++){ 
-                                    if(!campi.get(i).getNome().equals(usuario.getCampus().getNome())){%>
-                                        <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
-                                    <%}%>
+                            <p> Campus:<br/> <select name="campus" id="cb_campus">
+                                <option></option>
+                                <%for(int i=0;i<campi.size();i++){ %>
+                                    <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(usuario.getCurso().getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
                                 <%}%>
                             </select> </p>
-                        </div>  
-                    </td>
-                    <td>
-                        <div>
-                            <p> Departamento: <br/> <select name="departamento" style="width:120px;">
-                                <option value="<%=usuario.getDepartamento().getId()%>"><%=usuario.getDepartamento().getNome()%> </option>
-                                    <%for(int i=0;i<depts.size();i++){ 
-                                        if(!depts.get(i).getNome().equals(usuario.getDepartamento().getNome())){%>
-                                            <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
-                                        <%}%>
-                                    <%}%>
-                            </select> </p>
-                        </div>  
-                    </td> 
-                    <td>
-                        <div>
-                            <p> Curso:<br/> <select name="curso" style="width:120px;">
-                                <option value="<%=usuario.getCurso().getIdCurso()%>"> <%=usuario.getCurso().getNome()%></option>
-                                    <%for(int i=0;i<cursos.size();i++){ 
-                                        if(!cursos.get(i).getNome().equals(usuario.getCurso().getNome())){%>
-                                            <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                                        <%}%>
-                                    <%}%>
+                        </div>
+                        <div style="margin-left: 10px">
+                            <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;">
+                                <option> </option>
+                                <%
+                                    for(int i=0;i<departamentos.size();i++) {
+                                        if (usuario.getCampus().getNome().equals(departamentos.get(i).getNomeCampus())) {
+
+                                %>
+                                            <option value="<%= departamentos.get(i).getId()%>" <% if(departamentos.get(i).getNome().equals(usuario.getCurso().getDepartamento().getNome())) {%> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
+                                <%} }%>
                             </select> </p>
                         </div>
+                        <div style="margin-left: 10px">
+                            <p> Curso:<br/> <select name="curso"  id="cb_curso" class="cb_curso">
+                                <% if(tipoUsr != 6 && tipoUsr != 5 && tipoUsr != 4) { %>
+                                    <option> </option>
+                                <%}
+                                else {
+                                    for(int i=0;i<cursos.size();i++) {
+                                        if (usuario.getDepartamento().getNome().equals(cursos.get(i).getDepartamento().getNome())) {
+                                %>
+                                            <option value="<%=cursos.get(i).getIdCurso()%>" <% if(usuario.getCurso().getNome().equals(cursos.get(i).getNome())) { %> selected="selected" <%}%>> <%=cursos.get(i).getNome()%> </option>
+                                <%} } }%>
+                            </select></p>
+                        </div>
                     </td>
+
                     <tr>
                         <td>
                             <p> Nome:<br/> <input type="text" value="<%=usuario.getNome()%>" name="nome"> 
                         </td>
                         <td>
-                            <div>
-                                <p> Senha:<br/> <input type="password" value="<%=usuario.getSenha()%>" name="senha">
-                            </div>
+                            <p> Senha:<br/> <input type="password" value="<%=usuario.getSenha()%>" name="senha">
                         </td>                                         
                     </tr>
                 <tr></tr>

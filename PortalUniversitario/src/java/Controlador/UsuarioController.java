@@ -36,7 +36,7 @@ public class UsuarioController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
                 request.setCharacterEncoding("UTF-8");
                 String nome, senha, opcao;
-                int tipoUser, matricula,campus,departamento,curso;
+                int tipoUser, matricula, campus, departamento, curso;
                 opcao= request.getParameter("opcao");         
                 RequestDispatcher dispatcherDefault = request.getRequestDispatcher("UsuarioController?opcao=preencher");
             switch (opcao){
@@ -75,9 +75,13 @@ public class UsuarioController extends HttpServlet {
                     departamento = Integer.parseInt(request.getParameter("departamento"));
                     senha = request.getParameter("senha");
                     Model.Usuario usuario = new Model.Usuario(nome, senha, tipoUser, matricula);
-                    usuario.getCampus().setId(campus);
                     usuario.getDepartamento().setId(departamento);
-                    usuario.getCurso().setId(curso);
+                    usuario.getDepartamento().pesquisarDepartamento();
+                    usuario.getCampus().setId(campus);
+                    if (curso!=0) {
+                        usuario.getCurso().setId(curso);
+                        usuario.getCurso().pesquisar();
+                    }
                     usuario.incluir();
                     dispatcherDefault.forward(request, response);
                     /*
@@ -98,9 +102,13 @@ public class UsuarioController extends HttpServlet {
                     departamento = Integer.parseInt(request.getParameter("departamento"));
                     senha = request.getParameter("senha");
                     Model.Usuario usuarioAlt = new Model.Usuario(nome, senha, tipoUser, matricula);
-                    usuarioAlt.getCampus().setId(campus);
                     usuarioAlt.getDepartamento().setId(departamento);
-                    usuarioAlt.getCurso().setId(curso);
+                    usuarioAlt.getDepartamento().pesquisarDepartamento();
+                    usuarioAlt.getCampus().setId(campus);
+                    if (curso!=0) {
+                        usuarioAlt.getCurso().setId(curso);
+                        usuarioAlt.getCurso().pesquisar();
+                    }
                     usuarioAlt.alterar();
                     dispatcherDefault.forward(request, response);
                     /*

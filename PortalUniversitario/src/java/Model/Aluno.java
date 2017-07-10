@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Marcus Filipe
  */
 public class Aluno {
-    
+
     private String nome,telefone,email,semestreInicio,formaIngresso;
     private Curso curso = new Curso();
     private int matricula,creditacao,formaIngressoCod,cursoCod,id;
@@ -35,13 +35,14 @@ public class Aluno {
         this.email = email;
         this.semestreInicio = semestreInicio;
         this.formaIngresso = formaIngresso;
+        pesquisarCodFormaIng();
         this.creditacao = creditacao;
     }
 
     public Aluno() {
     }
-    
-    
+
+
 
     public int getMatricula() {
         return matricula;
@@ -130,20 +131,20 @@ public class Aluno {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void incluir(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
-        x.incluir(this);        
+        x.incluir(this);
     }
-    
+
     public void alterar(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
-        x.alterar(this);        
+        x.alterar(this);
     }
-    
+
     public void deletar(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
-        x.deletar(this);        
+        x.deletar(this);
     }
 
     public Curso getCurso() {
@@ -153,8 +154,8 @@ public class Aluno {
     public void setCurso(Curso curso) {
         this.curso = curso;
     }
-       
-    
+
+
     public void pesquisarCodFormaIng(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarFormaIngresso(this);
@@ -166,9 +167,9 @@ public class Aluno {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarIdAluno(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarIdAluno(this);
@@ -180,9 +181,9 @@ public class Aluno {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarAluno(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarAluno(this);
@@ -192,19 +193,23 @@ public class Aluno {
             this.nome = resultado.getString("aluno.Nome");
             this.curso.setNome(resultado.getString("cursos.Nome"));
             this.curso.setId(resultado.getInt("aluno.Fk_Curso"));
+            this.curso.getDepartamento().setNome(resultado.getString("Departamento"));
+            this.curso.getDepartamento().setNomeCampus(resultado.getString("Campus"));
+            this.curso.setTurno(resultado.getInt("fk_turno"));
             this.email = resultado.getString("aluno.email");
             this.telefone = resultado.getString("aluno.telefone");
             this.formaIngresso = resultado.getString("formasingresso.nome");
             this.formaIngressoCod = resultado.getInt("aluno.Fk_Forma_Ingresso");
             this.semestreInicio = resultado.getString("aluno.SemInicio");
             this.matricula = resultado.getInt("aluno.Matricula");
+            this.creditacao = resultado.getInt("aluno.creditacao");
         }
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarCurso(){
         Banco.AlunoDAO x = new Banco.AlunoDAO();
         ResultSet resultado = x.pesquisarCurso(this);
@@ -216,16 +221,16 @@ public class Aluno {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarTodos(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         x.pesquisarTodos(cursos);
     }
-    
+
     public void pesquisarIdCurso(){
        this.curso.pesquisarCodCurso();
     }
-    
+
 }

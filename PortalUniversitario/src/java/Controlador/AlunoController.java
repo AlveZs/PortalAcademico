@@ -34,7 +34,8 @@ try (PrintWriter out = response.getWriter()) {
     request.setAttribute("results", resultadosBusca);
     RequestDispatcher dispatcher;
     
-    request.setCharacterEncoding("UTF-8");
+    //request.setCharacterEncoding("UTF-8");
+    response.setContentType("text/html;charset=UTF-8"); //o outro método está dando problema :/
     opcao = request.getParameter("opcao");
         
     switch (opcao) {
@@ -65,6 +66,8 @@ try (PrintWriter out = response.getWriter()) {
             aluno.getCurso().setNome(curso);
             aluno.pesquisarIdCurso();
             aluno.incluir();
+            dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
+            dispatcher.forward(request,response);
             break;
         case "consulta":
             Banco.AlunoDAO x = new Banco.AlunoDAO();
@@ -87,7 +90,12 @@ try (PrintWriter out = response.getWriter()) {
             Model.Aluno alunoAlt = new Model.Aluno(matricula,nome,telefone,email,semestreInicio,formaIngresso,creditacao);
             alunoAlt.getCurso().setNome(curso);
             alunoAlt.pesquisarIdCurso();
+            alunoAlt.getCurso().pesquisar();
             alunoAlt.alterar();
+            alunoAlt.setNome(alunoAlt.getTelefone());
+            request.setAttribute("x", alunoAlt);
+            dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
+            dispatcher.forward(request,response);
             break;
         case "deletar":
             matricula = Integer.parseInt(request.getParameter("matricula"));

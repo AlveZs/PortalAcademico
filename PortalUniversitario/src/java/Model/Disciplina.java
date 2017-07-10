@@ -22,6 +22,7 @@ public class Disciplina {
     private ArrayList<Disciplina> disciplinas = new ArrayList<>();
 
     public Disciplina() {
+        curso = new Curso();
     }
 
     public Disciplina(String nome, int semestre,int idTipo, String codigo, int creditacao, int cargaHoraria) {
@@ -31,6 +32,7 @@ public class Disciplina {
         this.codigo = codigo;
         this.creditacao = creditacao;
         this.cargaHoraria = cargaHoraria;
+        curso = new Curso();
     }
 
     public Disciplina(String nome,int semestre, String tipo, String codigo, int creditacao, int cargaHoraria) {
@@ -40,6 +42,7 @@ public class Disciplina {
         this.creditacao = creditacao;
         this.cargaHoraria = cargaHoraria;
         this.semestre = semestre;
+        curso = new Curso();
     }
     
     public void incluir(){
@@ -73,6 +76,8 @@ public class Disciplina {
             this.creditacao = resultado.getInt("disciplinas.Creditacao");
             this.curso.setId(resultado.getInt("disciplinas.Fk_Cursos"));
             this.curso.setNome(resultado.getString("cursos.Nome"));
+            this.curso.getDepartamento().setNome(resultado.getString("Departamento"));
+            this.curso.getDepartamento().setNomeCampus(resultado.getString("Campus"));
             this.idTipo = resultado.getInt("disciplinas.Fk_Tipo");
             this.semestre = resultado.getInt("disciplinas.Semestre");
             
@@ -81,6 +86,10 @@ public class Disciplina {
         catch (SQLException e){
           System.out.println(e.getMessage());
         }    
+    }
+    
+    public void pesquisarIdCurso(){
+       this.curso.pesquisarCodCurso();
     }
     
     public String getNome() {

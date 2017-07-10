@@ -23,7 +23,7 @@ public class CursoDAO {
     public ResultSet pesquisar(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "select * from sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id where cursos.Codigo=("+curso.getCodigo()+")";
+            sql = "select * from sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id join sonaes.campus on departamentos.Fk_Campus = campus.Id where cursos.Codigo=("+curso.getCodigo()+")";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -62,10 +62,12 @@ public class CursoDAO {
       try{
         Model.Curso obj;  
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT cursos.Id,cursos.Nome, departamentos.Nome, cursos.CargaHoraria, cursos.Creditacao,cursos.Codigo, Min_Semestre,Max_Semestre, fk_turno FROM sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id;");
+        ResultSet res = stm.executeQuery("SELECT cursos.Id,cursos.Nome, departamentos.Nome, departamentos.Codigo, cursos.CargaHoraria, cursos.Creditacao,cursos.Codigo, Min_Semestre,Max_Semestre, fk_turno FROM sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id;");
         while (res.next()){
           obj = new Model.Curso(res.getString("cursos.Nome"),res.getString("departamentos.Nome"),res.getInt("CargaHoraria"),res.getInt("Creditacao"),res.getInt("Codigo"),res.getInt("Min_Semestre"),res.getInt("Max_Semestre"),res.getInt("fk_turno"));
 //          obj.setNome(res.getString("Nome"));
+          obj.getDepartamento().setCodigo(res.getString("departamentos.Codigo"));
+          obj.getDepartamento().pesquisarDepartamento();
           obj.setId(res.getInt("cursos.Id"));
           cursos.add(obj);
         }
@@ -99,7 +101,7 @@ public class CursoDAO {
     public ResultSet pesquisarCodCurso(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT Codigo,Id FROM sonaes.cursos where Nome = ('"+curso.getNome()+"')";
+            sql = "SELECT Codigo,Id FROM sonaes.cursos where Nome = '"+curso.getNome()+"' COLLATE utf8_unicode_ci;";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();

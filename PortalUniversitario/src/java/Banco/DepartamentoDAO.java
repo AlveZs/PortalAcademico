@@ -73,6 +73,7 @@ public class DepartamentoDAO {
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
             sql = "select * from sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus=campus.Id where departamentos.Codigo= "+departamento.getCodigo()+";";
+            //sql = "select d.Nome AS nomeao, d.Id, d.Codigo, campus.* from sonaes.departamentos d join sonaes.campus on d.Fk_Campus=campus.Id having nomeao= "+departamento.getNome()+";";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -85,7 +86,7 @@ public class DepartamentoDAO {
               return resultado;
           }             
     }
-      
+    
     public void pesquisar(ArrayList<Model.Departamento> departamentos){
         Connection con = ConnectionFactory.getConnection();
       try{
@@ -110,10 +111,11 @@ public class DepartamentoDAO {
       try{
         Model.Departamento obj;  
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT departamentos.Id,departamentos.Nome, departamentos.Codigo, campus.Nome FROM sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus = campus.Id;");
+        ResultSet res = stm.executeQuery("SELECT departamentos.Id,departamentos.Nome, departamentos.Codigo, campus.Nome, campus.Id FROM sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus = campus.Id;");
         while (res.next()){
           obj = new Model.Departamento(res.getString("departamentos.Nome"),res.getString("campus.Nome"),res.getString("departamentos.codigo"));
           obj.setId(res.getInt("departamentos.Id"));
+          obj.setCampus(res.getInt("campus.Id"));
           departamentos.add(obj);
         }
         res.close();

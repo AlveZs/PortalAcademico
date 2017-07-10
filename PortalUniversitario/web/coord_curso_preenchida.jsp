@@ -4,6 +4,7 @@
     Author     : joao
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,8 +18,19 @@
         <%@include file ="menu.jsp"%>
     <div>
     <form method="post" action="CursoController">
-        <% Model.Curso curso = (Model.Curso)request.getAttribute("c");%>
-        <% Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
+        <% 
+            Model.Curso curso = (Model.Curso)request.getAttribute("c");
+            Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");
+            
+            Model.Resultados resultados = new Model.Resultados();
+            ArrayList<Model.Campus> campi = new ArrayList();
+            resultados.pesquisarTodosCampus();
+            campi = resultados.getCampus();
+            
+            ArrayList<Model.Departamento> departamentos = new ArrayList();
+            resultados.pesquisarTodosDepartamentos();
+            departamentos = resultados.getDepartamentos();
+        %>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="700">
             <th colspan="7">
             	<h1>Gerenciar Curso</h1>
@@ -32,12 +44,26 @@
                 <td colspan="8"> <p>Nome:<br/> <input type="text" name="nome" value="<%=curso.getNome()%>" style="width:100%;"></p> </td>
             </tr>
             <tr>
-            	<td colspan="4">
-                    <p>Departamento:<br/>
-                        <select name="departamento" class="cb_departamento">
-                        <option value="0"><%=curso.getDepartamento()%></option>
+                <td>
+                    <p>Campus:<br/>
+                        <select name="campus" class="cb_campus">
+                            <option> </option>
+                            <%
+                                for(int i=0;i<campi.size();i++){ %>
+                                <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getId() == curso.getDepartamento().getCampus()) { %> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
+                            <%}%>
                         </select>
                     </p>
+                </td>
+            	<td colspan="4">
+                    <p>Departamento:<br/> <select name="departamento" class="cb_departamento">
+                        <option value="0"></option>
+                        <% for(int i=0;i<departamentos.size();i++) {
+                            if (departamentos.get(i).getCampus() == curso.getDepartamento().getCampus()) {
+                        %>
+                        <option value="<%=departamentos.get(i).getId()%>" <% if(curso.getDepartamento().getNome().equals(departamentos.get(i).getNome())) { %> selected="selected" <%}%>> <%=departamentos.get(i).getNome()%> </option>
+                        <%} }%>
+                    </select></p>
             	</td>
             </tr>
                 <td colspan="2">
@@ -94,9 +120,9 @@
             <tr></tr>
             <tr align="center">
             <td height="56" colspan="7">
-              <input type="button" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
-              <input type="button" value="Alterar" id="btn_alterar" class="botao">
-                      <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+              <input type="submit" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
+              <input type="submit" value="Alterar" id="btn_alterar" class="botao">
+              <input type="reset" value="Limpar" id="btn_limpar" class="botao">
             </td>
             </tr>
         </table>

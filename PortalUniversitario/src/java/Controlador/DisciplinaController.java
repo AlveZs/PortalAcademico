@@ -52,8 +52,6 @@ public class DisciplinaController extends HttpServlet {
                     dispatcherBusca.forward(request, response);  
                     break;
                 case "preencher":
-                    Model.Resultados resultados = new Model.Resultados();
-                    request.setAttribute("results", resultados);
                     RequestDispatcher dispatcherDisc = request.getRequestDispatcher("coord_disciplina.jsp");
                     dispatcherDisc.forward(request,response);
                     break;
@@ -63,10 +61,14 @@ public class DisciplinaController extends HttpServlet {
                     creditacao = Integer.parseInt(request.getParameter("creditacao"));
                     cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
                     semestre = Integer.parseInt(request.getParameter("semestre"));
-                    idTipo = Integer.parseInt(request.getParameter("tipo"));
+                    if (request.getParameter("optativa") == null)
+                        idTipo = 1;
+                    else
+                        idTipo = Integer.parseInt(request.getParameter("optativa"));
                     curso = Integer.parseInt(request.getParameter("curso"));
                     Model.Disciplina disciplinaInc = new Model.Disciplina(nome, semestre, idTipo, codigo, creditacao, cargaHoraria);
                     disciplinaInc.getCurso().setId(curso);
+                    disciplinaInc.getCurso().pesquisar();
                     disciplinaInc.incluir();
                     dispatcherDefault.forward(request, response);
                     break;
@@ -76,10 +78,14 @@ public class DisciplinaController extends HttpServlet {
                     creditacao = Integer.parseInt(request.getParameter("creditacao"));
                     cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
                     semestre = Integer.parseInt(request.getParameter("semestre"));
-                    idTipo = Integer.parseInt(request.getParameter("tipo"));
+                    if (request.getParameter("optativa") == null)
+                        idTipo = 1;
+                    else
+                        idTipo = Integer.parseInt(request.getParameter("optativa"));
                     curso = Integer.parseInt(request.getParameter("curso"));
                     Model.Disciplina disciplinaAlt = new Model.Disciplina(nome, semestre, idTipo, codigo, creditacao, cargaHoraria);
                     disciplinaAlt.getCurso().setId(curso);
+                    disciplinaAlt.getCurso().pesquisar();
                     disciplinaAlt.alterar();
                     dispatcherDefault.forward(request, response);
                     break;

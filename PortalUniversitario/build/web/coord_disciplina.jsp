@@ -19,10 +19,19 @@ and open the template in the editor.
         
      <div>
     <form method="post" action="DisciplinaController">
-        <%Model.Resultados resultado = (Model.Resultados)request.getAttribute("results");
-        ArrayList<Model.Curso> cursos = new ArrayList();
-        resultado.pesquisarTodosCursos();
-        cursos = resultado.getCursos();
+        <%
+            Model.Resultados resultados = new Model.Resultados();
+            ArrayList<Model.Campus> campi = new ArrayList();
+            ArrayList<Model.Departamento> departamentos = new ArrayList();
+            ArrayList<Model.Curso> cursos = new ArrayList();
+            
+            resultados.pesquisarTodosCampus();
+            resultados.pesquisarTodosDepartamentos();
+            resultados.pesquisarTodosCursos();
+            
+            campi = resultados.getCampus();
+            departamentos = resultados.getDepartamentos();
+            cursos = resultados.getCursos();
         %>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="600">
             <th colspan="2">
@@ -46,26 +55,29 @@ and open the template in the editor.
 	            	<p>Semestre:<br/> <input type="number" min="1" name="semestre" class="in_menores"></p>
                 </div>
                 <div>
-                	<p>Optativa:<br/> <input type="checkbox" name="optativa" style="margin: 10px 0 0 35px"></p>
-                    </div>
+                    <p>Optativa:<br/> <input type="checkbox" name="optativa" value="2" style="margin: 10px 0 0 35px"></p>
+                </div>
             </td>
             </tr>
             <tr>
-            <td>
+            <td colspan="5">
             	<div>
-                    <p> Curso:<br/> <select name="curso" id="sel_curso" style="width:120px;">
-                            <option> </option>
-                            <%for(int i=0;i<cursos.size();i++){ %>
-                            <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                            <%}%>
-                        </select> </p>
-                </div>
-                <div style="margin-left:10px">
-                        <p> Tipo:<br/><select name="tipo">
+                    <p> Campus:<br/> <select name="campus" id="cb_campus" style="width:120px; margin-right: 10px">
                         <option> </option>
-                        <option value="1">Regular</option>
-                        <option value="2">Optativa</option>
-                        </select></p>
+                        <%for(int i=0;i<campi.size();i++){ %>
+                            <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
+                        <%}%>
+                    </select> </p>
+                </div>
+                <div>
+                    <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px; margin-right: 10px" disabled="">
+                        <option> </option>
+                    </select> </p>
+                </div>
+                <div>
+                    <p> Curso:<br/> <select name="curso" id="cb_curso" style="width:240px;" disabled="">
+                        <option> </option>
+                    </select> </p>
                 </div>
             </td>
             </tr>

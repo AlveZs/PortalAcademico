@@ -53,39 +53,28 @@
                             <option value = "3">Secretário(a) Acadêmico</option>
                             <option value = "4">Coordenador(a) Curso</option>
                             <option value = "5">Secretário(a) Curso</option>
-                            <option value = "7">Aluno(a)</option>
+                            <option value = "6">Aluno(a)</option>
                         </select></p> 
                     </td>
                 </tr>
                 <tr>
-                    <td>
-                            <div>
-                                <p> Campus:<br/> <select name="campus" style="width:120px;">
-                                <option> </option>
-                                <%for(int i=0;i<campi.size();i++){ %>
-                                <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
-                                <%}%>
-                                </select> </p>
-                        </div>  
-                    </td>
-                    <td>
-                            
+                    <td colspan="4">
                         <div>
-                            <p> Departamento: <br/> <select name="departamento" style="width:120px;">
+                            <p> Campus:<br/> <select name="campus">
                             <option> </option>
-                            <%for(int i=0;i<depts.size();i++){ %>
-                            <option value="<%= depts.get(i).getId()%>"><%= depts.get(i).getNome()%></option>
+                            <%for(int i=0;i<campi.size();i++){ %>
+                            <option value="<%= campi.get(i).getId()%>"><%= campi.get(i).getNome()%></option>
                             <%}%>
                             </select> </p>
-                        </div>  
-                    </td> 
-                    <td>
-                         <div>
-                             <p> Curso:<br/> <select name="curso" id="cb_curso" style="width:120px;" disabled="disabled">
+                        </div>
+                        <div style="margin-left: 10px">
+                            <p> Departamento: <br/> <select name="departamento" style="width:120px;" disabled="">
                             <option> </option>
-                            <%for(int i=0;i<cursos.size();i++){ %>
-                            <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                            <%}%>
+                            </select> </p>
+                        </div>
+                         <div style="margin-left: 10px">
+                             <p> Curso:<br/> <select name="curso" id="cb_curso" class="cb_curso" disabled="disabled">
+                            <option> </option>
                             </select> </p>
                         </div>   
                     </td>
@@ -94,9 +83,7 @@
                             <p> Nome:<br/> <input type="text" name="nome"> 
                         </td>
                         <td>
-                            <div>
-                                <p> Senha:<br/> <input type="password" name="senha">
-                            </div>
+                            <p> Senha:<br/> <input type="password" name="senha">
                         </td>                                         
                     </tr>
                 </tr>

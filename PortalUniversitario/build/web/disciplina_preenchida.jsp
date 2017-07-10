@@ -19,12 +19,23 @@ and open the template in the editor.
         
      <div>
     <form method="post" action="DisciplinaController">
-        <%Model.Resultados resultado = (Model.Resultados)request.getAttribute("results");
-        Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("disc");
-        ArrayList<Model.Curso> cursos = new ArrayList();
-        resultado.pesquisarTodosCursos();
-        cursos = resultado.getCursos();
-        int tipo = disciplina.getIdTipo();
+        <%
+            Model.Resultados resultados = new Model.Resultados();
+            Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("disc");
+       
+            ArrayList<Model.Campus> campi = new ArrayList();
+            ArrayList<Model.Departamento> departamentos = new ArrayList();
+            ArrayList<Model.Curso> cursos = new ArrayList();
+            
+            resultados.pesquisarTodosCampus();
+            resultados.pesquisarTodosDepartamentos();
+            resultados.pesquisarTodosCursos();
+            
+            campi = resultados.getCampus();
+            departamentos = resultados.getDepartamentos();
+            cursos = resultados.getCursos();
+            
+            int tipo = disciplina.getIdTipo();
         %>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="600">
             <th colspan="2">
@@ -48,37 +59,44 @@ and open the template in the editor.
 	            	<p>Semestre:<br/> <input type="number" value="<%=disciplina.getSemestre()%>" min="1"  name="semestre" class="in_menores"></p>
                 </div>
                 <div>
-                	<p>Optativa:<br/> <input type="checkbox" name="optativa" style="margin: 10px 0 0 35px"></p>
+                    <p>Optativa:<br/> <input type="checkbox" name="optativa" value="2" <% if (tipo == 2) { %> checked="" <%}%> style="margin: 10px 0 0 35px"></p>
                     </div>
             </td>
             </tr>
             <tr>
-            <td>
-            	<div>
-                    <p> Curso:<br/> <select name="curso" id="sel_curso" style="width:120px;">
-                        <option value="<%=disciplina.getCurso().getIdCurso()%>"><%=disciplina.getCurso().getNome()%> </option>
-                            <%for(int i=0;i<cursos.size();i++){ 
-                                if(!cursos.get(i).getNome().equals(disciplina.getCurso().getNome())){%>
-                                    <option value="<%= cursos.get(i).getIdCurso()%>"><%= cursos.get(i).getNome()%></option>
-                                <%}%>
+                <td colspan="5">
+                    <div>
+                        <p> Campus:<br/> <select name="campus" id="cb_campus">
+                            <option></option>
+                            <%for(int i=0;i<campi.size();i++){ %>
+                                <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(disciplina.getCurso().getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
                             <%}%>
                         </select> </p>
-                </div>
-                <div style="margin-left:10px">
-                        <p> Tipo:<br/><select name="tipo">
-                            <%switch(tipo){
-                                case 1:%>
-                                    <option value="1">Regular</option>
-                                    <option value="2">Optativa</option>
-                                    <%break;
-                                case 2:%>
-                                    <option value="2">Optativa</option>
-                                    <option value="1">Regular</option>                                    
-                                    <%break;       
-                            }%>
+                    </div>
+                    <div>
+                        <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;">
+                            <option> </option>
+                            <%
+                                for(int i=0;i<departamentos.size();i++) {
+                                    if (disciplina.getCurso().getDepartamento().getNomeCampus().equals(departamentos.get(i).getNomeCampus())) {
+
+                            %>
+                                <option value="<%= departamentos.get(i).getId()%>" <% if(departamentos.get(i).getNome().equals(disciplina.getCurso().getDepartamento().getNome())) {%> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
+                            <%} }%>
+                        </select> </p>
+                    </div>
+                    <div>
+                        <p> Curso:<br/> <select name="curso"  id="cb_curso" class="cb_curso">
+                            <option> </option>
+                            <%
+                            for(int i=0;i<cursos.size();i++) {
+                                if (disciplina.getCurso().getDepartamento().getNome().equals(cursos.get(i).getDepartamento().getNome())) {
+                            %>
+                                <option value="<%=cursos.get(i).getIdCurso()%>" <% if(disciplina.getCurso().getNome().equals(cursos.get(i).getNome())) { %> selected="selected" <%}%>> <%=cursos.get(i).getNome()%> </option>
+                            <%} }%>
                         </select></p>
-                </div>
-            </td>
+                    </div>
+                </td>
             </tr>
             <tr> 
             	<td align="center"> 

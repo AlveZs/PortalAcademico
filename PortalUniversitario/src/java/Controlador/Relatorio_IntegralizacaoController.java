@@ -48,7 +48,7 @@ public class Relatorio_IntegralizacaoController extends HttpServlet {
         StringBuilder sb = new StringBuilder(""); //cria uma lista de String
         
         for(int i=0; i<cursos.size(); i++) {
-            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento() + ":");
+            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento().getNome() + ":");
         }
         
         out.println(sb); //Saída que será lida pelo AJAX
