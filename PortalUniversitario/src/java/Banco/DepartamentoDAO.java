@@ -87,6 +87,24 @@ public class DepartamentoDAO {
           }             
     }
     
+    public ResultSet pesquisarDepartamentoPorId(Model.Departamento departamento){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "select * from sonaes.departamentos join sonaes.campus on departamentos.Fk_Campus=campus.Id where departamentos.Id= "+departamento.getId()+";";
+            //sql = "select d.Nome AS nomeao, d.Id, d.Codigo, campus.* from sonaes.departamentos d join sonaes.campus on d.Fk_Campus=campus.Id having nomeao= "+departamento.getNome()+";";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
+    
     public void pesquisar(ArrayList<Model.Departamento> departamentos){
         Connection con = ConnectionFactory.getConnection();
       try{

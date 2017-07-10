@@ -5,7 +5,6 @@
  */
 package Controlador;
 
-import Model.Departamento;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -19,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author joao
  */
-@WebServlet(name = "CursoController", urlPatterns = {"/CursoController"})
-public class CursoController extends HttpServlet {
+@WebServlet(name = "SemestreController", urlPatterns = {"/SemestreController"})
+public class SemestreController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,49 +32,37 @@ public class CursoController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         
-        String nome,opcao;
-        int cargaHoraria, creditacao, codigo, minSemestre, maxSemestre, turno;
-        Departamento departamento = new Departamento();
-        request.setCharacterEncoding("UTF-8");
-        
-        RequestDispatcher dispatcher;
-        
-        opcao= request.getParameter("opcao");
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+        int ano, semestre;
+        String opcao;
+        opcao = request.getParameter("opcao");
         switch (opcao){
             case "Buscar":
-                Model.Curso curso = new Model.Curso(Integer.parseInt(request.getParameter("codigo")));
-                Model.Disciplina disciplina = new Model.Disciplina();
-                disciplina.pesquisarTodos(Integer.parseInt(request.getParameter("codigo")));
-                curso.pesquisarIdCurso();
-                curso.pesquisar();
-                request.setAttribute("d", disciplina);
-                request.setAttribute("c", curso);
-                dispatcher = request.getRequestDispatcher("coord_curso_preenchida.jsp");
-                dispatcher.forward(request,response);
+                Model.Semestre sc = new Model.Semestre();
+                sc.listarTodos(); 
+                request.setAttribute("sc", sc);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("semestre_preenchida.jsp");
+                dispatcher.forward(request,response);                
                 break;
             case "Incluir":
-                codigo = Integer.parseInt(request.getParameter("codigo"));
-                nome = request.getParameter("nome");
-                departamento.setId(Integer.parseInt(request.getParameter("departamento")));
-                departamento.pesquisarDepartamentoPorId();
-                cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
-                creditacao = Integer.parseInt(request.getParameter("credito"));
-                turno = Integer.parseInt(request.getParameter("turno"));
-                minSemestre = Integer.parseInt(request.getParameter("qtdMinSemestres"));
-                maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
-                Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
-                curs.incluir();
-                dispatcher = request.getRequestDispatcher("coord_curso.jsp");
-                dispatcher.forward(request,response);
+                ano = Integer.parseInt(request.getParameter("ano"));
+                semestre = Integer.parseInt(request.getParameter("semestre"));
+                Model.Semestre scancelado = new Model.Semestre(ano,semestre);
+                scancelado.incluir();
+                RequestDispatcher dispatcher2 = request.getRequestDispatcher("coord_semestre.jsp");
+                dispatcher2.forward(request,response);                   
                 break;
-            case "preencher":
-                Model.Departamento dept = new Model.Departamento(); 
-                dept.pesquisar();
-                request.setAttribute("depart", dept);
-                dispatcher = request.getRequestDispatcher("coord_curso.jsp");
-                dispatcher.forward(request,response);
+            case "Deletar":
+                ano = Integer.parseInt(request.getParameter("ano"));
+                semestre =Integer.parseInt(request.getParameter("semestre"));
+                Model.Semestre scDel = new Model.Semestre(ano, semestre);
+                scDel.deletar();
+                RequestDispatcher dispatcher3 = request.getRequestDispatcher("coord_semestre.jsp");
+                dispatcher3.forward(request,response);  
                 break;
+        
+        }   
         }
     }
 

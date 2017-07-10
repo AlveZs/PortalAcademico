@@ -69,7 +69,8 @@ public class UsuarioDAO {
     public ResultSet pesquisarUsuario(Model.Usuario usuario){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT usuarios.tipUser,usuarios.nome,campus.Nome,departamentos.Nome,cursos.Nome,usuarios.matricula,usuarios.senha,usuarios.Fk_Campus,usuarios.Fk_Departamentos,usuarios.Fk_Cursos FROM sonaes.usuarios join sonaes.campus on usuarios.Fk_Campus = campus.Id join sonaes.departamentos on usuarios.Fk_Departamentos = departamentos.Id join sonaes.cursos on usuarios.Fk_Cursos = cursos.Id where usuarios.matricula= "+usuario.getMatricula()+";";
+            //sql = "SELECT usuarios.tipUser,usuarios.nome,campus.Nome,departamentos.Nome,cursos.Nome,usuarios.matricula,usuarios.senha,usuarios.Fk_Campus,usuarios.Fk_Departamentos,usuarios.Fk_Cursos FROM sonaes.usuarios join sonaes.campus on usuarios.Fk_Campus = campus.Id join sonaes.departamentos on usuarios.Fk_Departamentos = departamentos.Id join sonaes.cursos on usuarios.Fk_Cursos = cursos.Id where usuarios.matricula= "+usuario.getMatricula()+";";
+            sql = "SELECT * FROM sonaes.usuarios where matricula = "+usuario.getMatricula()+";";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();

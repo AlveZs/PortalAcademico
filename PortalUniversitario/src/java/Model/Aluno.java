@@ -230,7 +230,7 @@ public class Aluno {
     }
 
     public void pesquisarIdCurso(){
-       this.curso.pesquisarCodCurso();
+       this.curso.pesquisarIdCurso();
     }
 
 }

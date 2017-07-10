@@ -25,12 +25,14 @@ and open the template in the editor.
             </th>
             </tr>
             <tr align="center">
-                <td><div><p> Ano:<br/> <input type="number" min ="1900" max="2099" name="anoSemestreCancelado" class="caixas" > </p></div>
-                <div><p> Semestre:<br/> <input type="number" min="1" max="2" name="semestreCancelado" class="caixas"> </p></div></td>
+                <td><div><p> Ano:<br/> <input type="number" min ="1900" max="2099" name="ano" class="caixas" > </p></div>
+                <div><p> Semestre:<br/> <input type="number" min="1" max="2" name="semestre" class="caixas"> </p></div></td>
             </tr>
             <tr align="center">
             	<td height="56" colspan="4">
-                  <input type="submit" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
+                  <input type="submit" name = "opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
+                  <input type="submit" name="opcao" value="Buscar" id="btn_novo" class="botao">
+                  <input type="submit" name="opcao" value="Deletar" id="btn_novo" class="botao">
                   <input type="reset" value="Limpar" id="btn_limpar" class="botao">
                 </td>
             </tr>

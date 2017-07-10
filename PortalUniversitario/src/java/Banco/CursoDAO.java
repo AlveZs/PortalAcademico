@@ -23,7 +23,7 @@ public class CursoDAO {
     public ResultSet pesquisar(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "select * from sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id join sonaes.campus on departamentos.Fk_Campus = campus.Id where cursos.Codigo=("+curso.getCodigo()+")";
+            sql = "select * from sonaes.cursos join sonaes.departamentos on cursos.Fk_Departamento = departamentos.Id join sonaes.campus on departamentos.Fk_Campus = campus.Id where cursos.Id=("+curso.getIdCurso()+")";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -98,10 +98,27 @@ public class CursoDAO {
           }             
     }
     
+    public ResultSet pesquisarIdCurso(Model.Curso curso){
+        Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+            sql = "SELECT Id,Nome FROM sonaes.cursos where cursos.Codigo = '"+curso.getCodigo()+"';";
+            ResultSet resultado=null;
+            try{
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }             
+    }
+    
     public ResultSet pesquisarCodCurso(Model.Curso curso){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT Codigo,Id FROM sonaes.cursos where Nome = '"+curso.getNome()+"' COLLATE utf8_unicode_ci;";
+            sql = "SELECT Codigo,Id FROM sonaes.cursos where Nome = '"+curso.getNome()+"';";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -120,7 +137,7 @@ public class CursoDAO {
         Connection con = ConnectionFactory.getConnection();
         try{
         Statement stm = con.createStatement();
-        String sql = "insert into sonaes.cursos (Nome, Fk_Departamento,CargaHoraria,Creditacao,Codigo,Min_Semestre,Max_Semestre, fk_turno) values ('"+curso.getNome()+"',"+curso.getCodDept()+", "+curso.getCargaHoraria()+","+curso.getCreditacao()+","+curso.getCodigo()+","+curso.getMinSemestre()+","+curso.getMaxSemestre()+","+curso.getTurno()+")";
+        String sql = "insert into sonaes.cursos (Nome, Fk_Departamento,CargaHoraria,Creditacao,Codigo,Min_Semestre,Max_Semestre, fk_turno) values ('"+curso.getNome()+"',"+curso.getDepartamento().getId()+", "+curso.getCargaHoraria()+","+curso.getCreditacao()+","+curso.getCodigo()+","+curso.getMinSemestre()+","+curso.getMaxSemestre()+","+curso.getTurno()+")";
         n= stm.executeUpdate(sql);
         }
         catch(SQLException e){
