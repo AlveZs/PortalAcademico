@@ -116,4 +116,10 @@ public class Resultados {
         x.pesquisarTodasFormaIngresso(formasIngresso);
     }
     
+    
+      public void PesquisarDisciplinasAluno(int matricula){
+        Banco.DisciplinaDAO x = new Banco.DisciplinaDAO();
+        x.PesquisarDisciplinasAluno(disciplinas,matricula);
+    }
+    
 }
