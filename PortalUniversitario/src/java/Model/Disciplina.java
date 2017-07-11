@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Disciplina {
     
-    private String  nome,tipo,codigo;
+    private String  nome,tipo,codigo,situacao;
     private Curso curso = new Curso();
     private int creditacao,cargaHoraria,semestre,idTipo,id, qtdPendentes;
 
@@ -178,6 +178,27 @@ public class Disciplina {
     }
 
     public void setQtdPendentes(int qtdPendentes) {
+        this.qtdPendentes = qtdPendentes;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public Disciplina(String nome, String tipo, String codigo, String situacao, int creditacao, int cargaHoraria, int semestre, int idTipo, int id, int qtdPendentes) {
+        this.nome = nome;
+        this.tipo = tipo;
+        this.codigo = codigo;
+        this.situacao = situacao;
+        this.creditacao = creditacao;
+        this.cargaHoraria = cargaHoraria;
+        this.semestre = semestre;
+        this.idTipo = idTipo;
+        this.id = id;
         this.qtdPendentes = qtdPendentes;
     }
     

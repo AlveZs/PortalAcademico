@@ -124,4 +124,38 @@ public class DisciplinaDAO {
       }
    }
     
+    
+    
+        public ResultSet PesquisarDisciplinasAluno(ArrayList<Model.Disciplina> disciplina, int matricula){
+         Connection minhaConexao = ConnectionFactory.getConnection();
+            String sql;
+           /* sql = "SELECT disciplinas.nome FROM sonaes.disciplinas JOIN cursos on disciplinas.Fk_Cursos = cursos.Id join departamentos on cursos.Fk_Departamento = departamentos.Id join campus on departamentos.Fk_Campus = campus.Id\n" +
+                  "Where cursos.Nome = '"+disciplina.getCurso1()+"'\n" +
+                  "order by Semestre;";*/
+          // sql = "Select disciplinas.nome, disciplinas.cargaHoraria, disciplinas.creditacao, disciplinas.codigo from disciplinas JOIN cursos on disciplinas.Fk_Cursos = cursos.Id join departamentos on cursos.Fk_Departamento = departamentos.Id join campus on departamentos.Fk_Campus = campus.Id Where cursos.Id = '"+curso1+"' order by Semestre;";
+          
+          sql = "SELECT disciplinas.nome, disciplinas.cargaHoraria, disciplinas.creditacao, disciplinas.codigo, situacao_disciplina_aluno.Situacao FROM sonaes.disciplinas JOIN historico on disciplinas.Id = historico.Fk_Disciplina join situacao_disciplina_aluno on historico.Fk_Situacao = situacao_disciplina_aluno.Id WHERE historico.Matricula = '"+matricula+"';";
+          
+            ResultSet resultado=null;
+            try{
+                Model.Disciplina obj;
+                Statement stm = minhaConexao.createStatement();
+                resultado = stm.executeQuery(sql);
+                 while (resultado.next()){
+                   obj = new Model.Disciplina();  
+                  obj.setNome(resultado.getString("nome"));
+                  obj.setCargaHoraria(resultado.getInt("cargaHoraria"));
+                  obj.setCreditacao(resultado.getInt("creditacao"));
+                  obj.setCodigo(resultado.getString("codigo"));
+                  obj.setSituacao(resultado.getString("Situacao"));
+                 disciplina.add(obj);
+          }
+            }
+            catch (SQLException e){
+              System.out.println(e.getMessage());
+          }
+          finally{
+              return resultado;
+          }  
+     }
 }
