@@ -44,8 +44,7 @@ public class HistoricoDAO {
       try{
         Model.Disciplina obj;
         Statement stm = con.createStatement();
-        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome, disciplinas.Codigo, disciplinas.Semestre, tipo_disciplinas.Nome, COUNT(disciplinas.Nome) FROM sonaes.historico JOIN sonaes.disciplinas ON historico.Fk_Disciplina=disciplinas.Id JOIN sonaes.situacao_disciplina_aluno ON historico.Fk_Situacao = situacao_disciplina_aluno.Id JOIN sonaes.cursos ON cursos.Id = disciplinas.Fk_Cursos JOIN sonaes.tipo_disciplinas ON disciplinas.Fk_Tipo = tipo_disciplinas.Id AND (situacao_disciplina_aluno.Nome LIKE 'Reprovado%' OR situacao_disciplina_aluno.Nome LIKE 'Pendente') AND cursos.Id = "+IDcurso+" GROUP BY disciplinas.Nome ORDER BY disciplinas.Nome;");
-        while (res.next()){
+        ResultSet res = stm.executeQuery("SELECT disciplinas.Nome, disciplinas.Codigo, disciplinas.Semestre, tipo_disciplinas.Nome, COUNT(disciplinas.Nome) FROM sonaes.historico JOIN sonaes.disciplinas ON historico.Fk_Disciplina=disciplinas.Id JOIN sonaes.situacao_disciplina_aluno ON historico.Fk_Situacao = situacao_disciplina_aluno.Id JOIN sonaes.cursos ON cursos.Id = disciplinas.Fk_Cursos JOIN sonaes.tipo_disciplinas ON disciplinas.Fk_Tipo = tipo_disciplinas.Id AND (situacao_disciplina_aluno.Situacao LIKE 'Reprovado%' OR situacao_disciplina_aluno.Situacao LIKE 'Pendente') AND cursos.Id = "+IDcurso+" GROUP BY disciplinas.Nome ORDER BY disciplinas.Nome;");        while (res.next()){
           obj =  new Model.Disciplina();
           obj.setNome(res.getString("disciplinas.Nome"));
           obj.setCodigo(res.getString("disciplinas.Codigo"));

@@ -140,7 +140,7 @@
 
                 </td>
                 <td colspan="3">
-                    <p class="cols_centrais"> Curso:<br/> <select name="curso"  id="cb_curso" class="campo_tabela">
+                    <p class="cols_centrais"> Curso:<br/> <select name="curso"  onchange="submit();" id="cb_curso" class="campo_tabela ">
                         <option> </option>
                         <%
                             for(int i=0;i<cursos.size();i++) {
@@ -188,64 +188,44 @@
                     <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" value="<%=aluno.getCreditacao()%>"> </p>
                 </td>
             </tr>
-        
-            <tr><td colspan="7">
-            <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
-                <th rowspan="2"> Nome das Disciplinas: </th>
-                <th rowspan="2"> Código </th>
-                <th colspan="2"> Carga Horária: </th>
-                <th rowspan="2"> Semestre </th>
-                <th rowspan="2"> Situação </th>
-                <th rowspan="2"> Optativa </th>
+            <td colspan="4">
+                <%                 
+                    ArrayList<Model.Disciplina> disc = new ArrayList();             
+                    //resultados.PesquisarDisciplinasAluno(String.valueOf(request.getAttribute("y")));
+                    //String curso1 = (String)request.getParameter("departamento");             
+                    // resultados.PesquisarDisciplinasAluno(curso1);
+                    disc = (ArrayList<Model.Disciplina>)request.getAttribute("y");
+
+                   //Model.Disciplina aluno1 = (Model.Disciplina)request.getAttribute("y");
+
+               %>
+                <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
+                
                 <tr>
-                    <td> <i> Exigida:</i> </td>
-                    <td> <i> Cumprida: </i> </td>
+                    <th>Nome:</th>
+                    <th>Creditacao</th>
+                    <th>Carga Horaria</th>
+                    <th>Situação</th>
                 </tr>
-                <!--código-->
-                <tr>
-                    <td>Algoritmos</td>
-                    <td>CPD063</td>
-                    <td>60h</td>
-                    <td>60h</td>
-                    <td>1</td>
-                    <td>Cumprida</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Linguagem de Programação III</td>
-                    <td>CPD023</td>
-                     <td>60h</td>
-                     <td>30h</td>
-                     <td>4</td>
-                     <td>Matriculado</td>
-                     <td></td>
-                </tr>
-                <tr>
-                    <td>Teoria dos Grafos</td>
-                    <td>MAT015</td>
-                     <td>60h</td>
-                     <td>0h</td>
-                     <td>5</td>
-                     <td>Apto a Cursar</td>
-                     <td>X</td>
-                </tr>
-                <tr>
-                    <td> <input type="button" onClick="inserirLinha()" id="btn_add_linha" value="+ Adicionar Disciplina" style="font-size:17px"> </td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                </tr>
-            </table>
-            </td></tr>
-        
+                   <%for(int i=0;i<disc.size();i++){ %>
+                   <tr <% if(disc.get(i).getSituacao().equals("Aprovado")) { %>
+                       style="background-color: #72c624; color: #141414;"
+                       <% } else if(disc.get(i).getSituacao().substring(0, 9).equals("Reprovado")) { %>
+                       style="background-color: #c62525; color: #141414; color: white"
+                   <%}%> >                    
+                        <td><%= disc.get(i).getNome()%> </td>  
+                        <td><%= disc.get(i).getCreditacao()%></td>                    
+                        <td><%= disc.get(i).getCargaHoraria()%></td>
+                        <td><%=disc.get(i).getSituacao()%></td>
+                    </tr>
+                    <%}%>
+             </table>
+            </td>
             <tr><td colspan="4" align="center">
                 <div>
-                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
-                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
-                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="deletar">
+                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="Cadastro">
+                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="Alterar">
+                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="Deletar">
                 </div>
             </td></tr>
         </table>

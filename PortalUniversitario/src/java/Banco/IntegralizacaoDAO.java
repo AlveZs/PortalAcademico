@@ -73,8 +73,7 @@ public class IntegralizacaoDAO {
     public ResultSet pesquisaMateriasAprovadas(Model.Aluno aluno){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "select historico.Matricula, count(situacao_disciplina_aluno.Nome) as Aprovadas from historico join situacao_disciplina_aluno on historico.Fk_Situacao = situacao_disciplina_aluno.Id join aluno on historico.Matricula=aluno.Matricula where situacao_disciplina_aluno.Nome ='Aprovado' AND aluno.Matricula = '"+aluno.getMatricula()+"' group by historico.Matricula;";
-            ResultSet resultado=null;
+            sql = "select historico.Matricula, count(situacao_disciplina_aluno.Situacao) as Aprovadas from historico join situacao_disciplina_aluno on historico.Fk_Situacao = situacao_disciplina_aluno.Id join aluno on historico.Matricula=aluno.Matricula where situacao_disciplina_aluno.Situacao ='Aprovado' AND aluno.Matricula = '"+aluno.getMatricula()+"' group by historico.Matricula;";            ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
                 resultado = stm.executeQuery(sql);

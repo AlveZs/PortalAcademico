@@ -187,30 +187,18 @@
                 <td>
                     <p> Creditação:<br/> <input type="text" name="creditacao" class="caixas" value="<%=aluno.getCreditacao()%>"> </p>
                 </td>
-            </tr> 
-            <tr><td colspan="4" align="center">
-                <div>
-                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
-                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
-                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="deletar">
-                </div>
-            </td></tr>
-        </table>
-    </form>
-  
- <%                 
-             ArrayList<Model.Disciplina> disc = new ArrayList();             
-             //resultados.PesquisarDisciplinasAluno(String.valueOf(request.getAttribute("y")));
-             //String curso1 = (String)request.getParameter("departamento");             
-             // resultados.PesquisarDisciplinasAluno(curso1);
-             disc = (ArrayList<Model.Disciplina>)request.getAttribute("y");
-           
-            //Model.Disciplina aluno1 = (Model.Disciplina)request.getAttribute("y");
-           
-        %>
-        
-        
-            <div style="overflow-x:auto;">
+            </tr>
+            <td colspan="4">
+                <%                 
+                    ArrayList<Model.Disciplina> disc = new ArrayList();             
+                    //resultados.PesquisarDisciplinasAluno(String.valueOf(request.getAttribute("y")));
+                    //String curso1 = (String)request.getParameter("departamento");             
+                    // resultados.PesquisarDisciplinasAluno(curso1);
+                    disc = (ArrayList<Model.Disciplina>)request.getAttribute("y");
+
+                   //Model.Disciplina aluno1 = (Model.Disciplina)request.getAttribute("y");
+
+               %>
                 <table id="tab_disciplinas" border="1" cellpadding="5" height="100" width="800" align="center">
                 
                 <tr>
@@ -220,7 +208,11 @@
                     <th>Situação</th>
                 </tr>
                    <%for(int i=0;i<disc.size();i++){ %>
-                    <tr>                    
+                   <tr <% if(disc.get(i).getSituacao().equals("Aprovado")) { %>
+                       style="background-color: #72c624; color: #141414;"
+                       <% } else if(disc.get(i).getSituacao().substring(0, 9).equals("Reprovado")) { %>
+                       style="background-color: #c62525; color: #141414; color: white"
+                   <%}%> >                    
                         <td><%= disc.get(i).getNome()%> </td>  
                         <td><%= disc.get(i).getCreditacao()%></td>                    
                         <td><%= disc.get(i).getCargaHoraria()%></td>
@@ -228,6 +220,15 @@
                     </tr>
                     <%}%>
              </table>
-           </div>
+            </td>
+            <tr><td colspan="4" align="center">
+                <div>
+                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="Cadastro">
+                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="Alterar">
+                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="Deletar">
+                </div>
+            </td></tr>
+        </table>
+    </form>
 </body>
 </html>

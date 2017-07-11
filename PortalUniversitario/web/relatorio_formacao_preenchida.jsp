@@ -103,7 +103,7 @@ and open the template in the editor.
                     relFor.add(obj);
                 }
             %>
-                <table border="1" align="center" width="500" style="margin-bottom:40px;">
+                <table border="1" align="center" width="700" style="margin-bottom:40px;">
                     <tr>
                     <th>Matricula:</th>
                     <th>Nome:</th>
