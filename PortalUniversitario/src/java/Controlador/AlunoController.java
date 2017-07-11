@@ -49,6 +49,12 @@ try (PrintWriter out = response.getWriter()) {
                 dispatcher.forward(request,response);
             }
             else{
+                  Model.Resultados resultados = (Model.Resultados)request.getAttribute("results");
+                ArrayList<Model.Disciplina> disc = new ArrayList();
+                resultados.PesquisarDisciplinasAluno(Integer.parseInt(request.getParameter("matricula")));
+                 disc = resultados.getDisciplinas();
+                  request.setAttribute("y",disc);
+                
                 request.setAttribute("x", alunoBusca);
                 dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
                 dispatcher.forward(request, response);
