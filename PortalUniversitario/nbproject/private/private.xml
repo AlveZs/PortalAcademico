@@ -2,6 +2,21 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/ProcessoController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/usuario.jsp</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/AlunoController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_aluno.jsp</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Usuario.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Curso.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/UsuarioController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Controlador/CursoController.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/AlunoDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/UsuarioDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Model/Aluno.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/src/java/Banco/ProcessosDAO.java</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/coord_curso.jsp</file>
+            <file>file:/home/joao/NetBeansProjects/PortalAcademico/PortalUniversitario/web/processo.jsp</file>
+        </group>
     </open-files>
 </project-private>

@@ -12,6 +12,11 @@ and open the template in the editor.
     <title>Portal UniversitÃ¡rio | Disciplina</title>
     <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
     <link href="css/disciplina.css" rel="stylesheet" type="text/css">
+    <script>
+        function nulo() {
+            alert("Não existe resultado para esse código");
+        }
+    </script>
 </head>
 <body>
     <%@include file="menu.jsp" %>
@@ -19,6 +24,12 @@ and open the template in the editor.
         
      <div>
     <form method="post" action="DisciplinaController">
+        <% String verificaNulo = (String)request.getAttribute("verNulo");%> 
+        <%  if (verificaNulo.equals("sim")){%>
+            <script type="text/javascript">
+                nulo();
+            </script>   
+        <%}%>
         <%
             Model.Resultados resultados = new Model.Resultados();
             ArrayList<Model.Campus> campi = new ArrayList();

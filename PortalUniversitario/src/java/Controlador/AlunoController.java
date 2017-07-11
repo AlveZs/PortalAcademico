@@ -43,11 +43,19 @@ try (PrintWriter out = response.getWriter()) {
             Model.Aluno alunoBusca = new Model.Aluno();
             alunoBusca.setMatricula(Integer.parseInt(request.getParameter("matricula")));
             alunoBusca.pesquisarAluno();
-            request.setAttribute("x", alunoBusca);
-            dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
-            dispatcher.forward(request, response);
+            if (alunoBusca.getId()==0){
+                request.setAttribute("verNulo", "sim");
+                dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
+                dispatcher.forward(request,response);
+            }
+            else{
+                request.setAttribute("x", alunoBusca);
+                dispatcher = request.getRequestDispatcher("coord_aluno_preenchida.jsp");
+                dispatcher.forward(request, response);
+            }
             break;
       case "preencher":
+            request.setAttribute("verNulo", "nao");
             dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
             dispatcher.forward(request,response);
             break;
@@ -66,17 +74,9 @@ try (PrintWriter out = response.getWriter()) {
             aluno.getCurso().setId(curso);
             aluno.getCurso().pesquisar();
             aluno.incluir();
+            request.setAttribute("verNulo", "nao");
             dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
             dispatcher.forward(request,response);
-            break;
-        case "consulta":
-            Banco.AlunoDAO x = new Banco.AlunoDAO();
-            request.setAttribute("resultado_banco",x);          
-            if(opcao.equals("consulta"))
-            {
-                dispatcher = request.getRequestDispatcher("Balanco.jsp");
-                dispatcher.forward(request, response);
-            }
             break;
         case "alterar":
             matricula = Integer.parseInt(request.getParameter("matricula"));
@@ -100,6 +100,7 @@ try (PrintWriter out = response.getWriter()) {
             Model.Aluno alunoDel = new Model.Aluno();
             alunoDel.setMatricula(matricula);
             alunoDel.deletar();
+            request.setAttribute("verNulo", "nao");
             dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
             dispatcher.forward(request,response);
             break;

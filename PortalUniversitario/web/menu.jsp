@@ -37,7 +37,7 @@ if((session.getAttribute("tipoUser")== null))
     	<ul class="menu">
         	<li> <a href="AlunoController?opcao=preencher" id="aluno"> Aluno </a> </li>
                 <li> <a href="CursoController?opcao=preencher" id="curso"> Curso </a> </li>           
-            <li> <a href="processo.jsp" id="processo"> <div></div> Processos </a> </li>
+            <li> <a href="ProcessoController?opcao=preencher" id="processo"> <div></div> Processos </a> </li>
             <li> <a href="#" id="relatorio"> Relatório </a>
             		<ul>
                             <!--<li> <a href="Relatorio_IntegralizacaoController?opcao=preencher" id="integralizacao"> <div></div> Integralização </a> </li>-->

@@ -127,6 +127,7 @@ public class Usuario {
             System.out.println("Entrou!");
             this.nome = resultado.getString("usuarios.nome");
             this.tipoUser = resultado.getInt("usuarios.tipUser");
+            this.id= resultado.getInt("usuarios.id");
             if (tipoUser == 4 || tipoUser == 5 || tipoUser == 6) {
                 System.out.println("entrou no IF");
                 //this.curso.setNome(resultado.getString("cursos.Nome"));

@@ -47,12 +47,22 @@ public class DepartamentoController extends HttpServlet {
                     Model.Departamento departBusca = new Model.Departamento();
                     departBusca.setCodigo(request.getParameter("codDept"));
                     departBusca.pesquisarDepartamento();
-                    request.setAttribute("depart", departBusca);
-                    dispatcher = request.getRequestDispatcher("departamento_preenchida.jsp");
-                    dispatcher.forward(request, response);
+                    if(departBusca.getId()==0){
+                        request.setAttribute("verNulo", "sim");
+                        request.setAttribute("results", resultadosBusca);
+                        dispatcher = request.getRequestDispatcher("departamento.jsp");
+                        dispatcher.forward(request,response);
+                    }
+                    else{
+                        request.setAttribute("results", resultadosBusca);
+                        request.setAttribute("depart", departBusca);
+                        dispatcher = request.getRequestDispatcher("departamento_preenchida.jsp");
+                        dispatcher.forward(request, response);
+                    }
                     break;
                 case "preencher":
                     Model.Resultados resultados = new Model.Resultados();
+                    request.setAttribute("verNulo", "nao");
                     request.setAttribute("results", resultados);
                     dispatcher = request.getRequestDispatcher("departamento.jsp");
                     dispatcher.forward(request,response);
@@ -63,6 +73,7 @@ public class DepartamentoController extends HttpServlet {
                     campus = Integer.parseInt(request.getParameter("campus"));
                     Model.Departamento departInc = new Model.Departamento(nome, codigo, campus);
                     departInc.incluir();
+                    request.setAttribute("verNulo", "nao");
                     dispatcher = request.getRequestDispatcher("departamento.jsp");
                     dispatcher.forward(request,response);
                     break;
@@ -72,6 +83,7 @@ public class DepartamentoController extends HttpServlet {
                     codigo = request.getParameter("codDept");
                     Model.Departamento departAlt = new Model.Departamento(nome, codigo, campus);
                     departAlt.alterar();
+                    request.setAttribute("verNulo", "nao");
                     dispatcher = request.getRequestDispatcher("departamento.jsp");
                     dispatcher.forward(request,response);
                     break;
@@ -79,6 +91,7 @@ public class DepartamentoController extends HttpServlet {
                     Model.Departamento departDel = new Model.Departamento();
                     departDel.setCodigo(request.getParameter("codDept"));
                     departDel.deletar();
+                    request.setAttribute("verNulo", "nao");
                     dispatcher = request.getRequestDispatcher("departamento.jsp");
                     dispatcher.forward(request,response);
                     break;

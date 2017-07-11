@@ -15,10 +15,21 @@
         <%@include file="menu.jsp" %>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
             <link href="css/aluno.css" rel="stylesheet" type="text/css">
+        <script>
+            function nulo() {
+                alert("Não existe resultado para esse código");
+            }
+        </script>
     </head>
     <body>
         
-    <form method="post" action="ProcessoController" name="consulta">        
+    <form method="post" action="ProcessoController" name="consulta">
+        <% String verificaNulo = (String)request.getAttribute("verNulo");%> 
+        <%  if (verificaNulo.equals("sim")){%>
+            <script type="text/javascript">
+                nulo();
+            </script>   
+        <%}%>        
     	<table id="tab_dados_aluno" class="tabelao" width="750" border="0"  align="center">
             <th colspan="5">
                 <h1> Gerenciar Processos </h1>

@@ -14,9 +14,20 @@
         <%@include file="menu.jsp" %>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
+        <script>
+            function nulo() {
+                alert("Não existe resultado para esse código");
+            }
+        </script>
     </head>
     <body>
         <form method="post" action="DepartamentoController" name="departamentoForm">
+            <% String verificaNulo = (String)request.getAttribute("verNulo");%> 
+            <% if (verificaNulo.equals("sim")){%>
+                <script type="text/javascript">
+                    nulo();
+                </script>   
+            <%}%>
             <%
             Model.Resultados resultado = new Model.Resultados();
             ArrayList <Model.Campus> campi = new ArrayList();

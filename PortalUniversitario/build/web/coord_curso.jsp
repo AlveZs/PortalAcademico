@@ -13,11 +13,22 @@
         <title>Portal Universitário | Curso</title>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/curso.css" rel="stylesheet" type="text/css">
+        <script>
+            function nulo() {
+                alert("Não existe resultado para esse código");
+            }
+        </script>
     </head>
     <body>
         <%@include file ="menu.jsp"%>
     <div>
     <form method="post" action="CursoController">
+        <% String verificaNulo = (String)request.getAttribute("verNulo");%> 
+        <%  if (verificaNulo.equals("sim")){%>
+            <script type="text/javascript">
+                nulo();
+            </script>   
+        <%}%>
         <% Model.Curso curso = (Model.Curso)request.getAttribute("c");%>
         <% Model.Disciplina disciplina = (Model.Disciplina)request.getAttribute("d");%>
         <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="700">

@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author joao
  */
 public class Processo {
-    int qtdSemestres,codProcesso,situacao;
+    int qtdSemestres,codProcesso,situacao,id;
     Aluno aluno = new Aluno();
 
     public Processo() {
@@ -28,6 +28,16 @@ public class Processo {
     public int getSituacao() {
         return situacao;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 
     public void setSituacao(int situacao) {
         this.situacao = situacao;
@@ -82,6 +92,7 @@ public class Processo {
             this.codProcesso = resultado.getInt("codProcesso");
             this.qtdSemestres = resultado.getInt("qtdSemestres");
             this.situacao = resultado.getInt("situacao");
+            this.id = resultado.getInt("processos.id");
         }
         }
         catch (SQLException e){

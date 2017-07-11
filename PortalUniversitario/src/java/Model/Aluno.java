@@ -190,6 +190,7 @@ public class Aluno {
         try{
         while (resultado.next())
         {
+            this.id = resultado.getInt("aluno.Id");
             this.nome = resultado.getString("aluno.Nome");
             this.curso.setNome(resultado.getString("cursos.Nome"));
             this.curso.setId(resultado.getInt("aluno.Fk_Curso"));

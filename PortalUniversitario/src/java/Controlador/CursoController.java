@@ -48,11 +48,21 @@ public class CursoController extends HttpServlet {
                 Model.Disciplina disciplina = new Model.Disciplina();
                 disciplina.pesquisarTodos(Integer.parseInt(request.getParameter("codigo")));
                 curso.pesquisarIdCurso();
-                curso.pesquisar();
-                request.setAttribute("d", disciplina);
-                request.setAttribute("c", curso);
-                dispatcher = request.getRequestDispatcher("coord_curso_preenchida.jsp");
-                dispatcher.forward(request,response);
+                if(curso.getIdCurso()==0){
+                    request.setAttribute("verNulo", "sim");
+                    Model.Departamento dept = new Model.Departamento(); 
+                    dept.pesquisar();
+                    request.setAttribute("depart", dept);
+                    dispatcher = request.getRequestDispatcher("coord_curso.jsp");
+                    dispatcher.forward(request,response);
+                }
+                else{    
+                    curso.pesquisar();
+                    request.setAttribute("d", disciplina);
+                    request.setAttribute("c", curso);
+                    dispatcher = request.getRequestDispatcher("coord_curso_preenchida.jsp");
+                    dispatcher.forward(request,response);
+                }
                 break;
             case "Incluir":
                 codigo = Integer.parseInt(request.getParameter("codigo"));
@@ -66,10 +76,12 @@ public class CursoController extends HttpServlet {
                 maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
                 Model.Curso curs = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
                 curs.incluir();
+                request.setAttribute("verNulo", "nao");
                 dispatcher = request.getRequestDispatcher("coord_curso.jsp");
                 dispatcher.forward(request,response);
                 break;
             case "preencher":
+                request.setAttribute("verNulo", "nao");
                 Model.Departamento dept = new Model.Departamento(); 
                 dept.pesquisar();
                 request.setAttribute("depart", dept);
@@ -88,6 +100,7 @@ public class CursoController extends HttpServlet {
                 maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
                 Model.Curso cursoAlt = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
                 cursoAlt.alterar();
+                request.setAttribute("verNulo", "nao");
                 dispatcher = request.getRequestDispatcher("coord_curso.jsp");
                 dispatcher.forward(request,response);
                 break;
@@ -96,6 +109,7 @@ public class CursoController extends HttpServlet {
                 Model.Curso cursoDel = new Model.Curso();
                 cursoDel.setCodigo(codigo);
                 cursoDel.deletar();
+                request.setAttribute("verNulo", "nao");
                 dispatcher = request.getRequestDispatcher("coord_curso.jsp");
                 dispatcher.forward(request,response);
                 break;

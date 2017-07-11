@@ -43,9 +43,15 @@ public class ProcessoController extends HttpServlet {
                 Model.Processo processoBusca = new Model.Processo();
                 processoBusca.setCodProcesso(Integer.parseInt(request.getParameter("codProcesso")));
                 processoBusca.pesquisar();
-                request.setAttribute("proc", processoBusca);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("processo_preenchida.jsp");
-                dispatcher.forward(request,response);
+                if(processoBusca.getId()==0){
+                    request.setAttribute("verNulo", "sim");
+                    dispatcher2.forward(request,response);
+                }
+                else{
+                    request.setAttribute("proc", processoBusca);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("processo_preenchida.jsp");
+                    dispatcher.forward(request,response);
+                }
                 break;
             case "Incluir":
                 aluno = Integer.parseInt(request.getParameter("matrícula"));
@@ -56,6 +62,11 @@ public class ProcessoController extends HttpServlet {
                 processoInc.getAluno().setMatricula(aluno);
                 processoInc.getAluno().pesquisarIdAluno();
                 processoInc.incluir();
+                request.setAttribute("verNulo", "nao");
+                dispatcher2.forward(request,response);
+                break;
+            case "preencher":
+                request.setAttribute("verNulo", "nao");
                 dispatcher2.forward(request,response);
                 break;
             case "Alterar":
@@ -67,12 +78,14 @@ public class ProcessoController extends HttpServlet {
                 processoAlt.getAluno().setMatricula(aluno);
                 processoAlt.getAluno().pesquisarIdAluno();
                 processoAlt.alterar();
+                request.setAttribute("verNulo", "nao");
                 dispatcher2.forward(request,response);
                 break;
             case "Deletar":
                 Model.Processo processoDel = new Model.Processo();
                 processoDel.setCodProcesso(Integer.parseInt(request.getParameter("codProcesso")));
                 processoDel.deletar();
+                request.setAttribute("verNulo", "nao");
                 dispatcher2.forward(request,response);
                 break;
         }

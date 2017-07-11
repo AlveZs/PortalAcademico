@@ -46,23 +46,23 @@ public class UsuarioController extends HttpServlet {
                     Model.Usuario usuarioBusca = new Model.Usuario();
                     usuarioBusca.setMatricula(Integer.parseInt(request.getParameter("matricula")));
                     usuarioBusca.pesquisarUsuario();
-                    request.setAttribute("usr", usuarioBusca);
-                    RequestDispatcher dispatcherBusca = request.getRequestDispatcher("usuario_preenchida.jsp");
-                    dispatcherBusca.forward(request, response);                    
-                    /*
-                    Model.Resultados resultadosBusca = new Model.Resultados();
-                    request.setAttribute("results", resultadosBusca);
-                    Model.Departamento departBusca = new Model.Departamento();
-                    departBusca.setCodigo(request.getParameter("codDept"));
-                    departBusca.pesquisarDepartamento();
-                    request.setAttribute("depart", departBusca);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("departamento_preenchida.jsp");
-                    dispatcher.forward(request, response);
-                    */
+                    if(usuarioBusca.getId()==0){
+                        request.setAttribute("results", resultadosBusca);
+                        request.setAttribute("verNulo", "sim");
+                        RequestDispatcher dispatcherUsr = request.getRequestDispatcher("usuario.jsp");
+                        dispatcherUsr.forward(request,response);
+                    }
+                    else{
+                        request.setAttribute("usr", usuarioBusca);
+                        request.setAttribute("results", resultadosBusca);
+                        RequestDispatcher dispatcherBusca = request.getRequestDispatcher("usuario_preenchida.jsp");
+                        dispatcherBusca.forward(request, response);                    
+                    }
                     break;
                 case "preencher":
                     Model.Resultados resultados = new Model.Resultados();
                     request.setAttribute("results", resultados);
+                    request.setAttribute("verNulo", "nao");
                     RequestDispatcher dispatcherUsr = request.getRequestDispatcher("usuario.jsp");
                     dispatcherUsr.forward(request,response);
                     break;
@@ -83,15 +83,8 @@ public class UsuarioController extends HttpServlet {
                         usuario.getCurso().pesquisar();
                     }
                     usuario.incluir();
+                    request.setAttribute("verNulo", "nao");
                     dispatcherDefault.forward(request, response);
-                    /*
-                    nome = request.getParameter("nome");
-                    codigo = request.getParameter("codDept");
-                    campus = Integer.parseInt(request.getParameter("campus"));
-                    Model.Departamento departInc = new Model.Departamento(nome, codigo, campus);
-                    departInc.incluir();
-                    dispatcher2.forward(request,response);
-                    */
                     break;
                 case "Alterar":
                     nome = request.getParameter("nome");
@@ -111,26 +104,12 @@ public class UsuarioController extends HttpServlet {
                     }
                     usuarioAlt.alterar();
                     dispatcherDefault.forward(request, response);
-                    /*
-                    campus = Integer.parseInt(request.getParameter("campus"));
-                    nome = request.getParameter("nome");
-                    codigo = request.getParameter("codDept");
-                    Model.Departamento departAlt = new Model.Departamento(nome, codigo, campus);
-                    departAlt.alterar();
-                    dispatcher2.forward(request,response);
-                    */
                     break;
                 case "Deletar":
                     Model.Usuario usuarioDel = new Model.Usuario();
                     usuarioDel.setMatricula(Integer.parseInt(request.getParameter("matricula")));
                     usuarioDel.deletar();
                     dispatcherDefault.forward(request, response);
-                    /*
-                    Model.Departamento departDel = new Model.Departamento();
-                    departDel.setCodigo(request.getParameter("codDept"));
-                    departDel.deletar();
-                    dispatcher2.forward(request,response);
-                    */
                     break;    
             }
         }

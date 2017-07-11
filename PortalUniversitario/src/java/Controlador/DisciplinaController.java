@@ -47,11 +47,19 @@ public class DisciplinaController extends HttpServlet {
                     Model.Disciplina disciplinaBusca = new Model.Disciplina();
                     disciplinaBusca.setCodigo(request.getParameter("codigo"));
                     disciplinaBusca.pesquisarDisciplina();
-                    request.setAttribute("disc", disciplinaBusca);
-                    RequestDispatcher dispatcherBusca = request.getRequestDispatcher("disciplina_preenchida.jsp");
-                    dispatcherBusca.forward(request, response);  
+                    if(disciplinaBusca.getId()==0){
+                        request.setAttribute("verNulo", "sim");
+                        RequestDispatcher dispatcherDisc = request.getRequestDispatcher("coord_disciplina.jsp");
+                        dispatcherDisc.forward(request,response);
+                    }
+                    else{
+                        request.setAttribute("disc", disciplinaBusca);
+                        RequestDispatcher dispatcherBusca = request.getRequestDispatcher("disciplina_preenchida.jsp");
+                        dispatcherBusca.forward(request, response);  
+                    }
                     break;
                 case "preencher":
+                    request.setAttribute("verNulo", "nao");
                     RequestDispatcher dispatcherDisc = request.getRequestDispatcher("coord_disciplina.jsp");
                     dispatcherDisc.forward(request,response);
                     break;

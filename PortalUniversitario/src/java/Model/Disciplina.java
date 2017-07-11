@@ -80,7 +80,7 @@ public class Disciplina {
             this.curso.getDepartamento().setNomeCampus(resultado.getString("Campus"));
             this.idTipo = resultado.getInt("disciplinas.Fk_Tipo");
             this.semestre = resultado.getInt("disciplinas.Semestre");
-            
+            this.id = resultado.getInt("disciplinas.Id");
         }
         }
         catch (SQLException e){

@@ -24,10 +24,20 @@
                         $("#cb_curso").attr("disabled", true);
                 });
             });
+            
+            function nulo() {
+                alert("Não existe resultado para essa Matrícula");
+            }
         </script>
     </head>
     <body>
         <form method="post" action="UsuarioController" name="usuarioForm">
+            <% String verificaNulo = (String)request.getAttribute("verNulo");%> 
+            <%  if (verificaNulo.equals("sim")){%>
+                <script type="text/javascript">
+                    nulo();
+                </script>   
+            <%}%>     
             <%Model.Resultados resultado = (Model.Resultados)request.getAttribute("results");
             resultado.pesquisarTodosCampus();
             resultado.pesquisarTodosCursos();
