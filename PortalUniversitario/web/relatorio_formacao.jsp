@@ -67,9 +67,6 @@ and open the template in the editor.
                 </div>
             </td>
             </tr>
-            <tr>
-                <td> Total de Alunos: 2</td>
-            </tr>
         </table>
     </form>
 </body>

@@ -76,6 +76,29 @@ public class CursoController extends HttpServlet {
                 dispatcher = request.getRequestDispatcher("coord_curso.jsp");
                 dispatcher.forward(request,response);
                 break;
+            case "Alterar":
+                codigo = Integer.parseInt(request.getParameter("codigo"));
+                nome = request.getParameter("nome");
+                departamento.setId(Integer.parseInt(request.getParameter("departamento")));
+                departamento.pesquisarDepartamentoPorId();
+                cargaHoraria = Integer.parseInt(request.getParameter("cargaHoraria"));
+                creditacao = Integer.parseInt(request.getParameter("credito"));
+                turno = Integer.parseInt(request.getParameter("turno"));
+                minSemestre = Integer.parseInt(request.getParameter("qtdMinSemestres"));
+                maxSemestre = Integer.parseInt(request.getParameter("qtdMaxSemestres"));
+                Model.Curso cursoAlt = new Model.Curso(nome, departamento, cargaHoraria, creditacao, codigo,minSemestre,maxSemestre,turno);
+                cursoAlt.alterar();
+                dispatcher = request.getRequestDispatcher("coord_curso.jsp");
+                dispatcher.forward(request,response);
+                break;
+            case "Deletar":
+                codigo = Integer.parseInt(request.getParameter("codigo"));
+                Model.Curso cursoDel = new Model.Curso();
+                cursoDel.setCodigo(codigo);
+                cursoDel.deletar();
+                dispatcher = request.getRequestDispatcher("coord_curso.jsp");
+                dispatcher.forward(request,response);
+                break;
         }
     }
 

@@ -17,7 +17,8 @@
     </head>
     <body>
         <form method="post" action="DepartamentoController" name="departamentoForm">
-            <%Model.Resultados resultado = (Model.Resultados)request.getAttribute("results");
+            <%
+            Model.Resultados resultado = new Model.Resultados();
             ArrayList <Model.Campus> campi = new ArrayList();
             resultado.pesquisarTodosCampus();
             campi = resultado.getCampus();
@@ -48,8 +49,7 @@
                     <td align="center" colspan="2"> 
                         <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
                         <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
-                        <input type="submit" name="opcao" value="Deletar" class="botao"> 
-                        <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
+                        <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
                     </td>
                 </tr>
             </table>

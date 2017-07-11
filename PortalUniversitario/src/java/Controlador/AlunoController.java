@@ -100,6 +100,8 @@ try (PrintWriter out = response.getWriter()) {
             Model.Aluno alunoDel = new Model.Aluno();
             alunoDel.setMatricula(matricula);
             alunoDel.deletar();
+            dispatcher = request.getRequestDispatcher("coord_aluno.jsp");
+            dispatcher.forward(request,response);
             break;
         default:
             //alteração

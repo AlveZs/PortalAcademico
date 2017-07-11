@@ -37,7 +37,7 @@ public class Curso {
         this.codigo = codigo;
         this.turno = turno;
     }
-    
+
     public Curso(String nome, String nomeDepartamento, int cargaHoraria, int creditacao, int codigo, int minSemestre, int maxSemestre, int turno) {
         this.nome = nome;
         this.departamento = new Departamento(nomeDepartamento);
@@ -51,7 +51,7 @@ public class Curso {
 
     public Curso(String nome, String nomeDepartamento, int cargaHoraria, int creditacao, int codigo, int turno) {
         this.nome = nome;
-        this.departamento = new Departamento(nomeDepartamento);        
+        this.departamento = new Departamento(nomeDepartamento);
         this.cargaHoraria = cargaHoraria;
         this.creditacao = creditacao;
         this.codigo = codigo;
@@ -176,7 +176,7 @@ public class Curso {
           System.out.println(e.getMessage());
         }
     }
-    
+
     public void pesquisarCodCurso(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         ResultSet resultado = x.pesquisarCodCurso(this);
@@ -195,6 +195,16 @@ public class Curso {
     public void incluir(){
         Banco.CursoDAO x = new Banco.CursoDAO();
         x.incluir(this);
+    }
+    
+    public void alterar(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        x.alterar(this);
+    }
+    
+    public void deletar(){
+        Banco.CursoDAO x = new Banco.CursoDAO();
+        x.deletar(this);
     }
 
     public void pesquisar(){
@@ -219,5 +229,5 @@ public class Curso {
           System.out.println(e.getMessage());
         }
     }
-    
+
 }

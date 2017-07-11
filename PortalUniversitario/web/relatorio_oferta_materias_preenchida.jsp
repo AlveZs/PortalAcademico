@@ -22,6 +22,7 @@ and open the template in the editor.
     ArrayList<Model.Curso> cursos = new ArrayList();
     ArrayList<Model.Departamento> departamentos = new ArrayList();
     ArrayList<Model.Campus> campi = new ArrayList();
+    resultados.pesquisarTodosCursos();
     resultados.pesquisarTodosDepartamentos();
     resultados.pesquisarTodosCampus();
     cursos = resultados.getCursos();
@@ -50,7 +51,7 @@ and open the template in the editor.
             	<div style="margin-left:10px">
                     <p>Departamento:<br/> <select name="departamento">
                         <option value="0"></option>
-                        <% for(int i=0;i<departamentos.size()/2;i++) {
+                        <% for(int i=0;i<departamentos.size();i++) {
                             if (Integer.parseInt(request.getParameter("campus")) == departamentos.get(i).getCampus()) {
                         %>
                             <option value="<%=departamentos.get(i).getId()%>" <% if(Integer.parseInt(request.getParameter("departamento")) == departamentos.get(i).getId()) { %> selected="selected" <%}%>> <%=departamentos.get(i).getNome()%> </option>
@@ -76,19 +77,19 @@ and open the template in the editor.
                 resultados.pesquisarResultadosHistorico(Integer.parseInt(request.getParameter("curso")));
 
                 ArrayList<Model.Disciplina> disciplinas = new ArrayList<Model.Disciplina>();
-                //Deixei o nome da classe na constru��o do ArrayList porque por alguma raz�o, o GlassFish buga se tirar
-
+                
                 disciplinas = resultados.getDisciplinas();
                 
                 for(int i=0;i<cursos.size();i++)
                     if(Integer.parseInt(request.getParameter("curso")) == cursos.get(i).getIdCurso())
                         minSemestres = cursos.get(i).getMinSemestre();
                 
-                int flag;
+                int flag, qtdMaterias = 0;;
                 for (int i=0; i<=minSemestres; i++) {
                     flag = 0;
                     for (int j=0; j<disciplinas.size(); j++) {
                         if (i+1 == disciplinas.get(j).getSemestre()) {
+                            qtdMaterias++;
                             if (flag == 0) {
                                 %>
                                 <tr>
@@ -135,6 +136,9 @@ and open the template in the editor.
                     }
                 }
                 %>
+            <tr>
+                <td> <p> Quantidade de Disciplinas: <%=qtdMaterias%> </p> </td>
+            </tr>
         </table>
     </form>
     </div>

@@ -39,7 +39,7 @@ public class DepartamentoController extends HttpServlet {
             String nome, nomeCampus, codigo,opcao;
             int campus;
             opcao= request.getParameter("opcao");
-            RequestDispatcher dispatcher2 = request.getRequestDispatcher("menu.jsp");
+            RequestDispatcher dispatcher;
             switch (opcao){
                 case "Buscar":
                     Model.Resultados resultadosBusca = new Model.Resultados();
@@ -48,14 +48,14 @@ public class DepartamentoController extends HttpServlet {
                     departBusca.setCodigo(request.getParameter("codDept"));
                     departBusca.pesquisarDepartamento();
                     request.setAttribute("depart", departBusca);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("departamento_preenchida.jsp");
+                    dispatcher = request.getRequestDispatcher("departamento_preenchida.jsp");
                     dispatcher.forward(request, response);
                     break;
                 case "preencher":
                     Model.Resultados resultados = new Model.Resultados();
                     request.setAttribute("results", resultados);
-                    RequestDispatcher dispatcherDept = request.getRequestDispatcher("departamento.jsp");
-                    dispatcherDept.forward(request,response);
+                    dispatcher = request.getRequestDispatcher("departamento.jsp");
+                    dispatcher.forward(request,response);
                     break;
                 case "Incluir":
                     nome = request.getParameter("nome");
@@ -63,7 +63,8 @@ public class DepartamentoController extends HttpServlet {
                     campus = Integer.parseInt(request.getParameter("campus"));
                     Model.Departamento departInc = new Model.Departamento(nome, codigo, campus);
                     departInc.incluir();
-                    dispatcher2.forward(request,response);
+                    dispatcher = request.getRequestDispatcher("departamento.jsp");
+                    dispatcher.forward(request,response);
                     break;
                 case "Alterar":
                     campus = Integer.parseInt(request.getParameter("campus"));
@@ -71,13 +72,15 @@ public class DepartamentoController extends HttpServlet {
                     codigo = request.getParameter("codDept");
                     Model.Departamento departAlt = new Model.Departamento(nome, codigo, campus);
                     departAlt.alterar();
-                    dispatcher2.forward(request,response);
+                    dispatcher = request.getRequestDispatcher("departamento.jsp");
+                    dispatcher.forward(request,response);
                     break;
                 case "Deletar":
                     Model.Departamento departDel = new Model.Departamento();
                     departDel.setCodigo(request.getParameter("codDept"));
                     departDel.deletar();
-                    dispatcher2.forward(request,response);
+                    dispatcher = request.getRequestDispatcher("departamento.jsp");
+                    dispatcher.forward(request,response);
                     break;
             }
         }

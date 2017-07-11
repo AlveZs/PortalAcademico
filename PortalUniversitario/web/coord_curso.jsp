@@ -82,27 +82,12 @@
                 </td>
             </tr>
             
-            <tr>
-                <td colspan="7" align="center">
-                    <table border="1">
-                        <tr class="subtabela_disciplina">
-                            <td><b>Nome</b></td>
-                            <td><b>Carga Horária</b></td>
-                            <td><b>Creditação</b></td>
-                            <td><b>Semestre</b></td>
-                            <td><b>Código</b></td>
-                            <td><b>Tipo</b></td>
-                        </tr>   
-                 </table>
-                </td>
-            </tr>
-            
             <tr></tr>
             <tr align="center">
             	<td height="56" colspan="7">
                   <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
                   <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
-                  <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+                  <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
                 </td>
          	</tr>
         </table>

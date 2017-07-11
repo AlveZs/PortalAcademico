@@ -21,19 +21,28 @@
             <% Model.Semestre sc = (Model.Semestre)request.getAttribute("sc");%>
             <table align="center" border="0" cellspacing="10" cellpadding="3" class="tabelao" width="600">
                 <th colspan="4">
-                    <h1>Semestres cancelados</h1>
+                    <h1>Semestres Cancelados</h1>
                     <div class="separador"></div>
                 </th>
-                <tr>
+                <tr align="center">
                     <td><b>Ano</b></td>
                     <td><b>Semestre</b></td>
                 </tr>
-                    <%for(Model.Semestre semestre : sc.getTodos()){%>
-                        <tr>
-                            <td><%=semestre.getAno()%></td>
-                            <td><%=semestre.getSemestre()%></td>
-                        </tr>
-                    <%}%>
+                <%for(Model.Semestre semestre : sc.getTodos()){%>
+                    <tr align="center">
+                        <td><%=semestre.getAno()%></td>
+                        <td><%=semestre.getSemestre()%></td>
+                    </tr>
+                <%}%>
+                
+                <tr></tr>
+                <tr></tr>
+                <tr></tr>
+                <tr align="center">
+                    <td colspan="2">
+                        <input type="submit" value="Voltar" name="opcao">
+                    </td>
+                </tr>
             </table>             
         </form>
         </div>

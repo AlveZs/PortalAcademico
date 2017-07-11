@@ -28,7 +28,7 @@ public class Usuario {
         this.tipoUser = tipoUser;
         this.matricula = matricula;
     }
-    
+
     public Usuario(String nome, String senha, int tipoUser, int matricula, Campus campus, Departamento departamento, Curso curso) {
         this.nome = nome;
         this.senha = senha;
@@ -102,48 +102,55 @@ public class Usuario {
     public void setId(int id) {
         this.id = id;
     }
-    
+
     public void incluir(){
         Banco.UsuarioDAO x = new Banco.UsuarioDAO();
         x.incluir(this);
     }
-    
+
     public void alterar(){
         Banco.UsuarioDAO x = new Banco.UsuarioDAO();
         x.alterar(this);
     }
-    
+
     public void deletar(){
         Banco.UsuarioDAO x = new Banco.UsuarioDAO();
         x.deletar(this);
     }
-    
+
     public void pesquisarUsuario(){
         Banco.UsuarioDAO x = new Banco.UsuarioDAO();
         ResultSet resultado = x.pesquisarUsuario(this);
         try{
         while (resultado.next())
         {
+            System.out.println("Entrou!");
             this.nome = resultado.getString("usuarios.nome");
             this.tipoUser = resultado.getInt("usuarios.tipUser");
-            this.curso.setNome(resultado.getString("cursos.Nome"));
-            this.curso.setId(resultado.getInt("usuarios.Fk_Cursos"));
-            this.curso.getDepartamento().setNome(resultado.getString("departamentos.Nome"));
-            this.curso.getDepartamento().setNomeCampus(resultado.getString("campus.Nome"));
-            this.curso.getDepartamento().setId(resultado.getInt("usuarios.Fk_Departamentos"));
-            this.curso.getDepartamento().setCampus(resultado.getInt("usuarios.Fk_Campus"));
-            this.campus.setNome(resultado.getString("campus.Nome"));
+            if (tipoUser == 4 || tipoUser == 5 || tipoUser == 6) {
+                System.out.println("entrou no IF");
+                //this.curso.setNome(resultado.getString("cursos.Nome"));
+                this.curso.setId(resultado.getInt("usuarios.Fk_Cursos"));
+                //this.curso.getDepartamento().setNome(resultado.getString("departamentos.Nome"));
+                //this.curso.getDepartamento().setNomeCampus(resultado.getString("campus.Nome"));
+                this.curso.getDepartamento().setId(resultado.getInt("usuarios.Fk_Departamentos"));
+                this.curso.getDepartamento().setCampus(resultado.getInt("usuarios.Fk_Campus"));
+                this.curso.pesquisar();
+                System.out.println(this.curso.getNome());
+            }
+            //this.campus.setNome(resultado.getString("campus.Nome"));
             this.campus.setId(resultado.getInt("usuarios.Fk_Campus"));
-            this.departamento.setNome(resultado.getString("departamentos.Nome"));
+            //this.departamento.setNome(resultado.getString("departamentos.Nome"));
             this.departamento.setId(resultado.getInt("usuarios.Fk_Departamentos"));
+            this.departamento.pesquisarDepartamentoPorId();
             this.senha = resultado.getString("usuarios.senha");
-            
+            System.out.println(this.departamento.getNome());
         }
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
-    
+
+
 }

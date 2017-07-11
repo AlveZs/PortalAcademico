@@ -31,9 +31,8 @@ and open the template in the editor.
             <tr align="center">
             	<td height="56" colspan="4">
                   <input type="submit" name = "opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
-                  <input type="submit" name="opcao" value="Buscar" id="btn_novo" class="botao">
-                  <input type="submit" name="opcao" value="Deletar" id="btn_novo" class="botao">
-                  <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+                  <input type="submit" name="opcao" value="Buscar" id="btn_buscar" class="botao">
+                  <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
                 </td>
             </tr>
         </table>

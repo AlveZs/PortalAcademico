@@ -14,50 +14,50 @@ import java.util.ArrayList;
  * @author Marcus Filipe
  */
 public class Departamento {
-    
+
     private String nome, nomeCampus, codigo;
     private int campus,id;
     private ArrayList<Departamento> dept = new ArrayList<>();
 
     public Departamento() {
     }
-    
+
     public Departamento(String nome) {
         this.nome = nome;
     }
-    
+
     public Departamento(String nome, String nomeCampus, String codigo) {
         this.nome = nome;
         this.nomeCampus = nomeCampus;
         this.codigo = codigo;
     }
-    
+
     public Departamento(String nome, String codigo, int campus) {
         this.nome = nome;
         this.codigo = codigo;
         this.campus = campus;
     }
-    
-    public void pesquisar(){
-        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
-        x.pesquisar(dept);
-    }
-    
+
     public void incluir(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
         x.incluir(this);
     }
-    
+
     public void alterar(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
         x.alterar(this);
     }
-    
+
     public void deletar(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
         x.deletar(this);
     }
-    
+
+    public void pesquisar(){
+        Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
+        x.pesquisar(dept);
+    }
+
     public void pesquisarDepartamento(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
         ResultSet resultado = x.pesquisarDepartamento(this);
@@ -72,15 +72,16 @@ public class Departamento {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
-    
+
     public void pesquisarDepartamentoPorId(){
         Banco.DepartamentoDAO x = new Banco.DepartamentoDAO();
-        ResultSet resultado = x.pesquisarDepartamento(this);
+        ResultSet resultado = x.pesquisarDepartamentoPorId(this);
         try{
         while (resultado.next())
         {
+            System.out.println("Entrou no dep");
             this.campus = resultado.getInt("Fk_Campus");
             this.nome = resultado.getString("departamentos.Nome");
             this.nomeCampus = resultado.getString("campus.nome");
@@ -89,7 +90,7 @@ public class Departamento {
         }
         catch (SQLException e){
           System.out.println(e.getMessage());
-        }    
+        }
     }
 
     public String getNome() {
@@ -139,9 +140,9 @@ public class Departamento {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
-    
-       
-    
+
+
+
+
+
 }

@@ -45,16 +45,20 @@
                     <div class="separador"></div>
                 </th>
                 <tr>
-                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
-                    <td>                                   
-                        <p>Tipo: <select name="tipo" id="tipo" style="width:120px;">
-                            <option> </option>
-                            <option value = "2">Coordenador(a) Acadêmico</option>
-                            <option value = "3">Secretário(a) Acadêmico</option>
-                            <option value = "4">Coordenador(a) Curso</option>
-                            <option value = "5">Secretário(a) Curso</option>
-                            <option value = "6">Aluno(a)</option>
-                        </select></p> 
+                    <td colspan="2">
+                        <div>
+                            <p> Matrícula:<br/> <input type="text" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p>
+                        </div>
+                        <div style="margin-left: 50px;">                                   
+                            <p>Tipo: <select name="tipo" id="tipo" style="width:200px;">
+                                <option value="0"> </option>
+                                <option value = "2">Coordenador(a) Acadêmico</option>
+                                <option value = "3">Secretário(a) Acadêmico</option>
+                                <option value = "4">Coordenador(a) Curso</option>
+                                <option value = "5">Secretário(a) Curso</option>
+                                <option value = "6">Aluno(a)</option>
+                            </select></p>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -68,19 +72,20 @@
                             </select> </p>
                         </div>
                         <div style="margin-left: 10px">
-                            <p> Departamento: <br/> <select name="departamento" style="width:120px;" disabled="">
+                            <p> Departamento: <br/> <select name="departamento" style="width:190px;" disabled="">
                             <option> </option>
                             </select> </p>
                         </div>
+                        
                          <div style="margin-left: 10px">
-                             <p> Curso:<br/> <select name="curso" id="cb_curso" class="cb_curso" disabled="disabled">
+                             <p> Curso:<br/> <select name="curso" id="cb_curso" class="cb_curso" disabled="">
                             <option> </option>
                             </select> </p>
                         </div>   
                     </td>
                     <tr>
                         <td>
-                            <p> Nome:<br/> <input type="text" name="nome"> 
+                            <p> Nome:<br/> <input type="text" name="nome" style="width: 95%"> 
                         </td>
                         <td>
                             <p> Senha:<br/> <input type="password" name="senha">
@@ -92,8 +97,7 @@
                     <td align="center" colspan="3"> 
                         <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
                         <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
-                        <input type="submit" name="opcao" value="Deletar" class="botao"> 
-                        <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
+                        <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
                     </td>
                 </tr>
             </table>

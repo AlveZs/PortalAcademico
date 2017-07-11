@@ -143,5 +143,41 @@ public class CursoDAO {
         catch(SQLException e){
            System.out.println(e.getMessage());
        }
-    } 
+    }
+    
+    public int alterar(Model.Curso curso){
+
+      Connection minhaConexao = ConnectionFactory.getConnection();
+      String sql;
+      sql = "update cursos set Nome = '"+curso.getNome()+"', Fk_Departamento = "+curso.getDepartamento().getId()+", CargaHoraria = "+curso.getCargaHoraria()+", Creditacao = "+curso.getCreditacao()+", Min_Semestre = "+curso.getMinSemestre()+", Max_Semestre = "+curso.getMaxSemestre()+", fk_turno = "+curso.getTurno()+" where Codigo = "+curso.getCodigo()+";";
+      int retorno=0;
+      try{
+            Statement stm = minhaConexao.createStatement();
+            retorno = stm.executeUpdate(sql);
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+      finally{
+          return retorno;
+      }
+   }
+    
+    public int deletar(Model.Curso curso){
+
+      Connection minhaConexao = ConnectionFactory.getConnection();
+      String sql;
+      sql = "delete from sonaes.cursos where Codigo = "+curso.getCodigo()+";";
+      int retorno=0;
+      try{
+            Statement stm = minhaConexao.createStatement();
+            retorno = stm.executeUpdate(sql);
+      }
+      catch (SQLException e){
+          System.out.println(e.getMessage());
+      }
+      finally{
+          return retorno;
+      }
+   }
 }

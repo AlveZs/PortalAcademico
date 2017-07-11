@@ -48,9 +48,8 @@
             <tr> 
             	<td align="center" colspan="3"> 
                     <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
-                    <input type="button" value="Alterar" id="btn_alterar" class="botao">
-                    <input type="submit" name="opcao" value="Deletar" class="botao"> 
-                    <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
+                    <input type="submit" value="Alterar" id="btn_alterar" class="botao">
+                    <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao"> 
                 </td>
             </tr>
         </table>

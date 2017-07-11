@@ -75,7 +75,7 @@
             	<td>
                     <p>Carga Horária:<br/> <input type="text" name="cargaHoraria" value="<%=curso.getCargaHoraria()%>" class="in_menores"></p></td>
                 <td>
-                    <p>Creditação:<br/> <input type="text" name="credito" value="<%=curso.getCreditacao()%> "class="in_menores"></p>
+                    <p>Creditação:<br/> <input type="text" name="credito" value="<%=curso.getCreditacao()%>" class="in_menores"></p>
                 
                 </td>
             </tr>
@@ -120,9 +120,9 @@
             <tr></tr>
             <tr align="center">
             <td height="56" colspan="7">
-              <input type="submit" value="Novo" id="btn_novo" class="botao" onClick="checkFields()">
-              <input type="submit" value="Alterar" id="btn_alterar" class="botao">
-              <input type="reset" value="Limpar" id="btn_limpar" class="botao">
+              <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao" onClick="checkFields()">
+              <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
+              <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
             </td>
             </tr>
         </table>

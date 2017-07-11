@@ -239,6 +239,7 @@ select {
 
 #btn_buscar {
 	margin-left: 20px;
+        color: #3a3a3a;
 }
 
 #btn_novo {
@@ -247,6 +248,10 @@ select {
 
 #btn_alterar {
 	background: #0072bc;
+}
+
+#btn_deletar {
+    background-color: #cc3b3b;
 }
 
 #btn_limpar {

@@ -15,6 +15,16 @@
         <%@include file="menu.jsp" %>
         <link href="css/pag_coordenador.css" rel="stylesheet" type="text/css">
         <link href="css/aluno.css" rel="stylesheet" type="text/css">
+        <script>
+            $(document).ready(function() {
+                $("#tipo").on('change', function(){
+                    if ($("#tipo").val() !== "2" && $("#tipo").val() !== "3")
+                        $("#cb_curso").attr("disabled", false);
+                    else
+                        $("#cb_curso").attr("disabled", true);
+                });
+            });
+        </script>
     </head>
     <body>
         <form method="post" action="UsuarioController" name="usuarioForm">
@@ -37,9 +47,12 @@
                     <div class="separador"></div>
                 </th>
                 <tr>
-                    <td colspan="2"> <p> Matrícula:<br/> <input type="text" value="<%=usuario.getMatricula()%>" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p> </td>
-                    <td>                                   
-                        <p>Tipo: <select name="tipo" style="width:120px;">
+                    <td colspan="2">
+                        <div>
+                        <p> Matrícula:<br/> <input type="text" value="<%=usuario.getMatricula()%>" name="matricula" > <input type="submit" name="opcao" value="Buscar" style="margin-left:30px"> </p>
+                        </div>
+                        <div style="margin-left: 50px">
+                        <p>Tipo: <select name="tipo" id="tipo" style="width:200px;">
                                 <% if(tipoUsr == 1) {%>
                                     <option value="1" selected="selected"> Root </option>
                                 <%}%>
@@ -49,7 +62,8 @@
                                 <option value = "5" <% if(tipoUsr == 5) {%> selected="selected" <%}%> >Secretário(a) Curso</option>
                                 <option value = "6" <% if(tipoUsr == 6) {%> selected="selected" <%}%> >Aluno(a)</option>        
                             }%>
-                        </select></p> 
+                        </select></p>
+                        </div>
                     </td>
                 </tr>
                 <tr>
@@ -58,19 +72,19 @@
                             <p> Campus:<br/> <select name="campus" id="cb_campus">
                                 <option value="0"></option>
                                 <%for(int i=0;i<campi.size();i++){ %>
-                                    <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(usuario.getCurso().getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
+                                    <option value="<%= campi.get(i).getId()%>" <% if(campi.get(i).getNome().equals(usuario.getDepartamento().getNomeCampus())) {%> selected="selected" <%}%> ><%= campi.get(i).getNome()%></option>
                                 <%}%>
                             </select> </p>
                         </div>
                         <div style="margin-left: 10px">
-                            <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:120px;">
+                            <p> Departamento:<br/> <select name="departamento" id="cb_departamento" style="width:190px;">
                                 <option value="0"> </option>
                                 <%
                                     for(int i=0;i<departamentos.size();i++) {
-                                        if (usuario.getCampus().getNome().equals(departamentos.get(i).getNomeCampus())) {
+                                        if (usuario.getDepartamento().getNomeCampus().equals(departamentos.get(i).getNomeCampus())) {
 
                                 %>
-                                            <option value="<%= departamentos.get(i).getId()%>" <% if(departamentos.get(i).getNome().equals(usuario.getCurso().getDepartamento().getNome())) {%> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
+                                            <option value="<%= departamentos.get(i).getId()%>" <% if(departamentos.get(i).getNome().equals(usuario.getDepartamento().getNome())) {%> selected="selected" <%}%> ><%= departamentos.get(i).getNome()%></option>
                                 <%} }%>
                             </select> </p>
                         </div>
@@ -91,7 +105,7 @@
 
                     <tr>
                         <td>
-                            <p> Nome:<br/> <input type="text" value="<%=usuario.getNome()%>" name="nome"> 
+                            <p> Nome:<br/> <input type="text" value="<%=usuario.getNome()%>" name="nome" style="width: 95%"> 
                         </td>
                         <td>
                             <p> Senha:<br/> <input type="password" value="<%=usuario.getSenha()%>" name="senha">
@@ -102,8 +116,7 @@
                     <td align="center" colspan="3"> 
                         <input type="submit" name="opcao" value="Incluir" id="btn_novo" class="botao">
                         <input type="submit" name="opcao" value="Alterar" id="btn_alterar" class="botao">
-                        <input type="submit" name="opcao" value="Deletar" class="botao"> 
-                        <input type="reset" value="Limpar" id="btn_limpar" class="botao"> 
+                        <input type="submit" name="opcao" value="Deletar" id="btn_deletar" class="botao">
                     </td>
                 </tr>
             </table>

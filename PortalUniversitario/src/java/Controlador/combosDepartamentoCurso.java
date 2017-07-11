@@ -7,7 +7,7 @@ package Controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,10 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author joao
+ * @author John_Peter
  */
-@WebServlet(name = "SemestreController", urlPatterns = {"/SemestreController"})
-public class SemestreController extends HttpServlet {
+@WebServlet(name = "combosDepartamentoCurso", urlPatterns = {"/combosDepartamentoCurso"})
+public class combosDepartamentoCurso extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,42 +34,22 @@ public class SemestreController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-        int ano, semestre;
+            /* TODO output your page here. You may use following sample code. */
+            
+        Model.Resultados resultados = new Model.Resultados();
+        request.setAttribute("results", resultados);
         
-        RequestDispatcher dispatcher;
-        String opcao;
-        opcao = request.getParameter("opcao");
+        ArrayList<Model.Curso> cursos = new ArrayList();
+        resultados.pesquisarTodosCursos();
+        cursos = resultados.getCursos();
         
-        switch (opcao){
-            case "Buscar":
-                Model.Semestre sc = new Model.Semestre();
-                sc.listarTodos(); 
-                request.setAttribute("sc", sc);
-                dispatcher = request.getRequestDispatcher("semestre_preenchida.jsp");
-                dispatcher.forward(request,response);                
-                break;
-            case "Incluir":
-                ano = Integer.parseInt(request.getParameter("ano"));
-                semestre = Integer.parseInt(request.getParameter("semestre"));
-                Model.Semestre scancelado = new Model.Semestre(ano,semestre);
-                scancelado.incluir();
-                dispatcher = request.getRequestDispatcher("coord_semestre.jsp");
-                dispatcher.forward(request,response);                   
-                break;
-            case "Deletar":
-                ano = Integer.parseInt(request.getParameter("ano"));
-                semestre =Integer.parseInt(request.getParameter("semestre"));
-                Model.Semestre scDel = new Model.Semestre(ano, semestre);
-                scDel.deletar();
-                dispatcher = request.getRequestDispatcher("coord_semestre.jsp");
-                dispatcher.forward(request,response);
-                break;
-            case "Voltar":
-                dispatcher = request.getRequestDispatcher("coord_semestre.jsp");
-                dispatcher.forward(request,response);
-                break;
+        StringBuilder sb = new StringBuilder(""); //cria uma lista de String
         
-        }   
+        for(int i=0; i<cursos.size(); i++) {
+            sb.append(cursos.get(i).getNome() + "-" + cursos.get(i).getDepartamento().getNome() + ":" + cursos.get(i).getIdCurso() + "?" + cursos.get(i).getDepartamento().getId() + "=");
+        }
+        
+        out.println(sb); //Saída que será lida pelo AJAX
         }
     }
 

@@ -243,9 +243,9 @@
         
             <tr><td colspan="4" align="center">
                 <div>
-                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
-                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
-                    <input type="reset" id="btn_limpar" class="botao" value="Limpar">
+                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="Cadastro">
+                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="Alterar">
+                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="Deletar">
                 </div>
             </td></tr>
         </table>

@@ -112,7 +112,10 @@ and open the template in the editor.
                     <th>Situação:</th>
                     </tr>
                     
-                <%for(Model.Integralizacao i: relFor){%>
+                <%  int qtdAlunos=0;
+                    for(Model.Integralizacao i: relFor){
+                        qtdAlunos++;
+                %>
                     <tr>
                         <td><%=i.getAluno().getMatricula()%></td>
                         <td><%=i.getAluno().getNome()%></td>
@@ -123,6 +126,9 @@ and open the template in the editor.
                 <%}%>
                 </table>
             </td>
+            </tr>
+            <tr>
+                <td> <p> Quantidade de Alunos: <%=qtdAlunos%> </p> </td>
             </tr>
         </table>
     </form>
