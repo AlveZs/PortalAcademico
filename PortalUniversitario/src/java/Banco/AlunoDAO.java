@@ -25,7 +25,7 @@ public class AlunoDAO {
 
       Connection minhaConexao = ConnectionFactory.getConnection();
       String sql;
-      sql = "insert into sonaes.aluno (matricula, nome, Fk_Curso, SemInicio, telefone, email, Fk_Forma_Ingresso, creditacao) values ("+aluno.getMatricula()+",'"+aluno.getNome()+"',"+aluno.getCurso().getIdCurso()+",'"+aluno.getSemestreInicio()+"','"+aluno.getTelefone()+"','"+aluno.getEmail()+"',"+aluno.getFormaIngressoCod()+" ,"+aluno.getCreditacao()+")";
+      sql = "insert into sonaes.aluno (matricula, nome, Fk_Curso, SemInicio, telefone, email, Fk_Forma_Ingresso, creditacao,sem_externo) values ("+aluno.getMatricula()+",'"+aluno.getNome()+"',"+aluno.getCurso().getIdCurso()+",'"+aluno.getSemestreInicio()+"','"+aluno.getTelefone()+"','"+aluno.getEmail()+"',"+aluno.getFormaIngressoCod()+" ,"+aluno.getCreditacao()+","+aluno.getSemExternos()+")";
       int retorno=0;
       try{
             Statement stm = minhaConexao.createStatement();
@@ -42,7 +42,7 @@ public class AlunoDAO {
 
       Connection minhaConexao = ConnectionFactory.getConnection();
       String sql;
-      sql = "update sonaes.aluno set SemInicio ='"+aluno.getSemestreInicio()+"', Fk_Curso ="+aluno.getCurso().getIdCurso()+", telefone ='"+aluno.getTelefone()+"',email = '"+aluno.getEmail()+"',Fk_Forma_Ingresso="+aluno.getFormaIngressoCod()+", creditacao = "+aluno.getCreditacao()+", nome ='"+aluno.getNome()+"' where matricula = "+aluno.getMatricula()+"";
+      sql = "update sonaes.aluno set SemInicio ='"+aluno.getSemestreInicio()+"', Fk_Curso ="+aluno.getCurso().getIdCurso()+", telefone ='"+aluno.getTelefone()+"',email = '"+aluno.getEmail()+"',Fk_Forma_Ingresso="+aluno.getFormaIngressoCod()+", creditacao = "+aluno.getCreditacao()+", nome ='"+aluno.getNome()+"', sem_externo="+aluno.getSemExternos()+" where matricula = "+aluno.getMatricula()+"";
       int retorno=0;
       try{
             Statement stm = minhaConexao.createStatement();
@@ -94,7 +94,7 @@ public class AlunoDAO {
     public ResultSet pesquisarAluno(Model.Aluno aluno){
         Connection minhaConexao = ConnectionFactory.getConnection();
             String sql;
-            sql = "SELECT aluno.Id,aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, cursos.fk_turno, departamentos.Nome AS Departamento, campus.Nome AS Campus, aluno.email, aluno.telefone, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo, formasingresso.nome, aluno.creditacao FROM aluno JOIN cursos ON aluno.Fk_Curso = cursos.Id JOIN departamentos ON cursos.Fk_Departamento = departamentos.Id JOIN campus ON departamentos.Fk_Campus = campus.Id JOIN formasingresso ON aluno.Fk_Forma_Ingresso = formasingresso.Id WHERE aluno.Matricula="+aluno.getMatricula()+";";
+            sql = "SELECT aluno.sem_externo,aluno.Id,aluno.Matricula, aluno.Nome, aluno.Fk_Curso, cursos.Nome, cursos.fk_turno, departamentos.Nome AS Departamento, campus.Nome AS Campus, aluno.email, aluno.telefone, aluno.SemInicio, aluno.Fk_Forma_Ingresso, aluno.sem_externo, formasingresso.nome, aluno.creditacao FROM aluno JOIN cursos ON aluno.Fk_Curso = cursos.Id JOIN departamentos ON cursos.Fk_Departamento = departamentos.Id JOIN campus ON departamentos.Fk_Campus = campus.Id JOIN formasingresso ON aluno.Fk_Forma_Ingresso = formasingresso.Id WHERE aluno.Matricula="+aluno.getMatricula()+";";
             ResultSet resultado=null;
             try{
                 Statement stm = minhaConexao.createStatement();
@@ -167,10 +167,11 @@ public class AlunoDAO {
         try{
           Model.Aluno obj;
           Statement stm = con.createStatement();
-          ResultSet res = stm.executeQuery("SELECT Matricula,aluno.Nome FROM aluno join cursos on aluno.Fk_Curso = cursos.Id where cursos.Nome = '"+curso+"';");
+          ResultSet res = stm.executeQuery("SELECT aluno.sem_externo,Matricula,aluno.Nome FROM aluno join cursos on aluno.Fk_Curso = cursos.Id where cursos.Nome = '"+curso+"';");
           while (res.next()){
             obj = new Model.Aluno();
             obj.getCurso().setNome(curso);
+            obj.setSemExternos(res.getInt("aluno.sem_externo"));
             obj.getCurso().pesquisarCodCurso();
             obj.setNome(res.getString("Nome"));
             obj.setMatricula(res.getInt("Matricula"));

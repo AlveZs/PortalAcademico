@@ -141,10 +141,11 @@ public class Integralizacao {
         if (semInicio != semAtual){
             qtdSemestres += 1;
             qtdSemestres -= qtdSemestresCancelados;
+            qtdSemestres += aluno.getSemExternos();
         }
-        else{
-            
+        else{          
             qtdSemestres -= qtdSemestresCancelados;
+            qtdSemestres += aluno.getSemExternos();
         }
     }
     
@@ -181,7 +182,7 @@ public class Integralizacao {
     }
     
     public String verificaSituacao(String nomeCurso){
-        int materiasSemestre,materiasRestantes,semRestantes;
+        int materiasSemestre,semRestantes;
         float mediaAluno,valorAlarme;
         curso.setNome(nomeCurso);
         curso.pesquisarCodCurso();

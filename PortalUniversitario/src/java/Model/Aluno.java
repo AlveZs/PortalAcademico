@@ -25,7 +25,7 @@ public class Aluno {
 
     private String nome,telefone,email,semestreInicio,formaIngresso;
     private Curso curso = new Curso();
-    private int matricula,creditacao,formaIngressoCod,cursoCod,id;
+    private int matricula,creditacao,formaIngressoCod,cursoCod,id, semExternos;
     private ArrayList<Curso> cursos = new ArrayList<>();
 
     public Aluno(int matricula, String nome, String telefone, String email, String semestreInicio, String formaIngresso, int creditacao) {
@@ -42,7 +42,13 @@ public class Aluno {
     public Aluno() {
     }
 
+    public int getSemExternos() {
+        return semExternos;
+    }
 
+    public void setSemExternos(int semExternos) {
+        this.semExternos = semExternos;
+    }
 
     public int getMatricula() {
         return matricula;
@@ -204,6 +210,7 @@ public class Aluno {
             this.semestreInicio = resultado.getString("aluno.SemInicio");
             this.matricula = resultado.getInt("aluno.Matricula");
             this.creditacao = resultado.getInt("aluno.creditacao");
+            this.semExternos = resultado.getInt("aluno.sem_externo");
         }
         }
         catch (SQLException e){

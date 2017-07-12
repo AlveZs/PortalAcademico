@@ -92,6 +92,7 @@ and open the template in the editor.
                 for(Model.Aluno a : alunos) {
                     Model.Integralizacao obj = new Model.Integralizacao();
                     obj.getAluno().setNome(a.getNome());
+                    obj.getAluno().setSemExternos(a.getSemExternos());
                     obj.getAluno().setMatricula(a.getMatricula());
                     obj.setCurso(a.getCurso());
                     obj.pesquisarInfos();

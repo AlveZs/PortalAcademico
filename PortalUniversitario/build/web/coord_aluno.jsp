@@ -171,7 +171,7 @@
                         <p> Sems Início:<br/> <input type="text" name="sems_inicio" class="caixas" > </p>
                     </div>
                     <div style="margin-left: 5px;">
-                        <p> Sems Cursados:<br/> <input type="text" name="sems_cursados" class="caixas" > </p>
+                        <p> Sems Externos:<br/> <input type="text" name="sems_externos" class="caixas" > </p>
                     </div>
                 </td>
                 <td>
@@ -181,9 +181,9 @@
             
             <tr><td colspan="4" align="center">
                 <div>
-                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="Cadastro">
-                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="Alterar">
-                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="Deletar">
+                    <input type="submit" name="opcao" id="btn_novo" class="botao" value="cadastro">
+                    <input type="submit" name="opcao" id="btn_alterar" class="botao" value="alterar">
+                    <input type="submit" name="opcao" id="btn_deletar" class="botao" value="deletar">
                 </div>
             </td></tr>
         </table>
